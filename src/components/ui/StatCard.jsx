@@ -61,28 +61,31 @@ const StatCard = ({
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
             className={`
-                bg-paper border-2 rounded-xl p-8 text-center
+                bg-paper/80 backdrop-blur-sm border rounded-xl p-3 md:p-8 text-center h-full
+                flex flex-col items-center justify-center transition-all duration-300
                 ${colors[color] || colors.green}
                 ${className}
             `}
         >
             {iconSrc && (
-                <div className="flex justify-center mb-4">
+                <div className="flex justify-center mb-2 md:mb-6">
                     <img
                         src={iconSrc}
                         alt=""
-                        className="w-12 h-12 object-contain"
+                        className="w-8 h-8 md:w-16 md:h-16 object-contain drop-shadow-sm"
                     />
                 </div>
             )}
-            <div className={`font-display text-5xl md:text-6xl mb-3 ${colors[color]?.split(' ')[0]}`}>
+            <div className={`font-display text-3xl md:text-7xl mb-1 md:mb-2 leading-none ${colors[color]?.split(' ')[0]}`}>
                 {prefix}{count.toLocaleString()}{suffix}
             </div>
-            <p className="text-graphite/70 font-medium">{label}</p>
+            <div className="w-8 md:w-12 h-0.5 md:h-1 bg-current opacity-20 rounded-full my-1 md:my-4 mx-auto" />
+            <p className="text-graphite/70 font-medium text-xs md:text-lg leading-tight px-1">{label}</p>
         </motion.div>
     );
 };

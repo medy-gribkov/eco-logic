@@ -1,133 +1,134 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Users, BookOpen, Globe } from 'lucide-react';
 import Section from '../layout/Section';
 import Container from '../layout/Container';
+import Icon from '../ui/Icon';
 import { useLanguage } from '../../i18n';
 
 const AboutSection = () => {
     const { language, isRTL } = useLanguage();
 
-    const values = [
-        {
-            icon: BookOpen,
-            title: { he: 'חינוך נגיש', en: 'Accessible Education' },
-            description: { he: 'חומרי לימוד חינמיים לכל אחד, בכל גיל', en: 'Free learning materials for everyone, at any age' }
-        },
-        {
-            icon: Heart,
-            title: { he: 'ללא מטרות רווח', en: 'Non-Profit' },
-            description: { he: 'כל ההכנסות חוזרות לפעילות חינוכית', en: 'All proceeds go back to educational activities' }
-        },
-        {
-            icon: Globe,
-            title: { he: 'השפעה גלובלית', en: 'Global Impact' },
-            description: { he: 'מקהילות מקומיות לשינוי עולמי', en: 'From local communities to global change' }
-        }
-    ];
+    // Animation variants for smooth scroll reveals
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0 }
+    };
 
     return (
-        <Section id="about" spacing="large" className="bg-gradient-to-b from-paper via-sand/20 to-paper">
-            <Container>
+        <Section
+            id="about"
+            spacing="large"
+            className="relative overflow-hidden"
+        >
+            {/* Background illustration */}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-about.png)' }}
+            />
+
+
+            <Container className="relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                    {/* Left side - Visual */}
+                    {/* Left side - Visual with floating card */}
                     <motion.div
-                        initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                        variants={fadeInUp}
+                        transition={{ duration: 0.5 }}
                         className="relative"
                     >
                         <div className="relative">
-                            {/* Background decorative shape */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-sage/20 to-green/10 rounded-3xl transform -rotate-2" />
-
                             {/* Main image container */}
-                            <div className="relative bg-paper rounded-3xl p-4 shadow-elevated">
+                            <div className="relative bg-paper rounded-3xl p-3 shadow-elevated">
                                 <img
-                                    src="/assets/images/hero-illustrated.png"
-                                    alt={language === 'he' ? 'חינוך סביבתי' : 'Environmental education'}
+                                    src="/assets/images/persona-planting.png"
+                                    alt={language === 'he' ? 'ילדים לומדים על הטבע' : 'Children learning about nature'}
                                     className="w-full h-auto rounded-2xl"
                                 />
 
-                                {/* Floating stat card */}
+                                {/* Floating secondary teacher image */}
                                 <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, scale: 0.9, x: 20 }}
+                                    whileInView={{ opacity: 1, scale: 1, x: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ delay: 0.3 }}
-                                    className="absolute -bottom-4 -end-4 bg-paper rounded-xl p-4 shadow-lg border border-sand"
+                                    transition={{ delay: 0.3, duration: 0.4 }}
+                                    className="absolute -bottom-12 -start-12 w-2/3 max-w-[200px]"
                                 >
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-12 h-12 bg-green/10 rounded-lg flex items-center justify-center">
-                                            <Users className="w-6 h-6 text-green" />
-                                        </div>
-                                        <div>
-                                            <div className="font-display text-2xl text-graphite">10K+</div>
-                                            <div className="text-sm text-graphite/60">
-                                                {language === 'he' ? 'תלמידים למדו' : 'Students taught'}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <img
+                                        src="/assets/personas/persona-teacher-pointing.png"
+                                        alt={language === 'he' ? 'מורה מסבירה' : 'Teacher explaining'}
+                                        className="w-full h-auto drop-shadow-xl z-20"
+                                    />
                                 </motion.div>
                             </div>
 
-                            {/* Decorative leaf element */}
-                            <div className="absolute -top-6 -start-6 text-5xl opacity-60">🌿</div>
+                            {/* Decorative leaf icon - no container */}
+                            <div className="absolute -top-4 -start-4">
+                                <Icon name="leaf" size="xl" alt="Decorative leaf" />
+                            </div>
                         </div>
                     </motion.div>
 
                     {/* Right side - Content */}
                     <motion.div
-                        initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                        variants={fadeInUp}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="space-y-8"
                     >
-                        {/* Badge */}
-                        <div className="inline-flex items-center gap-2 bg-green/10 text-green px-4 py-2 rounded-full mb-6">
+                        {/* Section badge */}
+                        <div className="inline-flex items-center gap-2 bg-green/10 text-green px-4 py-2 rounded-full">
+                            <Icon name="seedling" size="xs" inline />
                             <span className="font-body text-sm uppercase tracking-wider">
-                                {language === 'he' ? 'מי אנחנו' : 'Who We Are'}
+                                {language === 'he' ? 'קצת עלינו' : 'About Us'}
                             </span>
                         </div>
 
                         {/* Title */}
-                        <h2 className="font-display text-4xl md:text-5xl mb-6 text-graphite leading-tight">
-                            {language === 'he'
-                                ? 'ללמד את הדור הבא לשמור על העולם'
-                                : 'Teaching the next generation to protect our world'}
+                        <h2 className="font-display text-5xl md:text-6xl text-graphite leading-none">
+                            {language === 'he' ? 'מי אנחנו' : 'About EcoLogic'}
                         </h2>
 
-                        {/* Mission text */}
-                        <p className="text-lg text-graphite/70 mb-8 leading-relaxed">
-                            {language === 'he'
-                                ? 'EcoLogic הוא ארגון ללא מטרות רווח שנוסד עם מטרה פשוטה: להפוך חינוך סביבתי לנגיש לכולם. אנחנו מפתחים חומרי לימוד, סדנאות ותכניות לימודים שמלמדות ילדים ומבוגרים על הקשר בינינו לסביבה.'
-                                : 'EcoLogic is a non-profit organization founded with a simple mission: to make environmental education accessible to everyone. We develop learning materials, workshops, and curricula that teach children and adults about our connection to the environment.'}
-                        </p>
+                        {/* Mission block - cleaner, no double containers */}
+                        <div className="space-y-6">
+                            <div className="flex items-start gap-4">
+                                <Icon name="recycle-heart" size="lg" className="flex-shrink-0 mt-1" />
+                                <div>
+                                    <h3 className="font-display text-xl text-graphite mb-2">
+                                        {language === 'he' ? 'המשימה שלנו' : 'Our Mission'}
+                                    </h3>
+                                    <p className="text-graphite/70 leading-relaxed">
+                                        {language === 'he'
+                                            ? 'להפוך את ההשפעה הסביבתית הבלתי נראית לנראית, ולהעניק לכל אחד את הכוח לקבל החלטות מודעות יותר.'
+                                            : 'To make invisible environmental impact visible, and empower everyone to make more conscious decisions.'}
+                                    </p>
+                                </div>
+                            </div>
 
-                        {/* Values */}
-                        <div className="space-y-4">
-                            {values.map((value, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.2 + index * 0.1 }}
-                                    className="flex items-start gap-4 p-4 bg-sand/30 rounded-xl hover:bg-sand/50 transition-colors"
-                                >
-                                    <div className="w-10 h-10 bg-green/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                                        <value.icon className="w-5 h-5 text-green" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-display text-lg text-graphite mb-1">
-                                            {value.title[language]}
-                                        </h3>
-                                        <p className="text-sm text-graphite/60">
-                                            {value.description[language]}
-                                        </p>
-                                    </div>
-                                </motion.div>
-                            ))}
+                            <div className="flex items-start gap-4">
+                                <Icon name="lightbulb" size="lg" className="flex-shrink-0 mt-1" />
+                                <div>
+                                    <h3 className="font-display text-xl text-graphite mb-2">
+                                        {language === 'he' ? 'הקונספט' : 'The Concept'}
+                                    </h3>
+                                    <p className="text-graphite/70 leading-relaxed">
+                                        {language === 'he'
+                                            ? '"השפעה בלתי נראית" בוחנת איך הבחירות היומיות שלנו - מה אנחנו אוכלים, איך אנחנו נוסעים, מה אנחנו קונים - משפיעות על הסביבה בדרכים שלא תמיד רואים.'
+                                            : '"Invisible Impact" explores how our daily choices - what we eat, how we travel, what we buy - affect the environment in ways we don\'t always see.'}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+
+                        {/* Quote */}
+                        <blockquote className="border-s-4 border-magenta ps-6 py-2 italic text-graphite/60">
+                            {language === 'he'
+                                ? '"כל שאלה שאתם עונים מקרבת אתכם צעד אחד להבנת הקשר שלנו עם כדור הארץ."'
+                                : '"Every question you answer brings you one step closer to understanding our connection with Earth."'}
+                        </blockquote>
                     </motion.div>
                 </div>
             </Container>

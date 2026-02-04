@@ -1,195 +1,172 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { BookOpen, Eye, Zap, ArrowRight, ArrowLeft } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Section from '../layout/Section';
 import Container from '../layout/Container';
-import Button from '../ui/Button';
+import Icon from '../ui/Icon';
 import { useLanguage } from '../../i18n';
 
 const FeaturesSection = () => {
-    const { language, isRTL } = useLanguage();
-    const [activeFeature, setActiveFeature] = useState(0);
-    const Arrow = isRTL ? ArrowLeft : ArrowRight;
+    const { language } = useLanguage();
+    const [activeTab, setActiveTab] = useState(0);
 
-    const features = [
+    const pillars = [
         {
             id: 'education',
-            icon: BookOpen,
-            title: { he: 'חינוך', en: 'Education' },
-            subtitle: { he: 'ללמוד דרך גילוי', en: 'Learning through discovery' },
-            description: {
-                he: 'שיעורים אינטראקטיביים, חידונים ופעילויות שהופכים נושאים מורכבים לפשוטים ומעניינים. חומרי לימוד מותאמים לכל גיל.',
-                en: 'Interactive lessons, quizzes, and activities that make complex topics simple and engaging. Materials adapted for all ages.'
-            },
-            stats: { value: '50+', label: { he: 'שיעורים', en: 'Lessons' } },
-            color: 'green'
+            icon: 'book',
+            title: language === 'he' ? 'חינוך' : 'Education',
+            subtitle: language === 'he' ? 'למידה חווייתית' : 'Experiential Learning',
+            description: language === 'he'
+                ? 'סדנאות ותכניות לימוד אינטראקטיביות שמלמדות על קיימות דרך חוויה ישירה עם הטבע.'
+                : 'Interactive workshops and curricula that teach sustainability through direct experience with nature.',
+            features: language === 'he'
+                ? ['תכניות מותאמות לגיל', 'למידה מבוססת פרויקטים', 'משחקי סימולציה']
+                : ['Age-appropriate programs', 'Project-based learning', 'Simulation games']
         },
         {
             id: 'awareness',
-            icon: Eye,
-            title: { he: 'מודעות', en: 'Awareness' },
-            subtitle: { he: 'להבין את ההשפעה', en: 'Understanding our impact' },
-            description: {
-                he: 'נתונים, עובדות ומידע על הקשר בין הפעולות היומיות שלנו לסביבה. להפוך את הבלתי נראה לנראה.',
-                en: 'Data, facts, and information about the connection between our daily actions and the environment. Making the invisible visible.'
-            },
-            stats: { value: '100+', label: { he: 'עובדות', en: 'Facts' } },
-            color: 'sage'
+            icon: 'lightbulb',
+            title: language === 'he' ? 'מודעות' : 'Awareness',
+            subtitle: language === 'he' ? 'הבנת ההשפעה' : 'Understanding Impact',
+            description: language === 'he'
+                ? 'כלים להבנת ההשפעה הסביבתית של הבחירות היומיות שלנו - מאוכל ועד תחבורה.'
+                : 'Tools for understanding the environmental impact of our daily choices - from food to transportation.',
+            features: language === 'he'
+                ? ['מחשבוני טביעת רגל', 'ויזואליזציות אינטראקטיביות', 'מעקב התקדמות']
+                : ['Footprint calculators', 'Interactive visualizations', 'Progress tracking']
         },
         {
             id: 'action',
-            icon: Zap,
-            title: { he: 'פעולה', en: 'Action' },
-            subtitle: { he: 'לעשות שינוי', en: 'Making a difference' },
-            description: {
-                he: 'כלים מעשיים, אתגרים קהילתיים ופרויקטים שמאפשרים לכל אחד לתרום לשינוי חיובי בסביבה.',
-                en: 'Practical tools, community challenges, and projects that enable everyone to contribute to positive environmental change.'
-            },
-            stats: { value: '20+', label: { he: 'אתגרים', en: 'Challenges' } },
-            color: 'burgundy'
+            icon: 'recycle-heart',
+            title: language === 'he' ? 'פעולה' : 'Action',
+            subtitle: language === 'he' ? 'לעשות את ההבדל' : 'Making a Difference',
+            description: language === 'he'
+                ? 'מדריכים מעשיים ופרויקטים קהילתיים שהופכים ידע לפעולה משמעותית.'
+                : 'Practical guides and community projects that turn knowledge into meaningful action.',
+            features: language === 'he'
+                ? ['אתגרים יומיים', 'פרויקטים קהילתיים', 'מדידת השפעה']
+                : ['Daily challenges', 'Community projects', 'Impact measurement']
         }
     ];
 
-    const colorClasses = {
-        green: {
-            bg: 'bg-green/10',
-            border: 'border-green/30',
-            icon: 'bg-green/20 text-green',
-            accent: 'text-green'
-        },
-        sage: {
-            bg: 'bg-sage/10',
-            border: 'border-sage/30',
-            icon: 'bg-sage/20 text-green',
-            accent: 'text-sage'
-        },
-        burgundy: {
-            bg: 'bg-burgundy/10',
-            border: 'border-burgundy/30',
-            icon: 'bg-burgundy/20 text-burgundy',
-            accent: 'text-burgundy'
-        }
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0 }
     };
 
     return (
-        <Section id="features" spacing="large" className="bg-paper overflow-hidden">
-            <Container>
+        <Section
+            id="features"
+            spacing="large"
+            className="relative overflow-hidden"
+        >
+            {/* Background illustration */}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-features.png)' }}
+            />
+
+
+            <Container className="relative z-10">
                 {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={fadeInUp}
+                    transition={{ duration: 0.5 }}
+                    className="text-center mb-12"
                 >
-                    <div className="inline-flex items-center gap-2 bg-sand/50 text-graphite/70 px-4 py-2 rounded-full mb-6">
+                    <div className="inline-flex items-center gap-2 bg-magenta/10 text-magenta px-4 py-2 rounded-full mb-6">
+                        <Icon name="ideas" size="xs" inline />
                         <span className="font-body text-sm uppercase tracking-wider">
                             {language === 'he' ? 'הגישה שלנו' : 'Our Approach'}
                         </span>
                     </div>
 
                     <h2 className="font-display text-4xl md:text-5xl mb-4 text-graphite">
-                        {language === 'he' ? 'שלושה עמודי תווך' : 'Three Pillars'}
+                        {language === 'he' ? 'שלושת העמודים' : 'Three Pillars'}
                     </h2>
                     <p className="text-xl text-graphite/70 max-w-2xl mx-auto">
                         {language === 'he'
-                            ? 'הגישה שלנו משלבת חינוך, מודעות ופעולה כדי ליצור שינוי אמיתי'
-                            : 'Our approach combines education, awareness, and action to create real change'}
+                            ? 'הפילוסופיה שלנו מבוססת על שלושה עקרונות מנחים'
+                            : 'Our philosophy is built on three guiding principles'}
                     </p>
                 </motion.div>
 
-                {/* Features Navigation */}
-                <div className="flex justify-center gap-4 mb-12">
-                    {features.map((feature, index) => {
-                        const colors = colorClasses[feature.color];
-                        const isActive = activeFeature === index;
-
-                        return (
-                            <motion.button
-                                key={feature.id}
-                                onClick={() => setActiveFeature(index)}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
+                {/* Tab Navigation - Pill style */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={fadeInUp}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="flex justify-center mb-12"
+                >
+                    <div className="inline-flex bg-sand/50 rounded-full p-1.5">
+                        {pillars.map((pillar, index) => (
+                            <button
+                                key={pillar.id}
+                                onClick={() => setActiveTab(index)}
                                 className={`
-                                    flex items-center gap-3 px-6 py-4 rounded-xl border-2 transition-all duration-300
-                                    ${isActive
-                                        ? `${colors.bg} ${colors.border} shadow-lg`
-                                        : 'border-sand bg-paper hover:border-gray'
+                                    flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300
+                                    ${activeTab === index
+                                        ? 'bg-paper shadow-card text-graphite'
+                                        : 'text-graphite/60 hover:text-graphite'
                                     }
                                 `}
                             >
-                                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${isActive ? colors.icon : 'bg-sand text-graphite/50'}`}>
-                                    <feature.icon className="w-5 h-5" />
-                                </div>
-                                <span className={`font-display text-lg ${isActive ? colors.accent : 'text-graphite/70'}`}>
-                                    {feature.title[language]}
-                                </span>
-                            </motion.button>
-                        );
-                    })}
-                </div>
-
-                {/* Active Feature Content */}
-                <motion.div
-                    key={activeFeature}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="max-w-4xl mx-auto"
-                >
-                    {(() => {
-                        const feature = features[activeFeature];
-                        const colors = colorClasses[feature.color];
-
-                        return (
-                            <div className={`rounded-3xl p-8 md:p-12 ${colors.bg} border ${colors.border}`}>
-                                <div className="grid md:grid-cols-[1fr,auto] gap-8 items-center">
-                                    <div>
-                                        <h3 className={`font-display text-2xl md:text-3xl mb-2 ${colors.accent}`}>
-                                            {feature.subtitle[language]}
-                                        </h3>
-                                        <p className="text-graphite/70 text-lg leading-relaxed mb-6">
-                                            {feature.description[language]}
-                                        </p>
-                                        <Button
-                                            variant="outline"
-                                            className="border-graphite/30 hover:bg-graphite hover:text-paper"
-                                        >
-                                            {language === 'he' ? 'גלה עוד' : 'Discover More'}
-                                            <Arrow className="w-4 h-4 ms-2" />
-                                        </Button>
-                                    </div>
-
-                                    {/* Stats */}
-                                    <div className="text-center md:text-end">
-                                        <div className={`font-display text-6xl md:text-7xl ${colors.accent}`}>
-                                            {feature.stats.value}
-                                        </div>
-                                        <div className="text-graphite/60">
-                                            {feature.stats.label[language]}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })()}
+                                <Icon name={pillar.icon} size="sm" />
+                                <span className="font-display text-lg hidden sm:inline">{pillar.title}</span>
+                            </button>
+                        ))}
+                    </div>
                 </motion.div>
 
-                {/* Navigation dots */}
-                <div className="flex justify-center gap-2 mt-8">
-                    {features.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setActiveFeature(index)}
-                            className={`
-                                w-2 h-2 rounded-full transition-all duration-300
-                                ${index === activeFeature
-                                    ? 'w-8 bg-green'
-                                    : 'bg-sand hover:bg-gray'
-                                }
-                            `}
-                        />
-                    ))}
-                </div>
+                {/* Content Area */}
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={activeTab}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="max-w-4xl mx-auto"
+                    >
+                        <div className="bg-paper rounded-3xl p-8 md:p-12 shadow-card border border-sand">
+                            <div className="grid md:grid-cols-2 gap-8 items-center">
+                                {/* Icon - displayed prominently, no container */}
+                                <div className="text-center md:text-start">
+                                    <Icon name={pillars[activeTab].icon} size="3xl" className="mb-6" />
+                                    <h3 className="font-display text-3xl text-graphite mb-2">
+                                        {pillars[activeTab].title}
+                                    </h3>
+                                    <p className="text-magenta font-body text-lg mb-4">
+                                        {pillars[activeTab].subtitle}
+                                    </p>
+                                    <p className="text-graphite/70 leading-relaxed">
+                                        {pillars[activeTab].description}
+                                    </p>
+                                </div>
+
+                                {/* Features list - no extra containers */}
+                                <div className="space-y-4">
+                                    {pillars[activeTab].features.map((feature, index) => (
+                                        <motion.div
+                                            key={index}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: index * 0.1 }}
+                                            className="flex items-center gap-3"
+                                        >
+                                            <Icon name="checkmark" size="sm" />
+                                            <span className="text-graphite">{feature}</span>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
             </Container>
         </Section>
     );

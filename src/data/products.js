@@ -2,6 +2,106 @@
 
 export const products = [
     {
+        id: 7,
+        name: {
+            he: 'ערכת שתיל התחלתית',
+            en: 'Starter Seedling Kit'
+        },
+        description: {
+            he: 'ערכת גידול עם עציץ ושתיל - התחילו לגדל ירוק',
+            en: 'Growing kit with pot and seedling - start growing green'
+        },
+        price: 45,
+        currency: 'ILS',
+        image: '/assets/images/starter-seedling.png',
+        category: 'garden',
+        featured: true
+    },
+    {
+        id: 8,
+        name: {
+            he: 'סט סכו"ם מבמבוק',
+            en: 'Bamboo Cutlery Set'
+        },
+        description: {
+            he: 'סט רב פעמי לנסיעות - סכין, מזלג, כף וקשית',
+            en: 'Reusable travel set - knife, fork, spoon & straw'
+        },
+        price: 39,
+        currency: 'ILS',
+        image: '/assets/images/merch-updated.png',
+        category: 'accessories',
+        featured: false
+    },
+    {
+        id: 9,
+        name: {
+            he: 'מטען נייד סולארי',
+            en: 'Solar Power Bank'
+        },
+        description: {
+            he: 'סוללת גיבוי נטענת מהשמש - אנרגיה נקייה בכל מקום',
+            en: 'Solar rechargeable backup battery - clean energy everywhere'
+        },
+        price: 129,
+        currency: 'ILS',
+        image: '/assets/images/merch.png',
+        category: 'gadgets',
+        featured: true,
+        colors: ['black', 'green']
+    },
+    {
+        id: 10,
+        name: {
+            he: 'קפוצ\'ון כותנה אורגנית',
+            en: 'Organic Cotton Hoodie'
+        },
+        description: {
+            he: 'קפוצ\'ון נעים ומחמם, ייצור הוגן',
+            en: 'Cozy and warm hoodie, fair trade production'
+        },
+        price: 149,
+        currency: 'ILS',
+        image: '/assets/images/merch-updated.png',
+        category: 'clothing',
+        featured: false,
+        colors: ['sage', 'black', 'navy'],
+        sizes: ['S', 'M', 'L', 'XL']
+    },
+    {
+        id: 11,
+        name: {
+            he: 'מלון לדבורים יחידאיות',
+            en: 'Solitary Bee Hotel'
+        },
+        description: {
+            he: 'בית גידול קטן למאביקים - עזרו לטבע בעיר',
+            en: 'Small habitat for pollinators - help nature in the city'
+        },
+        price: 85,
+        currency: 'ILS',
+        image: '/assets/images/starter-seedling.png',
+        category: 'garden',
+        featured: true
+    },
+    {
+        id: 12,
+        name: {
+            he: 'כוס קפה רב פעמית',
+            en: 'Reusable Coffee Cup'
+        },
+        description: {
+            he: 'כוס סיבי במבוק עם מכסה סיליקון - ללא פלסטיק',
+            en: 'Bamboo fiber cup with silicone lid - plastic free'
+        },
+        price: 45,
+        currency: 'ILS',
+        image: '/assets/images/merch.png',
+        category: 'accessories',
+        featured: false,
+        colors: ['natural', 'pink', 'blue']
+    },
+    {
         id: 1,
         name: {
             he: 'חולצת EcoLogic',
@@ -102,22 +202,6 @@ export const products = [
         image: '/assets/images/merch-updated.png',
         category: 'accessories',
         featured: false
-    },
-    {
-        id: 7,
-        name: {
-            he: 'ערכת שתיל התחלתית',
-            en: 'Starter Seedling Kit'
-        },
-        description: {
-            he: 'ערכת גידול עם עציץ ושתיל - התחילו לגדל ירוק',
-            en: 'Growing kit with pot and seedling - start growing green'
-        },
-        price: 45,
-        currency: 'ILS',
-        image: '/assets/images/starter-seedling.png',
-        category: 'garden',
-        featured: true
     }
 ];
 

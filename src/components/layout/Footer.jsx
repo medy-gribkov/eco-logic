@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Linkedin, Twitter, Send } from 'lucide-react';
 import { useLanguage } from '../../i18n';
+import Icon from '../ui/Icon';
+import Modal from '../ui/Modal';
+import Button from '../ui/Button';
 
 const Footer = () => {
-    const { t, isRTL } = useLanguage();
+    const { isRTL, language } = useLanguage();
     const [email, setEmail] = useState('');
     const [subscribed, setSubscribed] = useState(false);
 
@@ -27,126 +28,168 @@ const Footer = () => {
     const navLinks = [
         { id: 'about', label: isRTL ? 'אודות' : 'About' },
         { id: 'features', label: isRTL ? 'מה אנחנו עושים' : 'Features' },
-        { id: 'quiz-preview', label: isRTL ? 'חידון' : 'Quiz' },
-        { id: 'stats', label: isRTL ? 'השפעה' : 'Impact' },
-        { id: 'brand', label: isRTL ? 'מותג' : 'Brand' },
-        { id: 'process', label: isRTL ? 'תהליך' : 'Process', isPage: true },
-    ];
-
-    const socialLinks = [
-        { icon: Instagram, href: '#', label: 'Instagram' },
-        { icon: Facebook, href: '#', label: 'Facebook' },
-        { icon: Linkedin, href: '#', label: 'LinkedIn' },
-        { icon: Twitter, href: '#', label: 'Twitter' },
+        { id: 'free-resources', label: isRTL ? 'משאבים חינם' : 'Free Resources' },
+        { id: 'programs', label: isRTL ? 'תכניות' : 'Programs' },
+        { id: 'collaborate', label: isRTL ? 'שיתוף פעולה' : 'Collaborate' },
     ];
 
     return (
-        <footer className="bg-graphite text-paper">
-            {/* Main Footer Content - Compact */}
-            <div className="max-w-7xl mx-auto px-6 md:px-8 py-10">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <footer className="relative overflow-hidden">
+            {/* Background illustration */}
+            <div
+                className="absolute inset-0 bg-cover bg-bottom bg-no-repeat pointer-events-none"
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-footer.png)' }}
+            />
+
+            {/* Main Footer Content */}
+            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-16">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
                     {/* Brand Column */}
-                    <div className="md:col-span-3">
+                    <div className="md:col-span-4">
                         <img
                             src="/assets/logo/logo.svg"
                             alt="EcoLogic"
-                            className="h-10 w-auto brightness-0 invert mb-3"
+                            className="h-12 w-auto mb-6"
                         />
-                        <p className="text-paper/60 text-sm leading-relaxed">
-                            {t('common.tagline')}
+                        <p className="text-graphite/80 text-lg leading-relaxed mb-6 font-display">
+                            {language === 'he'
+                                ? 'ללמוד מהטבע, לשמר את העתיד'
+                                : 'Learning from nature, preserving the future'}
                         </p>
+
+                        {/* Trust badges */}
+                        <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-3 text-sm text-graphite/70">
+                                <span className="bg-green/10 p-1.5 rounded-full text-green">
+                                    <Icon name="checkmark" size="xs" />
+                                </span>
+                                <span>{language === 'he' ? 'עמותה רשומה' : 'Registered Non-profit'}</span>
+                            </div>
+                            <div className="flex items-center gap-3 text-sm text-graphite/70">
+                                <span className="bg-green/10 p-1.5 rounded-full text-green">
+                                    <Icon name="recycle" size="xs" />
+                                </span>
+                                <span>{language === 'he' ? 'חומרים ממוחזרים' : 'Recycled Materials'}</span>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Navigate Column - 2 columns */}
-                    <div className="md:col-span-4">
-                        <h4 className="font-display text-sm uppercase tracking-wider mb-4 text-paper/80">
+                    {/* Navigate Column */}
+                    <div className="md:col-span-3">
+                        <h4 className="font-display text-xl uppercase tracking-wider mb-6 text-graphite border-b border-graphite/10 pb-2 inline-block">
                             {isRTL ? 'ניווט' : 'Navigate'}
                         </h4>
-                        <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+                        <div className="flex flex-col gap-4">
                             {navLinks.map((link) => (
-                                link.isPage ? (
-                                    <Link
-                                        key={link.id}
-                                        to={`/${link.id}`}
-                                        className="text-paper/60 hover:text-paper transition-colors text-sm"
-                                    >
-                                        {link.label}
-                                    </Link>
-                                ) : (
-                                    <button
-                                        key={link.id}
-                                        onClick={() => scrollToSection(link.id)}
-                                        className="text-paper/60 hover:text-paper transition-colors text-sm text-start"
-                                    >
-                                        {link.label}
-                                    </button>
-                                )
+                                <button
+                                    key={link.id}
+                                    onClick={() => scrollToSection(link.id)}
+                                    className="text-graphite/70 hover:text-magenta transition-colors text-start text-base flex items-center gap-2 group"
+                                >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-green/30 group-hover:bg-magenta transition-colors" />
+                                    {link.label}
+                                </button>
                             ))}
                         </div>
                     </div>
 
                     {/* Connect Column */}
                     <div className="md:col-span-2">
-                        <h4 className="font-display text-sm uppercase tracking-wider mb-4 text-paper/80">
+                        <h4 className="font-display text-xl uppercase tracking-wider mb-6 text-graphite border-b border-graphite/10 pb-2 inline-block">
                             {isRTL ? 'עקבו' : 'Connect'}
                         </h4>
-                        <div className="flex gap-3">
-                            {socialLinks.map((social) => (
-                                <a
-                                    key={social.label}
-                                    href={social.href}
-                                    aria-label={social.label}
-                                    className="w-9 h-9 rounded-full bg-paper/10 flex items-center justify-center hover:bg-paper/20 transition-colors"
-                                >
-                                    <social.icon className="w-4 h-4" />
-                                </a>
-                            ))}
+                        <div className="flex flex-col gap-4">
+                            <a href="#" className="text-graphite/70 hover:text-magenta transition-colors flex items-center gap-2 group">
+                                <Icon name="globe" size="xs" className="opacity-50 group-hover:opacity-100" />
+                                Instagram
+                            </a>
+                            <a href="#" className="text-graphite/70 hover:text-magenta transition-colors flex items-center gap-2 group">
+                                <Icon name="world" size="xs" className="opacity-50 group-hover:opacity-100" />
+                                Facebook
+                            </a>
+                            <a href="#" className="text-graphite/70 hover:text-magenta transition-colors flex items-center gap-2 group">
+                                <Icon name="ideas" size="xs" className="opacity-50 group-hover:opacity-100" />
+                                LinkedIn
+                            </a>
                         </div>
                     </div>
 
                     {/* Newsletter Column */}
                     <div className="md:col-span-3">
-                        <h4 className="font-display text-sm uppercase tracking-wider mb-4 text-paper/80">
-                            {t('newsletter.title')}
+                        <h4 className="font-display text-xl uppercase tracking-wider mb-6 text-graphite border-b border-graphite/10 pb-2 inline-block">
+                            {language === 'he' ? 'הישארו מעודכנים' : 'Stay Updated'}
                         </h4>
+                        <p className="text-graphite/60 text-sm mb-4 leading-relaxed">
+                            {language === 'he'
+                                ? 'קבלו טיפים, משאבים חינם ועדכונים על פעילויות לחינוך סביבתי'
+                                : 'Get free tips, resources, and updates on environmental education'}
+                        </p>
                         <form onSubmit={handleSubscribe} className="flex gap-2">
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder={t('newsletter.placeholder')}
-                                className="flex-1 bg-paper/10 px-3 py-2 rounded-sm text-sm placeholder:text-paper/40 focus:outline-none focus:ring-1 focus:ring-green min-w-0"
-                            />
+                            <div className="relative flex-1">
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    autoComplete="email"
+                                    placeholder={language === 'he' ? 'האימייל שלכם' : 'Your email'}
+                                    className="w-full bg-paper border border-gray/30 px-4 py-3 rounded-xl text-sm placeholder:text-graphite/40 focus:outline-none focus:ring-2 focus:ring-magenta/50"
+                                />
+                            </div>
                             <button
                                 type="submit"
-                                className="bg-green px-3 py-2 rounded-sm hover:bg-green/90 transition-colors flex-shrink-0"
-                                aria-label={isRTL ? 'הרשמה' : 'Subscribe'}
+                                className="bg-magenta text-paper px-4 py-3 rounded-xl hover:bg-magenta/90 transition-colors flex-shrink-0 flex items-center justify-center shadow-lg"
+                                aria-label="Subscribe"
                             >
-                                <Send className="w-4 h-4" />
+                                <Icon name="seedling" size="xs" className="brightness-0 invert" />
                             </button>
                         </form>
-                        {subscribed && (
-                            <p className="text-green text-xs mt-2">
-                                {t('newsletter.success')}
-                            </p>
-                        )}
                     </div>
                 </div>
             </div>
 
             {/* Bottom Bar */}
-            <div className="border-t border-paper/10">
-                <div className="max-w-7xl mx-auto px-6 md:px-8 py-4">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-3">
-                        <p className="text-paper/40 text-xs">
-                            {t('footer.copyright')}
+            <div className="relative z-10 border-t border-gray/10 bg-paper/30 backdrop-blur-sm">
+                <div className="max-w-7xl mx-auto px-6 md:px-8 py-6">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p className="text-graphite/50 text-sm">
+                            © 2024 EcoLogic. {language === 'he' ? 'כל הזכויות שמורות' : 'All rights reserved'}
                         </p>
-                        <p className="text-paper/30 text-xs">
-                            {t('footer.hackathon')}
-                        </p>
+                        <div className="flex items-center gap-2 text-graphite/40 text-sm">
+                            <Icon name="recycle-heart" size="xs" />
+                            <span>{language === 'he' ? 'עשוי מאהבה לכדור הארץ' : 'Made with love for Earth'}</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            {/* Newsletter Success Modal */}
+            <Modal
+                isOpen={subscribed}
+                onClose={() => setSubscribed(false)}
+                title={language === 'he' ? 'תודה!' : 'Thank You!'}
+                size="small"
+            >
+                <div className="text-center py-6">
+                    <div className="w-16 h-16 bg-magenta/10 rounded-full flex items-center justify-center mx-auto mb-4 text-magenta">
+                        <Icon name="heart" size="xl" />
+                    </div>
+                    <h3 className="font-display text-xl mb-2">
+                        {language === 'he' ? 'נרשמת בהצלחה' : 'You are subscribed!'}
+                    </h3>
+                    <p className="text-graphite/70 mb-6 text-sm">
+                        {language === 'he'
+                            ? 'אנחנו נשלח עדכונים מעניינים (ולא נספים לכם את המייל).'
+                            : "We'll send you interesting updates (and won't spam your inbox)."}
+                    </p>
+                    <Button
+                        variant="primary"
+                        onClick={() => setSubscribed(false)}
+                        className="bg-magenta hover:bg-magenta/90 w-full"
+                    >
+                        {language === 'he' ? 'מעולה' : 'Awesome'}
+                    </Button>
+                </div>
+            </Modal>
         </footer>
     );
 };

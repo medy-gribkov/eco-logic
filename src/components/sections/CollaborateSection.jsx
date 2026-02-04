@@ -1,45 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowLeft, Mail, Users, Heart, Mic } from 'lucide-react';
 import Section from '../layout/Section';
 import Container from '../layout/Container';
 import Button from '../ui/Button';
+import Icon from '../ui/Icon';
+import Modal from '../ui/Modal';
+import Input from '../ui/Input';
+import Textarea from '../ui/Textarea';
 import { useLanguage } from '../../i18n';
 import { collaborationOptions } from '../../data/programs';
 
 const CollaborationCard = ({ option, index }) => {
     const { language, isRTL } = useLanguage();
-    const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
-    const iconMap = {
-        '🎤': <Mic className="w-6 h-6" />,
-        '📝': <Mail className="w-6 h-6" />,
-        '🌟': <Users className="w-6 h-6" />,
-        '💚': <Heart className="w-6 h-6" />,
+    // Map collaboration types to our custom icons
+    const iconTypeMap = {
+        'invite-teach': 'lightbulb',
+        'custom-curriculum': 'book',
+        'ambassador': 'globe',
+        'donate': 'heart',
     };
+
+    const iconName = iconTypeMap[option.id] || 'checkmark';
 
     const colorClasses = [
         'bg-green/10 text-green hover:bg-green hover:text-paper',
         'bg-sage/20 text-green hover:bg-sage hover:text-paper',
-        'bg-burgundy/10 text-burgundy hover:bg-burgundy hover:text-paper',
+        'bg-magenta/10 text-magenta hover:bg-magenta hover:text-paper',
         'bg-sand text-graphite hover:bg-graphite hover:text-paper',
     ];
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: index * 0.08, duration: 0.4 }}
             className="group"
         >
             <div className={`
                 relative p-6 rounded-2xl transition-all duration-300 cursor-pointer
                 ${colorClasses[index]}
             `}>
-                {/* Icon */}
-                <div className="w-14 h-14 bg-paper/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-paper/30 transition-colors">
-                    {iconMap[option.icon] || <span className="text-2xl">{option.icon}</span>}
+                {/* Icon - displayed directly */}
+                <div className="mb-4">
+                    <Icon name={iconName} size="xl" className="transition-colors duration-300" />
                 </div>
 
                 {/* Content */}
@@ -50,31 +55,57 @@ const CollaborationCard = ({ option, index }) => {
                     {option.description[language]}
                 </p>
 
-                {/* Arrow */}
+                {/* Arrow indicator */}
                 <div className="flex items-center gap-2 text-sm font-body">
                     <span>{language === 'he' ? 'למידע נוסף' : 'Learn more'}</span>
-                    <Arrow className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <Icon name="confirm" size="xs" className={`group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
                 </div>
             </div>
         </motion.div>
     );
 };
 
+// Component for the Collaboration Section with interactive modal
 const CollaborateSection = () => {
-    const { language, isRTL } = useLanguage();
+    const { language } = useLanguage();
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+    const [contactSuccess, setContactSuccess] = useState(false);
+    const [contactForm, setContactForm] = useState({ name: '', email: '', organization: '', role: 'teacher', message: '' });
+
+    const handleContactSubmit = (e) => {
+        e.preventDefault();
+        // Simulate API call
+        setTimeout(() => {
+            setContactSuccess(true);
+        }, 800);
+    };
+
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0 }
+    };
 
     return (
-        <Section id="collaborate" spacing="large" className="bg-gradient-to-b from-sand/30 via-paper to-paper">
-            <Container>
+        <Section id="collaborate" spacing="large" className="relative overflow-hidden">
+            {/* Background illustration */}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-collaborate.png)' }}
+            />
+
+
+            <Container className="relative z-10">
                 {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={fadeInUp}
+                    transition={{ duration: 0.5 }}
                     className="text-center mb-12"
                 >
-                    <div className="inline-flex items-center gap-2 bg-sage/20 text-green px-4 py-2 rounded-full mb-6">
-                        <Users className="w-4 h-4" />
+                    <div className="inline-flex items-center gap-2 bg-green/10 text-green px-4 py-2 rounded-full mb-6">
+                        <Icon name="globe" size="xs" inline />
                         <span className="font-body text-sm uppercase tracking-wider">
                             {language === 'he' ? 'ביחד אנחנו חזקים' : 'Together We Are Stronger'}
                         </span>
@@ -99,13 +130,24 @@ const CollaborateSection = () => {
 
                 {/* Contact CTA */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={fadeInUp}
+                    transition={{ duration: 0.5, delay: 0.2 }}
                     className="mt-16 text-center"
                 >
-                    <div className="bg-gradient-to-r from-green/5 via-sand/50 to-burgundy/5 rounded-3xl p-8 md:p-12">
-                        <h3 className="font-display text-2xl md:text-3xl mb-4 text-graphite">
+                    <div className="relative bg-paper rounded-3xl p-8 md:p-12 shadow-card border border-sand overflow-visible mt-12">
+                        {/* Welcoming Teacher Image */}
+                        <div className="absolute -top-24 start-1/2 -translate-x-1/2 w-48 md:w-56 pointer-events-none">
+                            <img
+                                src="/assets/personas/persona-teacher-welcome.png"
+                                alt={language === 'he' ? 'מורה מזמינה' : 'Teacher welcoming'}
+                                className="w-full h-auto drop-shadow-lg"
+                            />
+                        </div>
+
+                        <h3 className="font-display text-2xl md:text-3xl mb-4 text-graphite pt-16">
                             {language === 'he' ? 'יש לכם רעיון אחר?' : 'Have another idea?'}
                         </h3>
                         <p className="text-graphite/70 mb-6 max-w-lg mx-auto">
@@ -115,14 +157,124 @@ const CollaborateSection = () => {
                         </p>
                         <Button
                             variant="primary"
-                            className="bg-graphite hover:bg-graphite/90 px-8 py-3"
+                            className="bg-magenta hover:bg-magenta/90 px-8 py-3 flex items-center gap-2 mx-auto"
+                            onClick={() => setIsContactModalOpen(true)}
                         >
-                            <Mail className="w-4 h-4 me-2" />
+                            <Icon name="heart" size="xs" className="brightness-0 invert" inline />
                             {language === 'he' ? 'צרו קשר' : 'Get in Touch'}
                         </Button>
                     </div>
                 </motion.div>
             </Container>
+
+            {/* Contact Modal */}
+            <Modal
+                isOpen={isContactModalOpen}
+                onClose={() => setIsContactModalOpen(false)}
+                title={language === 'he' ? 'בואו נשתף פעולה' : 'Let\'s Collaborate'}
+            >
+                {!contactSuccess ? (
+                    <form onSubmit={handleContactSubmit} className="flex flex-col gap-4">
+                        <p className="text-graphite/70 mb-2">
+                            {language === 'he'
+                                ? 'ספרו לנו על הרעיון שלכם ואיך נוכל ליצור השפעה סביבתית יחד.'
+                                : 'Tell us about your idea and how we can create environmental impact together.'}
+                        </p>
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <Input
+                                label={language === 'he' ? 'שם מלא' : 'Full Name'}
+                                value={contactForm.name}
+                                onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                                autoComplete="name"
+                                required
+                            />
+                            <Input
+                                label={language === 'he' ? 'אימייל' : 'Email'}
+                                type="email"
+                                value={contactForm.email}
+                                onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                                autoComplete="email"
+                                required
+                            />
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <Input
+                                label={language === 'he' ? 'מוסד / ארגון' : 'Institution / Org'}
+                                value={contactForm.organization}
+                                onChange={(e) => setContactForm({ ...contactForm, organization: e.target.value })}
+                                autoComplete="organization"
+                                placeholder={language === 'he' ? 'שם בית הספר או הארגון' : 'School or Org name'}
+                            />
+                            <div className="flex flex-col gap-1.5">
+                                <label className="text-sm font-body text-graphite/70">
+                                    {language === 'he' ? 'אני פונה כ...' : 'I am a...'}
+                                </label>
+                                <select
+                                    className="w-full p-3 bg-paper border border-sand rounded-xl focus:outline-none focus:ring-2 focus:ring-magenta/50 text-sm"
+                                    onChange={(e) => setContactForm({ ...contactForm, role: e.target.value })}
+                                >
+                                    <option value="teacher">{language === 'he' ? 'מורה / איש חינוך' : 'Teacher / Educator'}</option>
+                                    <option value="parent">{language === 'he' ? 'הורה' : 'Parent'}</option>
+                                    <option value="student">{language === 'he' ? 'סטודנט / תלמיד' : 'Student'}</option>
+                                    <option value="organization">{language === 'he' ? 'מוסד / עמותה' : 'Institution / NGO'}</option>
+                                    <option value="other">{language === 'he' ? 'אחר' : 'Other'}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <Textarea
+                            label={language === 'he' ? 'החזון שלכם לשיתוף פעולה' : 'Your Vision for Collaboration'}
+                            value={contactForm.message}
+                            onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                            placeholder={language === 'he'
+                                ? 'ספרו לנו על הקהילה שלכם ואיזה סוג של פעילות אתם מדמיינים...'
+                                : 'Tell us about your community and what kind of activity you imagine...'}
+                            rows={4}
+                            required
+                        />
+                        <div className="flex justify-end gap-3 mt-4">
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => setIsContactModalOpen(false)}
+                            >
+                                {language === 'he' ? 'ביטול' : 'Cancel'}
+                            </Button>
+                            <Button
+                                type="submit"
+                                variant="primary"
+                                className="bg-magenta hover:bg-magenta/90"
+                            >
+                                {language === 'he' ? 'שליחה' : 'Send Message'}
+                            </Button>
+                        </div>
+                    </form>
+                ) : (
+                    <div className="text-center py-8">
+                        <div className="w-16 h-16 bg-green/10 rounded-full flex items-center justify-center mx-auto mb-4 text-green">
+                            <Icon name="checkmark" size="xl" />
+                        </div>
+                        <h3 className="font-display text-2xl mb-2">
+                            {language === 'he' ? 'ההודעה נשלחה!' : 'Message Sent!'}
+                        </h3>
+                        <p className="text-graphite/70 mb-6">
+                            {language === 'he'
+                                ? 'תודה שפניתם אלינו. נחזור אליכם תוך 48 שעות.'
+                                : 'Thanks for reaching out. We will get back to you within 48 hours.'}
+                        </p>
+                        <Button
+                            variant="primary"
+                            onClick={() => {
+                                setIsContactModalOpen(false);
+                                setContactSuccess(false);
+                                setContactForm({ name: '', email: '', message: '' });
+                            }}
+                            className="bg-green hover:bg-green/90"
+                        >
+                            {language === 'he' ? 'סגירה' : 'Close'}
+                        </Button>
+                    </div>
+                )}
+            </Modal>
         </Section>
     );
 };

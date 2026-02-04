@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Minus, Plus, ShoppingBag, ArrowRight, ArrowLeft, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
+import Icon from './Icon';
 import { useCart } from '../../context/CartContext';
 import { useLanguage } from '../../i18n';
 
@@ -32,13 +33,15 @@ const CartDrawer = () => {
 
                     {/* Drawer */}
                     <motion.div
-                        initial={{ x: isRTL ? '-100%' : '100%' }}
+                        initial={{ x: isRTL ? '-110%' : '110%' }}
                         animate={{ x: 0 }}
-                        exit={{ x: isRTL ? '-100%' : '100%' }}
+                        exit={{ x: isRTL ? '-110%' : '110%' }}
                         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                         className={`
-                            fixed top-0 bottom-0 w-full max-w-md bg-paper shadow-2xl z-50
-                            ${isRTL ? 'left-0' : 'right-0'}
+                            fixed top-4 bottom-4 w-[calc(100%-2rem)] max-w-md 
+                            bg-paper/85 backdrop-blur-lg shadow-elevated z-50
+                            rounded-[2.5rem] border border-white/20 overflow-hidden
+                            ${isRTL ? 'left-4' : 'right-4'}
                         `}
                     >
                         <div className="flex flex-col h-full">
@@ -88,7 +91,7 @@ const CartDrawer = () => {
                                                             className="w-full h-full object-cover"
                                                         />
                                                     ) : (
-                                                        <span className="text-3xl">{item.icon || '📦'}</span>
+                                                        <Icon name="leaf" size="sm" />
                                                     )}
                                                 </div>
 
@@ -177,11 +180,14 @@ const CartDrawer = () => {
                                     </Button>
 
                                     {/* Note */}
-                                    <p className="text-xs text-center text-graphite/40">
-                                        {language === 'he'
-                                            ? '💚 אנחנו ארגון ללא מטרות רווח'
-                                            : '💚 We are a non-profit organization'}
-                                    </p>
+                                    <div className="text-xs text-center text-graphite/40 flex items-center justify-center gap-1">
+                                        <Icon name="heart" size="xs" inline />
+                                        <span>
+                                            {language === 'he'
+                                                ? 'אנחנו ארגון ללא מטרות רווח'
+                                                : 'We are a non-profit organization'}
+                                        </span>
+                                    </div>
                                 </div>
                             )}
                         </div>

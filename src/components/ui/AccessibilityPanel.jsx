@@ -252,7 +252,7 @@ const AccessibilityPanel = () => {
             {/* Floating Button */}
             <motion.button
                 onClick={() => setIsOpen(true)}
-                className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-graphite text-paper flex items-center justify-center shadow-elevated hover:bg-graphite/90 transition-colors"
+                className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-graphite text-paper flex items-center justify-center shadow-elevated hover:bg-graphite/90 transition-colors"
                 aria-label={isRTL ? 'הגדרות נגישות' : 'Accessibility settings'}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -278,7 +278,7 @@ const AccessibilityPanel = () => {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="fixed bottom-24 right-6 z-50 w-96 bg-paper rounded-lg shadow-elevated overflow-hidden max-h-[80vh] flex flex-col"
+                            className="fixed bottom-24 left-6 z-50 w-96 bg-paper rounded-lg shadow-elevated overflow-hidden max-h-[80vh] flex flex-col"
                         >
                             {/* Header */}
                             <div className="flex items-center justify-between px-5 py-4 border-b border-gray/20">

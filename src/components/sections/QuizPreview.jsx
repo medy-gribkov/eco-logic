@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, CheckCircle, XCircle, BookOpen, Lightbulb } from 'lucide-react';
 import Section from '../layout/Section';
 import Container from '../layout/Container';
 import Button from '../ui/Button';
 import Card from '../ui/Card';
+import Icon from '../ui/Icon';
 import { useLanguage } from '../../i18n';
 import { questions } from '../../data/questions';
 
 const QuizPreview = () => {
     const navigate = useNavigate();
-    const { t, language, isRTL } = useLanguage();
+    const { language, isRTL } = useLanguage();
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [showResult, setShowResult] = useState(false);
-    const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
     // Use first question as preview
     const question = questions[0];
@@ -32,17 +31,24 @@ const QuizPreview = () => {
     };
 
     return (
-        <Section id="quiz-preview" spacing="large" className="bg-gradient-to-b from-sand/30 via-green/5 to-paper">
-            <Container size="small">
+        <Section id="quiz-preview" spacing="large" className="relative overflow-hidden">
+            {/* Background illustration */}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-quiz.png)' }}
+            />
+            <div className="absolute inset-0 bg-paper/40 backdrop-blur-[1px]" />
+            <Container size="small" className="relative z-10">
                 {/* Header - Reframed as Interactive Lesson */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.5 }}
                     className="text-center mb-12"
                 >
                     <div className="inline-flex items-center gap-2 bg-green/10 text-green px-4 py-2 rounded-full mb-6">
-                        <BookOpen className="w-4 h-4" />
+                        <Icon name="book" size="xs" inline />
                         <span className="font-body text-sm uppercase tracking-wider">
                             {language === 'he' ? 'חוויית לימוד' : 'Learning Experience'}
                         </span>
@@ -93,7 +99,7 @@ const QuizPreview = () => {
                                     if (isCorrectOption) {
                                         optionStyle = 'border-green bg-green/10';
                                     } else if (isSelected && !isCorrectOption) {
-                                        optionStyle = 'border-burgundy bg-burgundy/10';
+                                        optionStyle = 'border-magenta bg-magenta/10';
                                     }
                                 } else if (isSelected) {
                                     optionStyle = 'border-sage bg-sage/10';
@@ -115,10 +121,12 @@ const QuizPreview = () => {
                                     >
                                         <span className="font-body text-lg text-graphite">{option.label[language]}</span>
                                         {showResult && isCorrectOption && (
-                                            <CheckCircle className="w-6 h-6 text-green" />
+                                            <Icon name="checkmark" size="md" />
                                         )}
                                         {showResult && isSelected && !isCorrectOption && (
-                                            <XCircle className="w-6 h-6 text-burgundy" />
+                                            <span className="w-6 h-6 rounded-full bg-magenta flex items-center justify-center text-paper text-sm">
+                                                X
+                                            </span>
                                         )}
                                     </motion.button>
                                 );
@@ -140,9 +148,9 @@ const QuizPreview = () => {
                                         rounded-xl p-6 mb-6
                                         ${isCorrect ? 'bg-green/10 border border-green/20' : 'bg-sand border border-sand'}
                                     `}>
-                                        <div className="flex items-center justify-center gap-2 mb-3">
-                                            <Lightbulb className={`w-5 h-5 ${isCorrect ? 'text-green' : 'text-burgundy'}`} />
-                                            <span className={`font-display text-lg ${isCorrect ? 'text-green' : 'text-burgundy'}`}>
+                                        <div className="flex items-center justify-center gap-3 mb-3">
+                                            <Icon name="lightbulb" size="md" />
+                                            <span className={`font-display text-lg ${isCorrect ? 'text-green' : 'text-magenta'}`}>
                                                 {isCorrect
                                                     ? (language === 'he' ? 'מצוין! זה נכון' : 'Excellent! That\'s correct')
                                                     : (language === 'he' ? 'לא בדיוק, אבל עכשיו תדעו' : 'Not quite, but now you know')}
@@ -165,7 +173,7 @@ const QuizPreview = () => {
                                         </Button>
                                         <Button onClick={() => navigate('/quiz')} className="flex items-center gap-2 bg-green hover:bg-green/90">
                                             {language === 'he' ? 'לחידון המלא' : 'Full Quiz'}
-                                            <Arrow className="w-4 h-4" />
+                                            <span className={isRTL ? 'rotate-180' : ''}>→</span>
                                         </Button>
                                     </div>
                                 </motion.div>
@@ -190,12 +198,13 @@ const QuizPreview = () => {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    className="mt-8 text-center"
+                    className="mt-8 text-center flex items-center justify-center gap-2"
                 >
+                    <Icon name="lightbulb" size="sm" />
                     <p className="text-sm text-graphite/50">
                         {language === 'he'
-                            ? '✨ השיטה שלנו: שאלה → גילוי → הסבר → זכירה'
-                            : '✨ Our method: Question → Discovery → Explanation → Retention'}
+                            ? 'השיטה שלנו: שאלה - גילוי - הסבר - זכירה'
+                            : 'Our method: Question - Discovery - Explanation - Retention'}
                     </p>
                 </motion.div>
             </Container>

@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Check, Package, User, MapPin, CreditCard, PartyP
 import Container from '../components/layout/Container';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
+import Icon from '../components/ui/Icon';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../i18n';
 
@@ -21,6 +22,7 @@ const CheckoutPage = () => {
         lastName: '',
         email: '',
         phone: '',
+        organization: '',
         address: '',
         city: '',
         zipCode: '',
@@ -74,11 +76,14 @@ const CheckoutPage = () => {
                                 ? 'קיבלנו את ההזמנה שלך ונהיה בקשר בקרוב.'
                                 : 'We received your order and will be in touch soon.'}
                         </p>
-                        <p className="text-sm text-graphite/50 mb-8">
-                            {language === 'he'
-                                ? '💚 כל התמיכה שלכם חוזרת לפעילות חינוכית'
-                                : '💚 All your support goes back to educational activities'}
-                        </p>
+                        <div className="text-sm text-graphite/50 mb-8 flex items-center justify-center gap-2">
+                            <Icon name="heart" size="xs" inline />
+                            <span>
+                                {language === 'he'
+                                    ? 'כל התמיכה שלכם חוזרת לפעילות חינוכית'
+                                    : 'All your support goes back to educational activities'}
+                            </span>
+                        </div>
                         <Button
                             onClick={() => navigate('/')}
                             className="bg-green hover:bg-green/90"
@@ -118,7 +123,7 @@ const CheckoutPage = () => {
             <Container>
                 {/* Back button */}
                 <button
-                    onClick={() => step > 1 ? setStep(step - 1) : navigate('/')}
+                    onClick={() => step > 1 ? setStep(step - 1) : navigate(-1)}
                     className="flex items-center gap-2 text-graphite/60 hover:text-graphite mb-8 transition-colors"
                 >
                     <BackArrow className="w-4 h-4" />
@@ -168,7 +173,7 @@ const CheckoutPage = () => {
                                                 {item.image ? (
                                                     <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                                 ) : (
-                                                    <span className="text-2xl">{item.icon || '📦'}</span>
+                                                    <Icon name="leaf" size="sm" />
                                                 )}
                                             </div>
                                             <div className="flex-1">
@@ -199,6 +204,7 @@ const CheckoutPage = () => {
                                             name="firstName"
                                             value={formData.firstName}
                                             onChange={handleInputChange}
+                                            autoComplete="given-name"
                                             className="w-full p-3 border border-sand rounded-lg focus:border-green focus:outline-none transition-colors"
                                         />
                                     </div>
@@ -211,6 +217,7 @@ const CheckoutPage = () => {
                                             name="lastName"
                                             value={formData.lastName}
                                             onChange={handleInputChange}
+                                            autoComplete="family-name"
                                             className="w-full p-3 border border-sand rounded-lg focus:border-green focus:outline-none transition-colors"
                                         />
                                     </div>
@@ -223,7 +230,22 @@ const CheckoutPage = () => {
                                             name="email"
                                             value={formData.email}
                                             onChange={handleInputChange}
+                                            autoComplete="email"
                                             className="w-full p-3 border border-sand rounded-lg focus:border-green focus:outline-none transition-colors"
+                                        />
+                                    </div>
+                                    <div className="md:col-span-2">
+                                        <label className="block text-sm text-graphite/70 mb-2">
+                                            {language === 'he' ? 'בית ספר או ארגון (אופציונלי)' : 'School or Organization (Optional)'}
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="organization"
+                                            value={formData.organization}
+                                            onChange={handleInputChange}
+                                            autoComplete="organization"
+                                            className="w-full p-3 border border-sand rounded-lg focus:border-green focus:outline-none transition-colors"
+                                            placeholder={language === 'he' ? 'שם המוסד שלכם' : 'Your institution name'}
                                         />
                                     </div>
                                     <div className="md:col-span-2">
@@ -235,6 +257,7 @@ const CheckoutPage = () => {
                                             name="phone"
                                             value={formData.phone}
                                             onChange={handleInputChange}
+                                            autoComplete="tel"
                                             className="w-full p-3 border border-sand rounded-lg focus:border-green focus:outline-none transition-colors"
                                         />
                                     </div>
@@ -267,7 +290,9 @@ const CheckoutPage = () => {
                                                 name="address"
                                                 value={formData.address}
                                                 onChange={handleInputChange}
+                                                autoComplete="street-address"
                                                 className="w-full p-3 border border-sand rounded-lg focus:border-green focus:outline-none transition-colors"
+                                                placeholder={language === 'he' ? 'רחוב ומספר בית' : 'Street name and number'}
                                             />
                                         </div>
                                         <div className="grid md:grid-cols-2 gap-4">
@@ -280,6 +305,7 @@ const CheckoutPage = () => {
                                                     name="city"
                                                     value={formData.city}
                                                     onChange={handleInputChange}
+                                                    autoComplete="address-level2"
                                                     className="w-full p-3 border border-sand rounded-lg focus:border-green focus:outline-none transition-colors"
                                                 />
                                             </div>
@@ -292,6 +318,7 @@ const CheckoutPage = () => {
                                                     name="zipCode"
                                                     value={formData.zipCode}
                                                     onChange={handleInputChange}
+                                                    autoComplete="postal-code"
                                                     className="w-full p-3 border border-sand rounded-lg focus:border-green focus:outline-none transition-colors"
                                                 />
                                             </div>
@@ -377,8 +404,9 @@ const CheckoutPage = () => {
                         </Card>
 
                         {/* Non-profit note */}
-                        <div className="text-center text-sm text-graphite/50">
-                            <p>💚 {language === 'he' ? 'ארגון ללא מטרות רווח' : 'Non-profit organization'}</p>
+                        <div className="text-center text-sm text-graphite/50 flex items-center justify-center gap-1">
+                            <Icon name="heart" size="xs" inline />
+                            <span>{language === 'he' ? 'ארגון ללא מטרות רווח' : 'Non-profit organization'}</span>
                         </div>
                     </div>
                 </div>

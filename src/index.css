@@ -1,28 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  /* Style C: Hot + Spice - Warm educational palette */
-  --color-graphite: #2C2C2C;
-  --color-paper: #F7F4ED;
-  --color-burgundy: #8B2942;
-  --color-green: #2D5A3D;
-  --color-sage: #7A9E7E;
-  --color-sand: #E8DFD0;
+  /* EcoLogic Brand Colors - Original palette with Style C warm complements */
+  --color-graphite: #111111;
+  --color-paper: #F3F1EA;
+  --color-magenta: #FF2D7A;
+  --color-green: #1D7C5A;
+  --color-blue: #2F6BFF;
   --color-gray: #C7C2B6;
-  
-  /* Legacy alias for compatibility */
-  --color-magenta: #8B2942;
-  --color-blue: #2D5A3D;
 
-  /* Fonts - Franklin Gothic for Style C */
-  --font-display: "Franklin Gothic Medium", "Trebuchet MS", sans-serif;
+  /* Style C warm complements */
+  --color-sand: #E8DFD0;
+  --color-sage: #7A9E7E;
+
+  /* Legacy aliases */
+  --color-burgundy: #FF2D7A;
+
+  /* Typography - Bebas Neue for headlines */
+  --font-display: "Bebas Neue", sans-serif;
   --font-display-he: "Heebo", sans-serif;
-  --font-body: "Segoe UI", Inter, sans-serif;
+  --font-body: Inter, sans-serif;
   --font-body-he: "Heebo", sans-serif;
   --font-mono: "Space Mono", monospace;
 
-  --shadow-card: 0 2px 12px rgba(44, 44, 44, 0.06);
-  --shadow-elevated: 0 6px 24px rgba(44, 44, 44, 0.10);
+  --shadow-card: 0 2px 12px rgba(17, 17, 17, 0.06);
+  --shadow-elevated: 0 6px 24px rgba(17, 17, 17, 0.10);
 }
 
 /* Custom base styles ensuring defaults match the design system */
@@ -348,6 +350,7 @@ html.content-highlighting h3:hover {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -367,9 +370,12 @@ html[dir="rtl"] .animate-marquee {
 
 /* Floating animation for decorative elements */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }

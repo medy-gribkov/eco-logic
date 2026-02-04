@@ -4,7 +4,7 @@ export const programs = [
     {
         id: 'seed',
         tier: 'free',
-        icon: '🌱',
+        icon: 'seedling',
         name: {
             he: 'זרע',
             en: 'Seed'
@@ -38,7 +38,7 @@ export const programs = [
     {
         id: 'sprout',
         tier: 'basic',
-        icon: '🌿',
+        icon: 'sprout',
         name: {
             he: 'נבט',
             en: 'Sprout'
@@ -74,7 +74,7 @@ export const programs = [
     {
         id: 'tree',
         tier: 'premium',
-        icon: '🌳',
+        icon: 'tree',
         name: {
             he: 'עץ',
             en: 'Tree'
@@ -114,7 +114,7 @@ export const programs = [
     {
         id: 'forest',
         tier: 'enterprise',
-        icon: '🏫',
+        icon: 'forest',
         name: {
             he: 'יער',
             en: 'Forest'
@@ -160,10 +160,10 @@ export const freeResources = [
             he: '12 עמודים של טיפים מעשיים לחיסכון במים בבית ובבית הספר',
             en: '12 pages of practical tips for saving water at home and school'
         },
-        icon: '💧',
+        type: 'water',
         format: 'PDF',
         pages: 12,
-        downloadUrl: '#'
+        downloadUrl: '/assets/downloads/water-guide.pdf'
     },
     {
         id: 'classroom-activities',
@@ -175,10 +175,10 @@ export const freeResources = [
             he: '5 פעילויות מוכנות ללמידה חווייתית על קיימות',
             en: '5 ready-to-use activities for experiential learning about sustainability'
         },
-        icon: '📚',
+        type: 'activities',
         format: 'PDF',
         pages: 20,
-        downloadUrl: '#'
+        downloadUrl: '/assets/downloads/classroom-activities.pdf'
     },
     {
         id: 'infographics-pack',
@@ -190,10 +190,10 @@ export const freeResources = [
             he: '8 אינפוגרפיקות צבעוניות על סביבה ואקולוגיה',
             en: '8 colorful infographics on environment and ecology'
         },
-        icon: '📊',
+        type: 'infographics',
         format: 'PNG',
         pages: 8,
-        downloadUrl: '#'
+        downloadUrl: '/assets/downloads/infographics-pack.png'
     },
     {
         id: 'teacher-quickstart',
@@ -205,17 +205,17 @@ export const freeResources = [
             he: 'כל מה שצריך כדי להתחיל ללמד קיימות ביום אחד',
             en: 'Everything you need to start teaching sustainability in one day'
         },
-        icon: '🎯',
+        type: 'guide',
         format: 'PDF',
         pages: 6,
-        downloadUrl: '#'
+        downloadUrl: '/assets/downloads/teacher-quickstart.pdf'
     }
 ];
 
 export const collaborationOptions = [
     {
         id: 'invite-teach',
-        icon: '🎤',
+        icon: 'lightbulb',
         title: {
             he: 'הזמינו אותנו ללמד',
             en: 'Invite Us to Teach'
@@ -227,7 +227,7 @@ export const collaborationOptions = [
     },
     {
         id: 'custom-curriculum',
-        icon: '📝',
+        icon: 'book',
         title: {
             he: 'בקשו תכנית מותאמת',
             en: 'Request Custom Curriculum'
@@ -239,7 +239,7 @@ export const collaborationOptions = [
     },
     {
         id: 'ambassador',
-        icon: '🌟',
+        icon: 'globe',
         title: {
             he: 'הפכו לשגרירים',
             en: 'Become an Ambassador'
@@ -251,7 +251,7 @@ export const collaborationOptions = [
     },
     {
         id: 'donate',
-        icon: '💚',
+        icon: 'heart',
         title: {
             he: 'תרמו לחינוך',
             en: 'Donate to Education'

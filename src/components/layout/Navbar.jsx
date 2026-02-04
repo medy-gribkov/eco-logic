@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, BookOpen } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useLanguage } from '../../i18n';
 import LanguageToggle from '../ui/LanguageToggle';
+import Icon from '../ui/Icon';
 
 const Navbar = () => {
-    const { t, language, isRTL } = useLanguage();
+    const { language, isRTL } = useLanguage();
     const location = useLocation();
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,7 +29,7 @@ const Navbar = () => {
     useEffect(() => {
         if (!isHomePage) return;
 
-        const sectionIds = ['hero', 'about', 'features', 'free-resources', 'programs', 'quiz-preview', 'collaborate'];
+        const sectionIds = ['hero', 'about', 'features', 'programs', 'free-resources', 'quiz-preview', 'collaborate'];
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -39,8 +40,8 @@ const Navbar = () => {
                 });
             },
             {
-                threshold: 0.3,
-                rootMargin: '-80px 0px -50% 0px'
+                threshold: 0.2,
+                rootMargin: '-100px 0px -40% 0px'
             }
         );
 
@@ -72,82 +73,73 @@ const Navbar = () => {
         setMobileMenuOpen(false);
     };
 
-    // Education-focused navigation
+    // Complete navigation with all sections in order
     const scrollNavLinks = [
-        { id: 'about', label: language === 'he' ? 'מי אנחנו' : 'About' },
-        { id: 'free-resources', label: language === 'he' ? 'משאבים חינם' : 'Free Resources' },
+        { id: 'about', label: language === 'he' ? 'עלינו' : 'About' },
+        { id: 'features', label: language === 'he' ? 'איך זה עובד' : 'How It Works' },
+        { id: 'free-resources', label: language === 'he' ? 'משאבים' : 'Resources' },
         { id: 'programs', label: language === 'he' ? 'תכניות' : 'Programs' },
-        { id: 'collaborate', label: language === 'he' ? 'שיתוף פעולה' : 'Collaborate' },
+        { id: 'quiz-preview', label: language === 'he' ? 'נסו שיעור' : 'Try Lesson' },
+        { id: 'collaborate', label: language === 'he' ? 'שיתוף פעולה' : 'Partner' },
     ];
 
     return (
-        <nav className={`
-            sticky top-0 z-50 transition-all duration-300
-            ${scrolled
-                ? 'bg-paper/98 backdrop-blur-md shadow-sm border-b border-graphite/10'
-                : 'bg-paper/80 backdrop-blur-sm'
-            }
-        `}>
-            <div className="max-w-7xl mx-auto px-6 md:px-8">
-                <div className="flex justify-between items-center h-16 md:h-20">
+        <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
+            {/* Pill-shaped navbar container */}
+            <div className={`
+                relative rounded-full transition-all duration-500
+                ${scrolled
+                    ? 'bg-paper/95 backdrop-blur-lg shadow-elevated'
+                    : 'bg-paper/80 backdrop-blur-md shadow-card'
+                }
+            `}>
+                <div className="flex justify-between items-center px-4 md:px-6 py-2 md:py-3">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center gap-3">
+                    <Link to="/" className="flex items-center gap-2 z-10">
                         <img
                             src="/assets/logo/logo.svg"
                             alt="EcoLogic"
-                            className="h-9 w-auto"
+                            className="h-8 w-auto"
                         />
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-1">
-                        {scrollNavLinks.map((link) => (
-                            <button
-                                key={link.id}
-                                onClick={() => scrollToSection(link.id)}
-                                className={`
-                                    relative px-4 py-2 font-body text-sm transition-colors rounded-lg
-                                    ${activeSection === link.id
-                                        ? 'text-green'
-                                        : 'text-graphite/70 hover:text-graphite hover:bg-sand/50'
-                                    }
-                                `}
-                            >
-                                {link.label}
-                                {activeSection === link.id && (
-                                    <motion.div
-                                        layoutId="activeNavIndicator"
-                                        className="absolute bottom-0 left-4 right-4 h-0.5 bg-green rounded-full"
-                                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                                    />
-                                )}
-                            </button>
-                        ))}
-
-                        <div className="w-px h-6 bg-gray/30 mx-2" />
-
-                        {/* Try Interactive Lesson - subtle CTA */}
-                        <button
-                            onClick={() => scrollToSection('quiz-preview')}
-                            className="flex items-center gap-2 px-4 py-2 bg-green/10 text-green font-body text-sm rounded-lg hover:bg-green/20 transition-colors"
-                        >
-                            <BookOpen className="w-4 h-4" />
-                            {language === 'he' ? 'נסו שיעור' : 'Try Lesson'}
-                        </button>
-
-                        <div className="w-px h-6 bg-gray/30 mx-2" />
-                        <LanguageToggle />
+                    <div className="hidden lg:flex items-center gap-1">
+                        {scrollNavLinks.map((link) => {
+                            const isActive = activeSection === link.id;
+                            return (
+                                <button
+                                    key={link.id}
+                                    onClick={() => scrollToSection(link.id)}
+                                    className={`
+                                        relative px-3 py-1.5 font-body text-sm transition-colors duration-200 rounded-full z-10
+                                        ${isActive ? 'text-paper' : 'text-graphite/70 hover:text-graphite'}
+                                    `}
+                                >
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="active-pill"
+                                            className="absolute inset-0 bg-magenta rounded-full -z-10"
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                        />
+                                    )}
+                                    {link.label}
+                                </button>
+                            );
+                        })}
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="flex items-center gap-3 md:hidden">
-                        <LanguageToggle className="!px-2 !py-1 text-xs" />
+                    {/* Right side: Language toggle */}
+                    <div className="flex items-center gap-2 z-10">
+                        <LanguageToggle className="!px-3 !py-1.5 !text-sm !rounded-full" />
+
+                        {/* Mobile Menu Button */}
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="p-2 hover:bg-sand/50 rounded-lg transition-colors"
+                            className="lg:hidden p-2 hover:bg-sand/50 rounded-full transition-colors"
                             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                         >
-                            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                         </button>
                     </div>
                 </div>
@@ -157,34 +149,29 @@ const Navbar = () => {
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden border-t border-graphite/10 bg-paper"
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className="lg:hidden mt-2 mx-4 bg-paper/95 backdrop-blur-lg rounded-2xl shadow-elevated overflow-hidden"
                     >
-                        <div className="px-6 py-4 space-y-1">
+                        <div className="p-4 space-y-1">
                             {scrollNavLinks.map((link) => (
                                 <button
                                     key={link.id}
                                     onClick={() => scrollToSection(link.id)}
                                     className={`
-                                        block w-full text-start py-3 px-4 rounded-lg font-body text-sm transition-colors
+                                        flex items-center gap-3 w-full text-start py-3 px-4 rounded-xl font-body text-sm transition-colors
                                         ${activeSection === link.id
-                                            ? 'text-green bg-green/10'
+                                            ? 'text-paper bg-magenta'
                                             : 'text-graphite hover:bg-sand/50'
                                         }
                                     `}
                                 >
+                                    {link.id === 'quiz-preview' && <Icon name="book" size="xs" inline />}
                                     {link.label}
                                 </button>
                             ))}
-                            <button
-                                onClick={() => scrollToSection('quiz-preview')}
-                                className="flex items-center gap-2 w-full py-3 px-4 rounded-lg font-body text-sm bg-green/10 text-green mt-2"
-                            >
-                                <BookOpen className="w-4 h-4" />
-                                {language === 'he' ? 'נסו שיעור אינטראקטיבי' : 'Try Interactive Lesson'}
-                            </button>
                         </div>
                     </motion.div>
                 )}

@@ -130,8 +130,9 @@ const MerchSection = () => {
             setCanScrollLeft(scrollLeft > 10);
             setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
 
-            const cardWidth = 288;
-            const newIndex = Math.round(scrollLeft / cardWidth);
+            // Card width (288px) + gap (20px) = 308px
+            const itemWidth = 308;
+            const newIndex = Math.round(scrollLeft / itemWidth);
             setActiveIndex(Math.min(newIndex, allProducts.length - 1));
         }
     };
@@ -152,7 +153,8 @@ const MerchSection = () => {
         const carousel = carouselRef.current;
         if (!carousel) return;
 
-        const scrollAmount = 288;
+        // Card width (288px) + gap (20px) = 308px
+        const scrollAmount = 308;
         const delta = direction === 'left' ? -scrollAmount : scrollAmount;
 
         carousel.scrollBy({
@@ -164,8 +166,15 @@ const MerchSection = () => {
     };
 
     return (
-        <Section id="merch" spacing="default" className="bg-gradient-to-b from-paper to-sand/20 overflow-hidden">
-            <Container>
+        <Section id="merch" spacing="default" className="relative overflow-hidden">
+            {/* Background illustration */}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-40"
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-about.png)' }}
+            />
+
+
+            <Container className="relative z-10">
                 {/* Section Header - Subtle, not pushy */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -240,16 +249,15 @@ const MerchSection = () => {
                             />
                         ))}
                     </div>
-
-                    {/* Dot indicators */}
                     <div className="flex justify-center gap-2 mt-6">
                         {allProducts.map((_, index) => (
                             <button
                                 key={index}
                                 onClick={() => {
                                     if (carouselRef.current) {
+                                        // Card width (288px) + gap (20px) = 308px
                                         carouselRef.current.scrollTo({
-                                            left: index * 288,
+                                            left: index * 308,
                                             behavior: 'smooth'
                                         });
                                     }
@@ -279,8 +287,8 @@ const MerchSection = () => {
                             : '💡 Selected products included free in our "Tree" package'}
                     </p>
                 </motion.div>
-            </Container>
-        </Section>
+            </Container >
+        </Section >
     );
 };
 

@@ -1,47 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import * as LucideIcons from 'lucide-react';
+import React from 'react';
 
-const Icon = ({ name, className = '', fallback = 'HelpCircle', ...props }) => {
-    const [svgContent, setSvgContent] = useState(null);
+/**
+ * Custom Icon component using ONLY our illustrated PNG icon set
+ * NO Lucide icons, NO emojis - brand consistency is key
+ * Icons are PNG files in /assets/icons/
+ */
 
-    // Helper to convert kebab-case to PascalCase for Lucide lookup
-    const toPascalCase = (str) =>
-        str.match(/[a-z0-9]+/gi)
-            ?.map(w => w.charAt(0).toUpperCase() + w.substring(1).toLowerCase())
-            .join('') || '';
+const iconMap = {
+    // Original brand icons
+    checkmark: '/assets/icons/checkmark.png',
+    confirm: '/assets/icons/confirm.png',
+    globe: '/assets/icons/globe.png',
+    ideas: '/assets/icons/ideas.png',
+    leaf: '/assets/icons/leaf.png',
+    lightbulb: '/assets/icons/lightbulb.png',
+    nature: '/assets/icons/nature.png',
+    'recycle-heart': '/assets/icons/recycle-heart.png',
+    recycle: '/assets/icons/recycle.png',
+    tree: '/assets/icons/tree.png',
+    world: '/assets/icons/world.png',
+    // New generated icons (same style)
+    book: '/assets/icons/book.png',
+    seedling: '/assets/icons/seedling.png',
+    download: '/assets/icons/download.png',
+    heart: '/assets/icons/heart.png',
+    sprout: '/assets/icons/sprout.png',
+    forest: '/assets/icons/forest.png',
+};
 
-    const lucideName = toPascalCase(name || '');
-    // Use provided fallback, or try to find one by name, or default to HelpCircle
-    const LucideFallback = LucideIcons[fallback] || LucideIcons[lucideName] || LucideIcons.HelpCircle;
+const sizeMap = {
+    xs: 'w-4 h-4',
+    sm: 'w-6 h-6',
+    md: 'w-8 h-8',
+    lg: 'w-12 h-12',
+    xl: 'w-16 h-16',
+    '2xl': 'w-20 h-20',
+    '3xl': 'w-24 h-24',
+};
 
-    useEffect(() => {
-        const loadIcon = async () => {
-            try {
-                const response = await fetch(`/assets/icons/${name}.svg`);
-                if (response.ok) {
-                    const text = await response.text();
-                    setSvgContent(text);
-                }
-            } catch (e) {
-                // Silent fail, use fallback
-            }
-        };
+const Icon = ({
+    name,
+    size = 'md',
+    className = '',
+    alt,
+    inline = false,
+    ...props
+}) => {
+    const src = iconMap[name];
 
-        // Only try to fetch if it looks like there might be a custom asset (checking if NOT a standard lucide name could be hard, so we just try)
-        if (name) loadIcon();
-    }, [name]);
-
-    if (svgContent) {
-        return (
-            <span
-                className={`inline-block align-middle [&>svg]:w-full [&>svg]:h-full ${className}`}
-                dangerouslySetInnerHTML={{ __html: svgContent }}
-                {...props}
-            />
-        );
+    if (!src) {
+        console.warn(`Icon "${name}" not found. Available icons: ${Object.keys(iconMap).join(', ')}`);
+        return null;
     }
 
-    return <LucideFallback className={className} {...props} />;
+    const sizeClass = sizeMap[size] || sizeMap.md;
+
+    return (
+        <img
+            src={src}
+            alt={alt || name}
+            className={`
+                object-contain select-none
+                ${sizeClass}
+                ${inline ? 'inline-block align-middle' : ''}
+                ${className}
+            `}
+            draggable={false}
+            {...props}
+        />
+    );
 };
+
+// Export available icon names for reference
+export const iconNames = Object.keys(iconMap);
+
+// Export the map for specialized use cases
+export { iconMap };
 
 export default Icon;
