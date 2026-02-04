@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Send } from 'lucide-react';
 import { useLanguage } from '../../i18n';
 import Icon from '../ui/Icon';
 import Modal from '../ui/Modal';
@@ -104,7 +105,7 @@ const Footer = () => {
                                 Instagram
                             </a>
                             <a href="#" className="text-graphite/70 hover:text-magenta transition-colors flex items-center gap-2 group">
-                                <Icon name="world" size="xs" className="opacity-50 group-hover:opacity-100" />
+                                <Icon name="globe" size="xs" className="opacity-50 group-hover:opacity-100" />
                                 Facebook
                             </a>
                             <a href="#" className="text-graphite/70 hover:text-magenta transition-colors flex items-center gap-2 group">
@@ -137,10 +138,11 @@ const Footer = () => {
                             </div>
                             <button
                                 type="submit"
-                                className="bg-magenta text-paper px-4 py-3 rounded-xl hover:bg-magenta/90 transition-colors flex-shrink-0 flex items-center justify-center shadow-lg"
+                                className="text-paper px-4 py-3 rounded-xl hover:opacity-90 transition-colors flex-shrink-0 flex items-center justify-center shadow-lg"
+                                style={{ backgroundColor: '#807586' }}
                                 aria-label="Subscribe"
                             >
-                                <Icon name="seedling" size="xs" className="brightness-0 invert" />
+                                <Send className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
                             </button>
                         </form>
                     </div>
@@ -170,9 +172,11 @@ const Footer = () => {
                 size="small"
             >
                 <div className="text-center py-6">
-                    <div className="w-16 h-16 bg-magenta/10 rounded-full flex items-center justify-center mx-auto mb-4 text-magenta">
-                        <Icon name="heart" size="xl" />
-                    </div>
+                    <img
+                        src="/assets/personas/persona-celebration.png"
+                        alt="Celebration"
+                        className="w-28 h-28 object-contain mx-auto mb-4"
+                    />
                     <h3 className="font-display text-xl mb-2">
                         {language === 'he' ? 'נרשמת בהצלחה' : 'You are subscribed!'}
                     </h3>

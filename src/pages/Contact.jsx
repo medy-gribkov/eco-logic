@@ -110,7 +110,11 @@ const Contact = () => {
                                         animate={{ opacity: 1, scale: 1 }}
                                         className="text-center py-8"
                                     >
-                                        <CheckCircle className="w-16 h-16 text-green mx-auto mb-4" />
+                                        <img
+                                            src="/assets/personas/persona-celebration.png"
+                                            alt="Success"
+                                            className="w-32 h-32 object-contain mx-auto mb-4"
+                                        />
                                         <h3 className="font-display text-2xl mb-2">
                                             {t('contact.successMessage')}
                                         </h3>

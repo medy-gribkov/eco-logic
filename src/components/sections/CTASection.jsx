@@ -7,6 +7,7 @@ import Container from '../layout/Container';
 import Grid from '../layout/Grid';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
+import Icon from '../ui/Icon';
 import { useLanguage } from '../../i18n';
 
 const CTASection = () => {
@@ -17,7 +18,7 @@ const CTASection = () => {
     const actions = [
         {
             id: 'quiz',
-            icon: <span className="text-3xl">🎯</span>,
+            icon: <Icon name="leaf" size="lg" />,
             title: t('cta.quizTitle'),
             description: t('cta.quizDesc'),
             buttonText: t('cta.quizButton'),

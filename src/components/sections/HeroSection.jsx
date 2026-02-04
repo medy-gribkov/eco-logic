@@ -28,7 +28,7 @@ const HeroSection = () => {
                     muted
                     playsInline
                     poster="/assets/backgrounds/bg-hero.png"
-                    className="absolute min-w-full min-h-full object-cover scale-110"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover scale-125"
                 >
                     <source src="/assets/videos/hero-loop.mp4" type="video/mp4" />
                 </video>

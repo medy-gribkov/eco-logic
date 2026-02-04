@@ -5,6 +5,7 @@ import Section from '../layout/Section';
 import Container from '../layout/Container';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
+import Icon from '../ui/Icon';
 import { useLanguage } from '../../i18n';
 
 const NewsletterSection = () => {
@@ -48,6 +49,7 @@ const NewsletterSection = () => {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            autoComplete="email"
                             placeholder={t('newsletter.placeholder')}
                             disabled={status === 'loading' || status === 'success'}
                             className="flex-1 bg-paper/10 border-paper/20 text-paper placeholder:text-paper/50"

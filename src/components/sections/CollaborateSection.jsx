@@ -58,7 +58,7 @@ const CollaborationCard = ({ option, index }) => {
                 {/* Arrow indicator */}
                 <div className="flex items-center gap-2 text-sm font-body">
                     <span>{language === 'he' ? 'למידע נוסף' : 'Learn more'}</span>
-                    <Icon name="confirm" size="xs" className={`group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
+                    <Icon name="checkmark" size="xs" className={`group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
                 </div>
             </div>
         </motion.div>
@@ -250,9 +250,11 @@ const CollaborateSection = () => {
                     </form>
                 ) : (
                     <div className="text-center py-8">
-                        <div className="w-16 h-16 bg-green/10 rounded-full flex items-center justify-center mx-auto mb-4 text-green">
-                            <Icon name="checkmark" size="xl" />
-                        </div>
+                        <img
+                            src="/assets/personas/persona-celebration.png"
+                            alt="Celebration"
+                            className="w-32 h-32 object-contain mx-auto mb-4"
+                        />
                         <h3 className="font-display text-2xl mb-2">
                             {language === 'he' ? 'ההודעה נשלחה!' : 'Message Sent!'}
                         </h3>

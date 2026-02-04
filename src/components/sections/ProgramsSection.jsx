@@ -136,7 +136,7 @@ const ProgramsSection = () => {
                                 muted
                                 playsInline
                                 poster="/assets/images/persona-starterkit.png"
-                                className="w-full h-auto aspect-video object-cover scale-110"
+                                className="w-full aspect-video object-cover scale-125"
                             >
                                 <source src="/assets/videos/hero-loop.mp4" type="video/mp4" />
                             </video>

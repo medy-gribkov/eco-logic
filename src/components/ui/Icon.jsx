@@ -7,19 +7,16 @@ import React from 'react';
  */
 
 const iconMap = {
-    // Original brand icons
+    // Core brand icons
     checkmark: '/assets/icons/checkmark.png',
-    confirm: '/assets/icons/confirm.png',
     globe: '/assets/icons/globe.png',
     ideas: '/assets/icons/ideas.png',
     leaf: '/assets/icons/leaf.png',
     lightbulb: '/assets/icons/lightbulb.png',
-    nature: '/assets/icons/nature.png',
     'recycle-heart': '/assets/icons/recycle-heart.png',
     recycle: '/assets/icons/recycle.png',
     tree: '/assets/icons/tree.png',
-    world: '/assets/icons/world.png',
-    // New generated icons (same style)
+    // Additional icons
     book: '/assets/icons/book.png',
     seedling: '/assets/icons/seedling.png',
     download: '/assets/icons/download.png',

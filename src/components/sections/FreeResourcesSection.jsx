@@ -158,17 +158,24 @@ const FreeResourcesSection = () => {
                     size="small"
                 >
                     <div className="space-y-6">
-                        <div className="bg-sand/20 p-4 rounded-xl">
-                            <p className="text-graphite/80 text-center font-body mb-2">
-                                {language === 'he'
-                                    ? 'אנחנו מחויבים להנגיש את התכנים שלנו לכל הקהילות.'
-                                    : 'We are committed to making our content accessible to all communities.'}
-                            </p>
-                            <p className="text-graphite/60 text-center text-sm">
-                                {language === 'he'
-                                    ? 'כל התכנים זהים לחלוטין בכל השפות.'
-                                    : 'All content is exactly the same across all languages.'}
-                            </p>
+                        <div className="flex items-start gap-4 bg-sand/20 p-4 rounded-xl">
+                            <img
+                                src="/assets/personas/persona-modal-guide.png"
+                                alt="Guide"
+                                className="w-20 h-20 object-contain flex-shrink-0"
+                            />
+                            <div>
+                                <p className="text-graphite/80 font-body mb-1">
+                                    {language === 'he'
+                                        ? 'אנחנו מחויבים להנגיש את התכנים שלנו לכל הקהילות.'
+                                        : 'We are committed to making our content accessible to all communities.'}
+                                </p>
+                                <p className="text-graphite/60 text-sm">
+                                    {language === 'he'
+                                        ? 'כל התכנים זהים לחלוטין בכל השפות.'
+                                        : 'All content is exactly the same across all languages.'}
+                                </p>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
