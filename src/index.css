@@ -1,0 +1,439 @@
+@import "tailwindcss";
+
+@theme {
+  /* Style C: Hot + Spice - Warm educational palette */
+  --color-graphite: #2C2C2C;
+  --color-paper: #F7F4ED;
+  --color-burgundy: #8B2942;
+  --color-green: #2D5A3D;
+  --color-sage: #7A9E7E;
+  --color-sand: #E8DFD0;
+  --color-gray: #C7C2B6;
+  
+  /* Legacy alias for compatibility */
+  --color-magenta: #8B2942;
+  --color-blue: #2D5A3D;
+
+  /* Fonts - Franklin Gothic for Style C */
+  --font-display: "Franklin Gothic Medium", "Trebuchet MS", sans-serif;
+  --font-display-he: "Heebo", sans-serif;
+  --font-body: "Segoe UI", Inter, sans-serif;
+  --font-body-he: "Heebo", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --shadow-card: 0 2px 12px rgba(44, 44, 44, 0.06);
+  --shadow-elevated: 0 6px 24px rgba(44, 44, 44, 0.10);
+}
+
+/* Custom base styles ensuring defaults match the design system */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-graphite font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-normal uppercase tracking-wide;
+  }
+
+  /* RTL (Hebrew) specific styles */
+  html[dir="rtl"] {
+    font-family: "Heebo", Inter, sans-serif;
+  }
+
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4,
+  html[dir="rtl"] h5,
+  html[dir="rtl"] h6 {
+    font-family: "Heebo", sans-serif;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  html[dir="rtl"] .font-display {
+    font-family: "Heebo", sans-serif;
+    font-weight: 700;
+  }
+
+  html[dir="rtl"] .font-body {
+    font-family: "Heebo", sans-serif;
+  }
+
+  html[dir="rtl"] .font-mono {
+    font-family: "Space Mono", monospace;
+  }
+}
+
+/* RTL utility classes */
+@layer utilities {
+  .flip-rtl {
+    transform: scaleX(1);
+  }
+
+  html[dir="rtl"] .flip-rtl {
+    transform: scaleX(-1);
+  }
+
+  /* Fix flex direction for RTL */
+  html[dir="rtl"] .flex-row-rtl {
+    flex-direction: row-reverse;
+  }
+
+  /* Text alignment helpers */
+  .text-start {
+    text-align: start;
+  }
+
+  .text-end {
+    text-align: end;
+  }
+}
+
+/* Accessibility: High Contrast Mode */
+html.high-contrast {
+  --color-paper: #FFFFFF;
+  --color-graphite: #000000;
+  --color-magenta: #CC0052;
+  --color-green: #005533;
+  --color-blue: #0044CC;
+  --color-gray: #666666;
+}
+
+html.high-contrast body {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+html.high-contrast a,
+html.high-contrast button {
+  text-decoration: underline;
+}
+
+/* Accessibility: Reduced Motion */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Typography polish */
+@layer base {
+  h1 {
+    line-height: 0.95;
+  }
+
+  h2 {
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    max-width: 65ch;
+    line-height: 1.65;
+  }
+
+  /* Section spacing consistency */
+  section {
+    @apply py-16 md:py-20;
+  }
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================================
+   ACCESSIBILITY FEATURES - Vision
+   ========================================= */
+
+/* Focus Indicators */
+html.focus-indicators *:focus {
+  outline: 3px solid var(--color-blue) !important;
+  outline-offset: 2px !important;
+}
+
+html.focus-indicators *:focus:not(:focus-visible) {
+  outline: none !important;
+}
+
+html.focus-indicators *:focus-visible {
+  outline: 3px solid var(--color-blue) !important;
+  outline-offset: 2px !important;
+}
+
+/* Link Highlighting */
+html.link-highlighting a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+  text-decoration-thickness: 2px !important;
+}
+
+html.link-highlighting a:hover {
+  text-decoration-color: var(--color-green) !important;
+}
+
+/* Color Blind Modes - SVG Filters */
+html.color-blind-protanopia {
+  filter: url('#protanopia-filter');
+}
+
+html.color-blind-deuteranopia {
+  filter: url('#deuteranopia-filter');
+}
+
+html.color-blind-tritanopia {
+  filter: url('#tritanopia-filter');
+}
+
+/* =========================================
+   ACCESSIBILITY FEATURES - Motor
+   ========================================= */
+
+/* Large Cursor */
+html.large-cursor,
+html.large-cursor * {
+  cursor: crosshair !important;
+}
+
+html.large-cursor a,
+html.large-cursor button,
+html.large-cursor [role="button"],
+html.large-cursor input,
+html.large-cursor select,
+html.large-cursor textarea {
+  cursor: pointer !important;
+}
+
+/* Large Click Targets */
+html.large-click-targets button,
+html.large-click-targets a,
+html.large-click-targets [role="button"],
+html.large-click-targets input[type="checkbox"],
+html.large-click-targets input[type="radio"] {
+  min-height: 44px !important;
+  min-width: 44px !important;
+}
+
+html.large-click-targets button,
+html.large-click-targets a {
+  padding: 12px 16px !important;
+}
+
+/* Keyboard Navigation Indicator */
+html.keyboard-navigation [tabindex]:focus,
+html.keyboard-navigation a:focus,
+html.keyboard-navigation button:focus,
+html.keyboard-navigation input:focus,
+html.keyboard-navigation select:focus,
+html.keyboard-navigation textarea:focus {
+  outline: 3px dashed var(--color-green) !important;
+  outline-offset: 4px !important;
+}
+
+/* =========================================
+   ACCESSIBILITY FEATURES - Cognitive
+   ========================================= */
+
+/* Dyslexia Font */
+html.dyslexia-font,
+html.dyslexia-font * {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', 'Heebo', sans-serif !important;
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.15em !important;
+  line-height: 1.8 !important;
+}
+
+html.dyslexia-font h1,
+html.dyslexia-font h2,
+html.dyslexia-font h3,
+html.dyslexia-font h4,
+html.dyslexia-font h5,
+html.dyslexia-font h6 {
+  text-transform: none !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Reading Guide - Highlight current area */
+html.reading-guide p,
+html.reading-guide li,
+html.reading-guide span,
+html.reading-guide div {
+  transition: background-color 0.2s ease;
+}
+
+html.reading-guide p:hover,
+html.reading-guide li:hover {
+  background-color: rgba(255, 255, 0, 0.15) !important;
+  box-shadow: 0 0 0 4px rgba(255, 255, 0, 0.15);
+}
+
+/* Simplified Layout */
+html.simplified-layout .decorative,
+html.simplified-layout [aria-hidden="true"]:not(.sr-only):not(svg):not(path),
+html.simplified-layout .blur-3xl,
+html.simplified-layout .blur-2xl,
+html.simplified-layout .blur-xl,
+html.simplified-layout [class*="animate-"] {
+  display: none !important;
+}
+
+html.simplified-layout .shadow-card,
+html.simplified-layout .shadow-elevated {
+  box-shadow: none !important;
+  border: 1px solid var(--color-gray) !important;
+}
+
+html.simplified-layout {
+  --shadow-card: none;
+  --shadow-elevated: none;
+}
+
+/* Content Highlighting */
+html.content-highlighting p:hover,
+html.content-highlighting li:hover,
+html.content-highlighting h1:hover,
+html.content-highlighting h2:hover,
+html.content-highlighting h3:hover {
+  background-color: rgba(47, 107, 255, 0.1) !important;
+  outline: 2px solid rgba(47, 107, 255, 0.3);
+  outline-offset: 2px;
+}
+
+/* =========================================
+   UTILITY CLASSES
+   ========================================= */
+
+/* Hide scrollbar but allow scrolling */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Line clamp utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Marquee animation for TrustedBrands */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+html[dir="rtl"] .animate-marquee {
+  animation-direction: reverse;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.animate-float-slow {
+  animation: float 8s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+/* Background tree pattern */
+.bg-trees-pattern {
+  background-image: url('/assets/patterns/trees-pattern.svg');
+  background-repeat: repeat-x;
+  background-position: bottom;
+  background-size: 400px auto;
+}
+
+.bg-trees-pattern-subtle {
+  background-image: url('/assets/patterns/trees-pattern.svg');
+  background-repeat: repeat-x;
+  background-position: bottom;
+  background-size: 600px auto;
+  opacity: 0.15;
+}
+
+/* =========================================
+   COLOR BLIND SVG FILTERS (add to HTML)
+   ========================================= */
+/*
+  These filters should be added to index.html as hidden SVG:
+
+  <svg style="display:none">
+    <defs>
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.567, 0.433, 0, 0, 0
+          0.558, 0.442, 0, 0, 0
+          0, 0.242, 0.758, 0, 0
+          0, 0, 0, 1, 0"/>
+      </filter>
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.625, 0.375, 0, 0, 0
+          0.7, 0.3, 0, 0, 0
+          0, 0.3, 0.7, 0, 0
+          0, 0, 0, 1, 0"/>
+      </filter>
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.95, 0.05, 0, 0, 0
+          0, 0.433, 0.567, 0, 0
+          0, 0.475, 0.525, 0, 0
+          0, 0, 0, 1, 0"/>
+      </filter>
+    </defs>
+  </svg>
+*/

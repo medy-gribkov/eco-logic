@@ -1,0 +1,235 @@
+{
+  "common": {
+    "appName": "ECO LOGIC",
+    "tagline": "Invisible Impact"
+  },
+  "nav": {
+    "home": "Home",
+    "quiz": "Quiz",
+    "about": "About",
+    "process": "Process",
+    "privacy": "Privacy Policy",
+    "impact": "Impact",
+    "volunteer": "Volunteer",
+    "resources": "Resources",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Interactive Environmental Education",
+    "title": "Discover Your",
+    "titleHighlight": "Invisible Impact",
+    "subtitle": "Every daily choice affects the environment. Do you know how much?",
+    "cta": "Start the Quiz",
+    "learnMore": "Learn More",
+    "stat1": "1000+ users",
+    "stat2": "10 environmental topics"
+  },
+  "home": {
+    "greeting": "Good morning,",
+    "greeter": "Changemaker.",
+    "impactScore": "Your Impact Score",
+    "points": "Points",
+    "level": "Level",
+    "todaysChallenges": "Today's Challenges",
+    "awareness": "Awareness",
+    "logic": "Logic",
+    "action": "Action",
+    "quickQuiz": "Quick Quiz",
+    "quickQuizDesc": "Water Footprint: Test your knowledge in 5 questions.",
+    "puzzle": "Puzzle",
+    "puzzleDesc": "Carbon Calculator: Match the daily impacts.",
+    "dailyChoice": "Daily Choice",
+    "dailyChoiceDesc": "This or That? Make the better choice.",
+    "startNow": "Start Now",
+    "locked": "Locked"
+  },
+  "stats": {
+    "title": "Data That Matters",
+    "subtitle": "Environmental facts that few are aware of",
+    "sources": "Data from: UNEP, FAO, waterfootprint.org"
+  },
+  "features": {
+    "title": "What We Do",
+    "subtitle": "Three pillars for environmental change"
+  },
+  "quizPreview": {
+    "title": "Try a Question",
+    "subtitle": "Test your environmental knowledge",
+    "hint": "Select an answer to see the result",
+    "tryAgain": "Try Again",
+    "startFull": "Full Quiz"
+  },
+  "testimonials": {
+    "title": "What People Say",
+    "subtitle": "Experiences from participants and partners"
+  },
+  "cta": {
+    "title": "Join the Change",
+    "subtitle": "There are many ways to take part in spreading environmental awareness",
+    "quizTitle": "Take the Quiz",
+    "quizDesc": "Test your knowledge and understand the real impact of daily choices",
+    "quizButton": "Start Now",
+    "volunteerTitle": "Volunteer With Us",
+    "volunteerDesc": "Join our volunteer team and help spread the message",
+    "volunteerButton": "Join",
+    "shareTitle": "Share",
+    "shareDesc": "Help us reach more people by sharing with friends",
+    "shareButton": "Share Now"
+  },
+  "newsletter": {
+    "title": "Stay Updated",
+    "subtitle": "Join our newsletter and get updates on new content",
+    "placeholder": "Email address",
+    "button": "Subscribe",
+    "sending": "Sending...",
+    "success": "Subscribed!",
+    "privacy": "We won't share your email with anyone"
+  },
+  "partners": {
+    "title": "Partners & Supporters"
+  },
+  "quiz": {
+    "exit": "Exit",
+    "timer": "Timer",
+    "questionOf": "Question {current} of {total}",
+    "source": "Source",
+    "checkAnswer": "Check Answer",
+    "next": "Next",
+    "finish": "Finish",
+    "correct": "Correct!",
+    "incorrect": "Incorrect"
+  },
+  "result": {
+    "correct": "Correct!",
+    "incorrect": "Missed It!",
+    "didYouKnow": "Did you know?",
+    "pointsEarned": "Points Earned",
+    "shareTitle": "Make It Visible. Share The Truth.",
+    "share": "Share",
+    "nextChallenge": "Next Challenge"
+  },
+  "social": {
+    "iJustSaved": "I Just Saved",
+    "ofWater": "Of Water",
+    "thats": "That's",
+    "joinMe": "ecologic.app/join-me",
+    "didYouKnow": "Did You Know?",
+    "carbonFootprint": "Carbon Footprint",
+    "stopDoomscrolling": "Stop Doomscrolling.",
+    "takeAction": "Take one action today."
+  },
+  "about": {
+    "title": "About EcoLogic",
+    "missionTitle": "Our Mission",
+    "missionText": "To make invisible environmental impact visible, and empower everyone to make more conscious decisions.",
+    "conceptTitle": "The Concept",
+    "conceptText": "\"Invisible Impact\" explores how our daily choices - what we eat, how we travel, what we buy - affect the environment in ways we don't always see.",
+    "aiTitle": "How AI Helps Us",
+    "aiText": "In this project, AI serves as a tool for creating visual content, but the concept, design decisions, and messaging remain entirely human.",
+    "teamTitle": "Our Team",
+    "valuesTitle": "Our Values"
+  },
+  "impact": {
+    "title": "Our Impact",
+    "subtitle": "Numbers that show the change we're creating",
+    "globalTitle": "Global Data",
+    "israelTitle": "Israel Data",
+    "engagementTitle": "Our Reach"
+  },
+  "volunteer": {
+    "title": "Volunteer Toolkit",
+    "subtitle": "Everything you need to be an EcoLogic ambassador",
+    "downloadKit": "Download Full Kit",
+    "sections": {
+      "whoWeAre": "Who We Are",
+      "values": "Our Values",
+      "yourRole": "Your Role",
+      "communication": "Communication Guidelines",
+      "brand": "Visual & Brand",
+      "ethics": "Boundaries & Ethics",
+      "social": "Social Media",
+      "troubleshooting": "If Something Goes Wrong",
+      "elevator": "How to Describe Us",
+      "thankYou": "Thank You!"
+    }
+  },
+  "resources": {
+    "title": "Resources",
+    "subtitle": "Educational materials and tools for spreading the message",
+    "guides": "Guides",
+    "downloadables": "Downloadables",
+    "externalLinks": "Useful Links"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have questions? We'd love to hear from you",
+    "nameLabel": "Full Name",
+    "emailLabel": "Email",
+    "subjectLabel": "Subject",
+    "messageLabel": "Message",
+    "submitButton": "Send Message",
+    "successMessage": "Message sent successfully!",
+    "errorMessage": "An error occurred. Please try again.",
+    "info": {
+      "email": "team@ecologic.org.il",
+      "social": "Follow us on social media"
+    }
+  },
+  "process": {
+    "title": "Design Process",
+    "subtitle": "HUMAN * AI - How we integrated artificial intelligence in design",
+    "humanDecisions": "Human Decisions",
+    "humanList": [
+      "Defining the concept and message",
+      "Choosing the target audience",
+      "Defining the environmental problem",
+      "Designing the user experience",
+      "Selecting color palette and typography",
+      "Final editing and quality control"
+    ],
+    "aiAssistance": "AI Assistance",
+    "aiList": [
+      "Creating icons in consistent style",
+      "Color palette suggestions",
+      "Background image generation",
+      "Content writing assistance"
+    ],
+    "toolsUsed": "Tools Used",
+    "constraint": "The Intentional Constraint",
+    "constraintText": "We chose to limit AI use to creating raw materials only. All design decisions, composition, and messaging remained in human hands."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated",
+    "intro": "EcoLogic respects your privacy. This policy explains how we collect and use information.",
+    "collectTitle": "Information We Collect",
+    "collectText": "We collect anonymous usage data to improve the experience. We do not collect personally identifiable information without your consent.",
+    "useTitle": "How We Use Information",
+    "useText": "Information is used to improve content, personalize the experience, and conduct academic research on environmental education.",
+    "shareTitle": "Sharing with Third Parties",
+    "shareText": "We do not sell or share personal information with third parties for commercial purposes.",
+    "contactTitle": "Contact Us",
+    "contactText": "For questions about this privacy policy, contact us at: privacy@ecologic.org.il"
+  },
+  "footer": {
+    "copyright": "© 2026 EcoLogic. All rights reserved.",
+    "builtWith": "Built with love for the environment",
+    "hackathon": "HUMAN * AI Hackathon Project | Tiltan",
+    "links": {
+      "about": "About",
+      "privacy": "Privacy",
+      "contact": "Contact"
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "Page Not Found",
+    "message": "Looks like you got lost... just like plastic waste in the ocean.",
+    "backHome": "Back to Home"
+  },
+  "errors": {
+    "somethingWrong": "Oops! Something went wrong",
+    "tryAgain": "Please try again",
+    "noConnection": "No internet connection"
+  }
+}

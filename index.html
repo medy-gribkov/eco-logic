@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>אקולוג'יק | Eco Logic - השפעה בלתי נראית</title>
+  <meta name="description" content="גלה את ההשפעה הסביבתית הבלתי נראית שלך. אפליקציה אינטראקטיבית לחינוך סביבתי." />
+  <meta name="keywords" content="סביבה, חינוך סביבתי, טביעת רגל פחמנית, מים, אקולוגיה, EcoLogic" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="אקולוג'יק - השפעה בלתי נראית" />
+  <meta property="og:description" content="גלה כמה משפיעות הבחירות היומיות שלך על הסביבה" />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts: Hebrew (Heebo) + English (Bebas Neue, Inter, Space Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Heebo:wght@300;400;500;700;900&family=Inter:wght@400;600;700&family=Space+Mono&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Accessibility: Color Blind Mode SVG Filters -->
+  <svg style="display:none" aria-hidden="true">
+    <defs>
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.567, 0.433, 0, 0, 0
+          0.558, 0.442, 0, 0, 0
+          0, 0.242, 0.758, 0, 0
+          0, 0, 0, 1, 0"/>
+      </filter>
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.625, 0.375, 0, 0, 0
+          0.7, 0.3, 0, 0, 0
+          0, 0.3, 0.7, 0, 0
+          0, 0, 0, 1, 0"/>
+      </filter>
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.95, 0.05, 0, 0, 0
+          0, 0.433, 0.567, 0, 0
+          0, 0.475, 0.525, 0, 0
+          0, 0, 0, 1, 0"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
