@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 const Button = ({ children, variant = 'primary', onClick, className = '', ...props }) => {
@@ -23,4 +23,4 @@ const Button = ({ children, variant = 'primary', onClick, className = '', ...pro
     );
 };
 
-export default Button;
+export default memo(Button);

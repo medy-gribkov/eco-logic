@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 const FeatureCard = ({
@@ -47,6 +47,7 @@ const FeatureCard = ({
                         src={iconSrc}
                         alt=""
                         className="w-10 h-10 object-contain"
+                        loading="lazy"
                     />
                 )}
             </div>
@@ -56,4 +57,4 @@ const FeatureCard = ({
     );
 };
 
-export default FeatureCard;
+export default memo(FeatureCard);

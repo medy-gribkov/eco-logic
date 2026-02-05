@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 /**
  * Custom Icon component using ONLY our illustrated PNG icon set
  * NO Lucide icons, NO emojis - brand consistency is key
- * Icons are PNG files in /assets/icons/
+ * Icons are WebP files in /assets/icons/
+ * Memoized for performance
  */
 
 const iconMap = {
@@ -77,4 +78,4 @@ export const iconNames = Object.keys(iconMap);
 // Export the map for specialized use cases
 export { iconMap };
 
-export default Icon;
+export default memo(Icon);

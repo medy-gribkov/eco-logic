@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { motion } from 'framer-motion';
 
 const StatCard = ({
@@ -78,6 +78,7 @@ const StatCard = ({
                         src={iconSrc}
                         alt=""
                         className="w-8 h-8 md:w-16 md:h-16 object-contain drop-shadow-sm"
+                        loading="lazy"
                     />
                 </div>
             )}
@@ -90,4 +91,4 @@ const StatCard = ({
     );
 };
 
-export default StatCard;
+export default memo(StatCard);

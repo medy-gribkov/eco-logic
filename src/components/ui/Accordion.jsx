@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
-const AccordionItem = ({ title, children, isOpen, onToggle }) => {
+const AccordionItem = memo(({ title, children, isOpen, onToggle }) => {
     return (
         <div className="border-b border-gray/20 last:border-b-0">
             <button
@@ -34,7 +34,7 @@ const AccordionItem = ({ title, children, isOpen, onToggle }) => {
             </AnimatePresence>
         </div>
     );
-};
+});
 
 const Accordion = ({
     items, // [{ id, title, content }]

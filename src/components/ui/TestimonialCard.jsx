@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 
@@ -32,6 +32,7 @@ const TestimonialCard = ({
                         src={image}
                         alt={author}
                         className="w-12 h-12 rounded-full object-cover"
+                        loading="lazy"
                     />
                 ) : (
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green to-blue flex items-center justify-center text-paper font-display text-lg">
@@ -47,4 +48,4 @@ const TestimonialCard = ({
     );
 };
 
-export default TestimonialCard;
+export default memo(TestimonialCard);
