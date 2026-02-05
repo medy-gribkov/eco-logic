@@ -1,13 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../../i18n';
 import LanguageToggle from '../ui/LanguageToggle';
 import Icon from '../ui/Icon';
+import NavDropdown from '../ui/NavDropdown';
+
+// Mobile dropdown sub-component
+const MobileDropdown = ({ label, items, language, onNavigate }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+    const t = (obj) => obj?.[language] || obj?.['en'] || obj;
+
+    return (
+        <div>
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center justify-between w-full text-start py-3 px-4 rounded-xl font-body text-sm text-graphite hover:bg-sand/50 transition-colors"
+            >
+                <span>{label}</span>
+                <motion.span
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                >
+                    <ChevronDown className="w-4 h-4" />
+                </motion.span>
+            </button>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                    >
+                        <div className="ps-4 space-y-1 pb-2">
+                            {items.map((item, index) => (
+                                <button
+                                    key={item.path || index}
+                                    onClick={() => {
+                                        navigate(item.path);
+                                        onNavigate?.();
+                                    }}
+                                    className="flex items-center gap-2 w-full text-start py-2 px-4 rounded-lg font-body text-sm text-graphite/70 hover:text-graphite hover:bg-sand/30 transition-colors"
+                                >
+                                    {t(item.label)}
+                                </button>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
 
 const Navbar = () => {
-    const { language, isRTL } = useLanguage();
+    const { language } = useLanguage();
     const location = useLocation();
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -73,15 +124,27 @@ const Navbar = () => {
         setMobileMenuOpen(false);
     };
 
-    // Complete navigation with all sections in order
-    const scrollNavLinks = [
-        { id: 'about', label: language === 'he' ? 'עלינו' : 'About' },
-        { id: 'features', label: language === 'he' ? 'איך זה עובד' : 'How It Works' },
-        { id: 'free-resources', label: language === 'he' ? 'משאבים' : 'Resources' },
-        { id: 'programs', label: language === 'he' ? 'תכניות' : 'Programs' },
-        { id: 'quiz-preview', label: language === 'he' ? 'נסו שיעור' : 'Try Lesson' },
-        { id: 'collaborate', label: language === 'he' ? 'שיתוף פעולה' : 'Partner' },
+    // Navigation items - logical flow: Learn → Explore → Engage → Act → More
+    const navigationItems = [
+        { id: 'about', type: 'scroll', label: { he: 'עלינו', en: 'About' } },
+        { id: 'features', type: 'scroll', label: { he: 'איך זה עובד', en: 'How It Works' } },
+        { id: 'programs', type: 'scroll', label: { he: 'תכניות', en: 'Programs' } },
+        { id: 'free-resources', type: 'scroll', label: { he: 'משאבים', en: 'Resources' } },
+        { id: 'quiz-preview', type: 'scroll', label: { he: 'נסו שיעור', en: 'Try a Lesson' } },
+        { id: 'collaborate', type: 'scroll', label: { he: 'שותפויות', en: 'Partner' } },
+        {
+            id: 'more',
+            type: 'dropdown',
+            label: { he: 'עוד', en: 'More' },
+            items: [
+                { path: '/volunteer', label: { he: 'התנדבות', en: 'Volunteer' } },
+                { path: '/media-kit', label: { he: 'ערכת מדיה', en: 'Media Kit' } }
+            ]
+        },
     ];
+
+    // Helper to get label based on language
+    const t = (obj) => obj?.[language] || obj?.['en'] || obj;
 
     return (
         <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
@@ -95,7 +158,7 @@ const Navbar = () => {
             `}>
                 <div className="flex justify-between items-center px-4 md:px-6 py-2 md:py-3">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2 z-10">
+                    <Link to="/" className="flex items-center gap-2 z-10 relative">
                         <img
                             src="/assets/logo/logo.svg"
                             alt="EcoLogic"
@@ -103,14 +166,35 @@ const Navbar = () => {
                         />
                     </Link>
 
+                    {/* Decorative Vine - Continuous Drape Pattern */}
+                    <div
+                        className="absolute top-0 left-0 right-0 h-14 pointer-events-none opacity-15 z-0 hidden md:block"
+                        style={{
+                            backgroundImage: 'url(/assets/decor/vine-drape.webp)',
+                            backgroundRepeat: 'repeat-x',
+                            backgroundSize: 'auto 100%',
+                            backgroundPosition: 'top center'
+                        }}
+                    />
+
                     {/* Desktop Navigation */}
                     <div className="hidden lg:flex items-center gap-1">
-                        {scrollNavLinks.map((link) => {
-                            const isActive = activeSection === link.id;
+                        {navigationItems.map((item) => {
+                            if (item.type === 'dropdown') {
+                                return (
+                                    <NavDropdown
+                                        key={item.id}
+                                        label={item.label}
+                                        items={item.items}
+                                    />
+                                );
+                            }
+
+                            const isActive = activeSection === item.id;
                             return (
                                 <button
-                                    key={link.id}
-                                    onClick={() => scrollToSection(link.id)}
+                                    key={item.id}
+                                    onClick={() => scrollToSection(item.id)}
                                     className={`
                                         relative px-3 py-1.5 font-body text-sm transition-colors duration-200 rounded-full z-10
                                         ${isActive ? 'text-paper' : 'text-graphite/70 hover:text-graphite'}
@@ -123,7 +207,7 @@ const Navbar = () => {
                                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                         />
                                     )}
-                                    {link.label}
+                                    {t(item.label)}
                                 </button>
                             );
                         })}
@@ -156,22 +240,36 @@ const Navbar = () => {
                         className="lg:hidden mt-2 mx-4 bg-paper/95 backdrop-blur-lg rounded-2xl shadow-elevated overflow-hidden"
                     >
                         <div className="p-4 space-y-1">
-                            {scrollNavLinks.map((link) => (
-                                <button
-                                    key={link.id}
-                                    onClick={() => scrollToSection(link.id)}
-                                    className={`
-                                        flex items-center gap-3 w-full text-start py-3 px-4 rounded-xl font-body text-sm transition-colors
-                                        ${activeSection === link.id
-                                            ? 'text-paper bg-magenta'
-                                            : 'text-graphite hover:bg-sand/50'
-                                        }
-                                    `}
-                                >
-                                    {link.id === 'quiz-preview' && <Icon name="book" size="xs" inline />}
-                                    {link.label}
-                                </button>
-                            ))}
+                            {navigationItems.map((item) => {
+                                if (item.type === 'dropdown') {
+                                    return (
+                                        <MobileDropdown
+                                            key={item.id}
+                                            label={t(item.label)}
+                                            items={item.items}
+                                            language={language}
+                                            onNavigate={() => setMobileMenuOpen(false)}
+                                        />
+                                    );
+                                }
+
+                                return (
+                                    <button
+                                        key={item.id}
+                                        onClick={() => scrollToSection(item.id)}
+                                        className={`
+                                            flex items-center gap-3 w-full text-start py-3 px-4 rounded-xl font-body text-sm transition-colors
+                                            ${activeSection === item.id
+                                                ? 'text-paper bg-magenta'
+                                                : 'text-graphite hover:bg-sand/50'
+                                            }
+                                        `}
+                                    >
+                                        {item.id === 'quiz-preview' && <Icon name="book" size="xs" inline />}
+                                        {t(item.label)}
+                                    </button>
+                                );
+                            })}
                         </div>
                     </motion.div>
                 )}
