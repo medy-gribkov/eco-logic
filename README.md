@@ -1,16 +1,194 @@
-# React + Vite
+# EcoLogic
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An educational environmental awareness platform featuring interactive quizzes, downloadable resources, and a watercolor illustration style.
 
-Currently, two official plugins are available:
+**Live Site:** https://eco-logic-rouge.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Quick Start
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Install dependencies
+npm install
 
-## Expanding the ESLint configuration
+# Start development server
+npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Build for production
+npm run build
+
+# Deploy to Vercel
+vercel --prod
+```
+
+---
+
+## Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| React 19 | UI framework |
+| Vite | Build tool |
+| Tailwind CSS 4 | Styling |
+| Framer Motion | Animations |
+| React Router DOM | Routing |
+| Vercel | Hosting |
+
+---
+
+## Project Structure
+
+```
+eco-logic/
+    .agent/
+        workflows/           # Reusable skill files
+    public/
+        assets/
+            backgrounds/     # Section background images
+            icons/           # Custom watercolor icons
+            personas/        # Character illustrations
+            logos/           # Partner organization logos
+            fonts/           # Custom typography
+    src/
+        components/
+            ui/              # Button, Card, Icon, Modal
+            layout/          # Navbar, Footer, Section
+            sections/        # Homepage sections
+        pages/               # Route pages
+        data/                # Static data files
+        i18n/                # Translations
+        hooks/               # Custom React hooks
+        context/             # React context providers
+```
+
+---
+
+## Design System
+
+### Colors
+
+| Name | Hex | Usage |
+|------|-----|-------|
+| Magenta | #FF2D7A | Primary accent, CTAs |
+| Green | #1D7C5A | Secondary, eco-themes |
+| Graphite | #111111 | Text |
+| Paper | #F3F1EA | Backgrounds |
+| Sand | #E8DFD0 | Cards, dividers |
+
+### Typography
+
+| Category | Font |
+|----------|------|
+| Display (EN) | Bebas Neue |
+| Display (HE) | Heebo 700 |
+| Body | Inter |
+
+### Icons
+
+Custom watercolor-style PNG icons. Never use generic icon libraries.
+
+```jsx
+import Icon from '../components/ui/Icon';
+
+<Icon name="leaf" size="md" />
+```
+
+---
+
+## Skills / Workflows
+
+Reusable workflow files are available in `.agent/workflows/`:
+
+| File | Description |
+|------|-------------|
+| `project-setup.md` | Initialize React + Vite + Tailwind |
+| `design-system.md` | Create colors, typography, spacing |
+| `asset-generation.md` | Generate consistent AI images |
+| `component-library.md` | Build reusable UI components |
+| `deployment.md` | Deploy to Vercel |
+
+These skills can be used to recreate this project or build similar ones with different styles.
+
+---
+
+## Features
+
+### Interactive Quiz
+- Preview question on homepage
+- Full quiz with timer and score tracking
+- Per-question feedback with educational facts
+- Social sharing with formatted post previews
+
+### Bilingual Support
+- English and Hebrew
+- RTL layout support
+- Language toggle in navbar
+
+### Partner Section
+- Real Israeli environmental organization logos
+- Glassmorphic hover effects
+- Integrated persona illustration
+
+### Downloadable Resources
+- PDF guides (water usage, recycling)
+- Language-specific downloads
+
+---
+
+## Development
+
+### Running Locally
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173
+
+### Building
+
+```bash
+npm run build
+```
+
+Output in `dist/` directory.
+
+### Linting
+
+```bash
+npm run lint
+```
+
+---
+
+## Deployment
+
+### Vercel (Recommended)
+
+```bash
+npm install -g vercel
+vercel login
+vercel --prod
+```
+
+### Manual
+
+1. Run `npm run build`
+2. Deploy `dist/` folder to any static host
+
+---
+
+## Credits
+
+- Illustrations: AI-generated watercolor style
+- Icons: Custom illustrated PNG set
+- Fonts: Google Fonts
+- Framework: React + Vite
+- Hosting: Vercel
+
+---
+
+## License
+
+This project is for educational purposes.
