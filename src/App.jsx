@@ -10,6 +10,11 @@ import Result from './pages/Result';
 import QuizComplete from './pages/QuizComplete';
 import Process from './pages/Process';
 import CheckoutPage from './pages/CheckoutPage';
+import VolunteerPage from './pages/VolunteerPage';
+import MediaKitPage from './pages/MediaKitPage';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
+import AccessibilityStatement from './pages/AccessibilityStatement';
 import CartDrawer from './components/ui/CartDrawer';
 import FloatingCartButton from './components/ui/FloatingCartButton';
 
@@ -59,6 +64,37 @@ function App() {
               <Route path="/process" element={
                 <Layout>
                   <Process />
+                </Layout>
+              } />
+
+              {/* Volunteer page */}
+              <Route path="/volunteer" element={
+                <Layout>
+                  <VolunteerPage />
+                </Layout>
+              } />
+
+              {/* Media Kit page */}
+              <Route path="/media-kit" element={
+                <Layout>
+                  <MediaKitPage />
+                </Layout>
+              } />
+
+              {/* Legal pages */}
+              <Route path="/terms" element={
+                <Layout>
+                  <Terms />
+                </Layout>
+              } />
+              <Route path="/privacy" element={
+                <Layout>
+                  <Privacy />
+                </Layout>
+              } />
+              <Route path="/accessibility" element={
+                <Layout>
+                  <AccessibilityStatement />
                 </Layout>
               } />
 
