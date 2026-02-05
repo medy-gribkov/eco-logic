@@ -67,26 +67,18 @@ const MediaKitPage = () => {
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                     style={{ backgroundImage: 'url(/assets/backgrounds/bg-features.webp)' }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-paper/90 via-paper/80 to-paper" />
+                <div className="absolute inset-0 bg-gradient-to-r from-paper/95 via-paper/85 to-paper/60" />
 
                 <Container className="relative z-10 pt-32 pb-16">
-                    <div className="max-w-4xl mx-auto text-center">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        {/* Text Content */}
                         <motion.div
                             initial="hidden"
                             animate="visible"
                             variants={fadeInUp}
                             transition={{ duration: 0.6 }}
+                            className="text-start"
                         >
-                            {/* Logo Display */}
-                            <motion.img
-                                src="/assets/logo/logo.svg"
-                                alt="EcoLogic"
-                                className="h-24 md:h-32 w-auto mx-auto mb-8"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.5 }}
-                            />
-
                             <div className="inline-flex items-center gap-2 bg-magenta/10 text-magenta px-4 py-2 rounded-full mb-6">
                                 <Icon name="book" size="xs" inline />
                                 <span className="font-body text-sm uppercase tracking-wider">
@@ -94,35 +86,56 @@ const MediaKitPage = () => {
                                 </span>
                             </div>
 
-                            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 text-graphite">
-                                {language === 'he' ? 'משאבי עיתונות ומדיה' : 'Press & Media Resources'}
+                            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 text-graphite leading-tight">
+                                {language === 'he' ? 'משאבי עיתונות' : 'Press & Media'}
+                                <span className="block text-magenta">
+                                    {language === 'he' ? 'ונכסים דיגיטליים' : 'Resources'}
+                                </span>
                             </h1>
 
-                            <p className="text-xl text-graphite/70 mb-8 max-w-2xl mx-auto leading-relaxed">
+                            <p className="text-xl text-graphite/70 mb-8 max-w-lg leading-relaxed">
                                 {language === 'he'
-                                    ? 'כל מה שצריך כדי לכתוב עלינו, לשתף את הסיפור שלנו, או לשתף פעולה. לוגואים, תמונות, מידע ועוד.'
-                                    : 'Everything you need to write about us, share our story, or collaborate. Logos, images, information and more.'}
+                                    ? 'כל מה שצריך כדי לספר עלינו, לשתף את החזון, או לשתף פעולה. לוגואים, תמונות, נתונים ועוד - הכל במקום אחד.'
+                                    : 'Everything you need to tell our story, share the vision, or collaborate. Logos, images, data and more - all in one place.'}
                             </p>
 
-                            <div className="flex flex-wrap gap-4 justify-center">
+                            <div className="flex flex-wrap gap-4">
                                 <Button
                                     variant="primary"
-                                    className="bg-magenta hover:bg-magenta/90 flex items-center gap-2"
+                                    className="bg-magenta hover:bg-magenta/90 flex items-center gap-2 px-8 py-4 rounded-xl text-lg shadow-lg"
                                     onClick={() => {
                                         const element = document.getElementById('press-kit');
                                         element?.scrollIntoView({ behavior: 'smooth' });
                                     }}
                                 >
-                                    <Icon name="download" size="xs" className="brightness-0 invert" inline />
-                                    {language === 'he' ? 'להורדות' : 'Get Downloads'}
+                                    <Icon name="download" size="sm" className="brightness-0 invert" inline />
+                                    {language === 'he' ? 'להורדת הנכסים' : 'Get Assets'}
                                 </Button>
                                 <Button
                                     variant="outline"
-                                    className="border-graphite/30"
+                                    className="border-graphite/30 px-8 py-4 rounded-xl text-lg hover:bg-sand/30"
                                     onClick={() => setIsContactModalOpen(true)}
                                 >
-                                    {language === 'he' ? 'יצירת קשר לעיתונות' : 'Press Contact'}
+                                    {language === 'he' ? 'יצירת קשר' : 'Contact Press'}
                                 </Button>
+                            </div>
+                        </motion.div>
+
+                        {/* Persona Image */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="hidden lg:flex justify-center"
+                        >
+                            <div className="relative">
+                                {/* Abstract blob background behind persona if needed, or just the image */}
+                                <img
+                                    src="/assets/personas/persona-celebration.webp"
+                                    alt="Media Kit"
+                                    className="max-h-[550px] w-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                                    loading="lazy"
+                                />
                             </div>
                         </motion.div>
                     </div>
@@ -202,6 +215,7 @@ const MediaKitPage = () => {
                                         src={item.src}
                                         alt={item.label[language]}
                                         className="max-w-full max-h-full object-contain"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div className="absolute inset-0 bg-gradient-to-t from-graphite/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
@@ -250,6 +264,7 @@ const MediaKitPage = () => {
                                 src="/assets/personas/persona-modal-guide.webp"
                                 alt="Press Contact"
                                 className="w-24 h-24 object-contain mx-auto mb-6"
+                                loading="lazy"
                             />
                             <h2 className="font-display text-3xl md:text-4xl mb-4 text-graphite">
                                 {language === 'he' ? 'צריכים עוד מידע?' : 'Need More Information?'}
@@ -295,6 +310,7 @@ const MediaKitPage = () => {
                                 src="/assets/personas/persona-modal-guide.webp"
                                 alt="Guide"
                                 className="w-16 h-16 object-contain flex-shrink-0"
+                                loading="lazy"
                             />
                             <p className="text-graphite/80 text-sm">
                                 {language === 'he'

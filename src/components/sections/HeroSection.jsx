@@ -27,8 +27,9 @@ const HeroSection = () => {
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                     poster="/assets/backgrounds/bg-hero.webp"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
                     style={{ objectFit: 'cover' }}
                 >
                     <source src="/assets/videos/hero-loop.mp4" type="video/mp4" />

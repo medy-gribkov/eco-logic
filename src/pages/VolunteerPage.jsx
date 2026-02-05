@@ -166,6 +166,7 @@ const VolunteerPage = () => {
                                 src="/assets/personas/persona-teacher-welcome.webp"
                                 alt="Volunteer"
                                 className="max-h-[500px] w-auto object-contain drop-shadow-2xl"
+                                loading="lazy"
                             />
                         </motion.div>
                     </div>
@@ -239,6 +240,7 @@ const VolunteerPage = () => {
                                         src={testimonial.image}
                                         alt={testimonial.name[language]}
                                         className="w-16 h-16 rounded-full object-cover border-2 border-green/20"
+                                        loading="lazy"
                                     />
                                     <div>
                                         <div className="font-display text-lg text-graphite">

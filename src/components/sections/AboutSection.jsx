@@ -45,6 +45,7 @@ const AboutSection = () => {
                                     src="/assets/images/persona-planting.webp"
                                     alt={language === 'he' ? 'ילדים לומדים על הטבע' : 'Children learning about nature'}
                                     className="w-full h-auto rounded-2xl"
+                                    loading="lazy"
                                 />
 
                                 {/* Floating secondary teacher image */}
@@ -59,6 +60,7 @@ const AboutSection = () => {
                                         src="/assets/personas/persona-teacher-pointing.webp"
                                         alt={language === 'he' ? 'מורה מסבירה' : 'Teacher explaining'}
                                         className="w-full h-auto drop-shadow-xl z-20"
+                                        loading="lazy"
                                     />
                                 </motion.div>
                             </div>
