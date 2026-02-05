@@ -14,7 +14,7 @@ export const impactStats = {
                 he: 'טון פלסטיק מגיע לאוקיינוסים מדי שנה',
                 en: 'tons of plastic enter oceans yearly'
             },
-            iconSrc: '/assets/icons/globe.png',
+            iconSrc: '/assets/icons/globe.webp',
             color: 'blue',
             source: 'UNEP 2023'
         },
@@ -26,7 +26,7 @@ export const impactStats = {
                 he: 'מהמזון בעולם הולך לפח',
                 en: 'of food globally is wasted'
             },
-            iconSrc: '/assets/icons/recycle-heart.png',
+            iconSrc: '/assets/icons/recycle-heart.webp',
             color: 'magenta',
             source: 'UN FAO'
         },
@@ -38,7 +38,7 @@ export const impactStats = {
                 he: 'מים לייצור קילו בשר בקר',
                 en: 'water to produce 1kg of beef'
             },
-            iconSrc: '/assets/icons/leaf.png',
+            iconSrc: '/assets/icons/leaf.webp',
             color: 'blue',
             source: 'waterfootprint.org'
         },
@@ -50,7 +50,7 @@ export const impactStats = {
                 he: 'עצים נדרשים לספוג טיסה לאירופה',
                 en: 'trees needed to offset 1 flight to Europe'
             },
-            iconSrc: '/assets/icons/globe.png',
+            iconSrc: '/assets/icons/globe.webp',
             color: 'green',
             source: 'ICAO Carbon Calculator'
         }
@@ -66,7 +66,7 @@ export const impactStats = {
                 he: 'צריכת מים יומית ממוצעת לאדם',
                 en: 'average daily water per person'
             },
-            iconSrc: '/assets/icons/leaf.png',
+            iconSrc: '/assets/icons/leaf.webp',
             color: 'blue',
             source: 'Israel Water Authority'
         },
@@ -78,7 +78,7 @@ export const impactStats = {
                 he: 'שיעור המיחזור בישראל',
                 en: 'recycling rate in Israel'
             },
-            iconSrc: '/assets/icons/recycle-heart.png',
+            iconSrc: '/assets/icons/recycle-heart.webp',
             color: 'green',
             source: 'Ministry of Environment'
         },
@@ -90,7 +90,7 @@ export const impactStats = {
                 he: 'שקיות פלסטיק נצרכות בשנה',
                 en: 'plastic bags consumed yearly'
             },
-            iconSrc: '/assets/icons/globe.png',
+            iconSrc: '/assets/icons/globe.webp',
             color: 'magenta',
             source: 'Israel Ministry of Environment'
         }
@@ -106,7 +106,7 @@ export const impactStats = {
                 he: 'אנשים השלימו את החידון',
                 en: 'people completed the quiz'
             },
-            iconSrc: '/assets/icons/globe.png',
+            iconSrc: '/assets/icons/globe.webp',
             color: 'green'
         },
         {
@@ -117,7 +117,7 @@ export const impactStats = {
                 he: 'עובדות סביבתיות נלמדו',
                 en: 'environmental facts learned'
             },
-            iconSrc: '/assets/icons/lightbulb.png',
+            iconSrc: '/assets/icons/lightbulb.webp',
             color: 'blue'
         },
         {
@@ -128,7 +128,7 @@ export const impactStats = {
                 he: 'שיתופים ברשתות חברתיות',
                 en: 'social media shares'
             },
-            iconSrc: '/assets/icons/checkmark.png',
+            iconSrc: '/assets/icons/checkmark.webp',
             color: 'magenta'
         }
     ]
@@ -138,7 +138,7 @@ export const impactStats = {
 export const features = [
     {
         id: 'education',
-        iconSrc: '/assets/icons/lightbulb.png',
+        iconSrc: '/assets/icons/lightbulb.webp',
         title: {
             he: 'חינוך',
             en: 'Education'
@@ -151,7 +151,7 @@ export const features = [
     },
     {
         id: 'awareness',
-        iconSrc: '/assets/icons/recycle-heart.png',
+        iconSrc: '/assets/icons/recycle-heart.webp',
         title: {
             he: 'מודעות',
             en: 'Awareness'
@@ -164,7 +164,7 @@ export const features = [
     },
     {
         id: 'action',
-        iconSrc: '/assets/icons/checkmark.png',
+        iconSrc: '/assets/icons/checkmark.webp',
         title: {
             he: 'פעולה',
             en: 'Action'

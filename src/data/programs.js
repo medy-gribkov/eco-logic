@@ -193,7 +193,7 @@ export const freeResources = [
         type: 'infographics',
         format: 'PNG',
         pages: 8,
-        downloadUrl: '/assets/downloads/infographics-pack.png'
+        downloadUrl: '/assets/downloads/infographics-pack.webp'
     },
     {
         id: 'teacher-quickstart',
@@ -209,6 +209,22 @@ export const freeResources = [
         format: 'PDF',
         pages: 6,
         downloadUrl: '/assets/downloads/teacher-quickstart.pdf'
+    },
+    {
+        id: 'seedling-starter',
+        title: {
+            he: 'ערכת שתיל להתחלה',
+            en: 'Seedling Starter Pack'
+        },
+        description: {
+            he: 'מדריך מלא לגידול שתיל ראשון עם הילדים - כולל טיפים, לוח זמנים ופעילויות',
+            en: 'Complete guide to growing your first seedling with kids - includes tips, timeline and activities'
+        },
+        type: 'seedling',
+        format: 'PDF',
+        pages: 8,
+        downloadUrl: '/assets/downloads/seedling-starter.pdf',
+        image: '/assets/images/starter-seedling.webp'
     }
 ];
 

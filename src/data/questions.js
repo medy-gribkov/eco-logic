@@ -5,7 +5,7 @@ export const questions = [
     {
         id: 1,
         topic: 'water',
-        iconSrc: '/assets/icons/leaf.png',
+        iconSrc: '/assets/icons/leaf.webp',
         question: {
             he: 'מה דורש יותר מים לייצור?',
             en: 'Which uses more water to produce?'
@@ -25,7 +25,7 @@ export const questions = [
     {
         id: 2,
         topic: 'water',
-        iconSrc: '/assets/icons/leaf.png',
+        iconSrc: '/assets/icons/leaf.webp',
         question: {
             he: 'כמה ליטר מים נדרשים לייצור ג\'ינס אחד?',
             en: 'How many liters of water are needed to produce one pair of jeans?'
@@ -45,7 +45,7 @@ export const questions = [
     {
         id: 3,
         topic: 'carbon',
-        iconSrc: '/assets/icons/globe.png',
+        iconSrc: '/assets/icons/globe.webp',
         question: {
             he: 'איזה אמצעי תחבורה פולט הכי הרבה CO2 לנוסע לקילומטר?',
             en: 'Which mode of transport emits the most CO2 per passenger per kilometer?'
@@ -65,7 +65,7 @@ export const questions = [
     {
         id: 4,
         topic: 'carbon',
-        iconSrc: '/assets/icons/leaf.png',
+        iconSrc: '/assets/icons/leaf.webp',
         question: {
             he: 'כמה עצים צריכים לגדול שנה שלמה כדי לספוג את הפליטות של טיסה לאירופה?',
             en: 'How many trees need to grow for a full year to absorb emissions from one flight to Europe?'
@@ -85,7 +85,7 @@ export const questions = [
     {
         id: 5,
         topic: 'food',
-        iconSrc: '/assets/icons/recycle-heart.png',
+        iconSrc: '/assets/icons/recycle-heart.webp',
         question: {
             he: 'מה טביעת הרגל הפחמנית הגבוהה ביותר?',
             en: 'Which has the highest carbon footprint?'
@@ -105,7 +105,7 @@ export const questions = [
     {
         id: 6,
         topic: 'food',
-        iconSrc: '/assets/icons/recycle-heart.png',
+        iconSrc: '/assets/icons/recycle-heart.webp',
         question: {
             he: 'כמה מכל המזון שמיוצר בעולם מבוזבז מדי שנה?',
             en: 'How much of all food produced globally is wasted each year?'
@@ -125,7 +125,7 @@ export const questions = [
     {
         id: 7,
         topic: 'energy',
-        iconSrc: '/assets/icons/lightbulb.png',
+        iconSrc: '/assets/icons/lightbulb.webp',
         question: {
             he: 'כמה אנרגיה חוסכת נורת LED לעומת נורת ליבון?',
             en: 'How much energy does an LED bulb save compared to an incandescent bulb?'
@@ -145,7 +145,7 @@ export const questions = [
     {
         id: 8,
         topic: 'energy',
-        iconSrc: '/assets/icons/lightbulb.png',
+        iconSrc: '/assets/icons/lightbulb.webp',
         question: {
             he: 'מה צורך הכי הרבה חשמל בבית ממוצע בישראל?',
             en: 'What consumes the most electricity in an average home?'
@@ -165,7 +165,7 @@ export const questions = [
     {
         id: 9,
         topic: 'waste',
-        iconSrc: '/assets/icons/recycle-heart.png',
+        iconSrc: '/assets/icons/recycle-heart.webp',
         question: {
             he: 'כמה שנים לוקח לבקבוק פלסטיק להתפרק בטבע?',
             en: 'How many years does it take for a plastic bottle to decompose in nature?'
@@ -185,7 +185,7 @@ export const questions = [
     {
         id: 10,
         topic: 'waste',
-        iconSrc: '/assets/icons/recycle-heart.png',
+        iconSrc: '/assets/icons/recycle-heart.webp',
         question: {
             he: 'כמה אחוז מכל הפלסטיק שיוצר אי פעם ממוחזר בפועל?',
             en: 'What percentage of all plastic ever produced has actually been recycled?'
@@ -218,27 +218,27 @@ export const getTopics = () => {
 export const topicInfo = {
     water: {
         name: { he: 'מים', en: 'Water' },
-        iconSrc: '/assets/icons/leaf.png',
+        iconSrc: '/assets/icons/leaf.webp',
         color: 'blue'
     },
     carbon: {
         name: { he: 'פחמן', en: 'Carbon' },
-        iconSrc: '/assets/icons/globe.png',
+        iconSrc: '/assets/icons/globe.webp',
         color: 'gray'
     },
     food: {
         name: { he: 'מזון', en: 'Food' },
-        iconSrc: '/assets/icons/recycle-heart.png',
+        iconSrc: '/assets/icons/recycle-heart.webp',
         color: 'green'
     },
     energy: {
         name: { he: 'אנרגיה', en: 'Energy' },
-        iconSrc: '/assets/icons/lightbulb.png',
+        iconSrc: '/assets/icons/lightbulb.webp',
         color: 'yellow'
     },
     waste: {
         name: { he: 'פסולת', en: 'Waste' },
-        iconSrc: '/assets/icons/recycle-heart.png',
+        iconSrc: '/assets/icons/recycle-heart.webp',
         color: 'magenta'
     }
 };

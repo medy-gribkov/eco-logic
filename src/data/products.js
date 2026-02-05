@@ -2,6 +2,54 @@
 
 export const products = [
     {
+        id: 13,
+        name: {
+            he: 'כרטיסיות לימוד תכנית',
+            en: 'Curriculum Cards'
+        },
+        description: {
+            he: 'כרטיסיות לימוד צבעוניות לחינוך סביבתי - מושלם למורים',
+            en: 'Colorful educational cards for environmental education - perfect for teachers'
+        },
+        price: 79,
+        currency: 'ILS',
+        image: '/assets/images/products/curriculum-cards.webp',
+        category: 'educational',
+        featured: true
+    },
+    {
+        id: 14,
+        name: {
+            he: 'ערכת נבט - קופסה',
+            en: 'Sprout Kit Box'
+        },
+        description: {
+            he: 'ערכת גידול מלאה בקופסה מעוצבת - כל מה שצריך להתחיל לגדל',
+            en: 'Complete growing kit in designed box - everything you need to start growing'
+        },
+        price: 149,
+        currency: 'ILS',
+        image: '/assets/images/products/sprout-kit-box.webp',
+        category: 'garden',
+        featured: true
+    },
+    {
+        id: 15,
+        name: {
+            he: 'ערכת עץ - קופסה',
+            en: 'Tree Kit Box'
+        },
+        description: {
+            he: 'ערכת שתילת עציץ מלאה עם הכל - לשתול עץ יחד',
+            en: 'Complete tree planting kit with everything - plant a tree together'
+        },
+        price: 199,
+        currency: 'ILS',
+        image: '/assets/images/products/tree-kit-box.webp',
+        category: 'garden',
+        featured: true
+    },
+    {
         id: 7,
         name: {
             he: 'ערכת שתיל התחלתית',
@@ -13,7 +61,7 @@ export const products = [
         },
         price: 45,
         currency: 'ILS',
-        image: '/assets/images/starter-seedling.png',
+        image: '/assets/images/starter-seedling.webp',
         category: 'garden',
         featured: true
     },
@@ -24,14 +72,15 @@ export const products = [
             en: 'Bamboo Cutlery Set'
         },
         description: {
-            he: 'סט רב פעמי לנסיעות - סכין, מזלג, כף וקשית',
-            en: 'Reusable travel set - knife, fork, spoon & straw'
+            he: 'סט רב פעמי לנסיעות - מזלג, סכין, כף וקשית',
+            en: 'Reusable travel set - fork, knife, spoon & straw'
         },
-        price: 39,
+        price: 45,
         currency: 'ILS',
-        image: '/assets/images/merch-updated.png',
+        image: '/assets/images/products/bamboo-cutlery-set.webp',
         category: 'accessories',
-        featured: false
+        featured: false,
+        colors: ['natural']
     },
     {
         id: 9,
@@ -45,7 +94,7 @@ export const products = [
         },
         price: 129,
         currency: 'ILS',
-        image: '/assets/images/merch.png',
+        image: '/assets/images/merch.webp',
         category: 'gadgets',
         featured: true,
         colors: ['black', 'green']
@@ -62,7 +111,7 @@ export const products = [
         },
         price: 149,
         currency: 'ILS',
-        image: '/assets/images/merch-updated.png',
+        image: '/assets/images/products/organic-hoodie.webp',
         category: 'clothing',
         featured: false,
         colors: ['sage', 'black', 'navy'],
@@ -80,7 +129,7 @@ export const products = [
         },
         price: 85,
         currency: 'ILS',
-        image: '/assets/images/starter-seedling.png',
+        image: '/assets/images/products/sprout-kit-full.webp',
         category: 'garden',
         featured: true
     },
@@ -96,7 +145,7 @@ export const products = [
         },
         price: 45,
         currency: 'ILS',
-        image: '/assets/images/merch.png',
+        image: '/assets/images/products/coffee-cup.webp',
         category: 'accessories',
         featured: false,
         colors: ['natural', 'pink', 'blue']
@@ -113,7 +162,7 @@ export const products = [
         },
         price: 89,
         currency: 'ILS',
-        image: '/assets/images/merch.png',
+        image: '/assets/images/products/tshirt.webp',
         category: 'clothing',
         featured: true,
         colors: ['white', 'green', 'black'],
@@ -131,7 +180,7 @@ export const products = [
         },
         price: 49,
         currency: 'ILS',
-        image: '/assets/images/merch-updated.png',
+        image: '/assets/images/products/tote-bag.webp',
         category: 'accessories',
         featured: true,
         colors: ['natural', 'green']
@@ -148,7 +197,7 @@ export const products = [
         },
         price: 79,
         currency: 'ILS',
-        image: '/assets/images/merch.png',
+        image: '/assets/images/products/water-bottle.webp',
         category: 'accessories',
         featured: true,
         colors: ['silver', 'green', 'black']
@@ -165,7 +214,7 @@ export const products = [
         },
         price: 59,
         currency: 'ILS',
-        image: '/assets/images/merch-updated.png',
+        image: '/assets/images/products/cap.webp',
         category: 'clothing',
         featured: false,
         colors: ['green', 'white', 'black']
@@ -182,9 +231,9 @@ export const products = [
         },
         price: 35,
         currency: 'ILS',
-        image: '/assets/images/merch.png',
+        image: '/assets/images/products/notebook.webp',
         category: 'stationery',
-        featured: false,
+        featured: true,
         colors: ['natural']
     },
     {
@@ -199,7 +248,7 @@ export const products = [
         },
         price: 25,
         currency: 'ILS',
-        image: '/assets/images/merch-updated.png',
+        image: '/assets/images/products/sticker-pack.webp',
         category: 'accessories',
         featured: false
     }
