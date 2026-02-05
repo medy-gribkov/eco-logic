@@ -120,7 +120,7 @@ const FreeResourcesSection = () => {
                                     </div>
 
                                     {/* Image */}
-                                    <div className="w-full md:w-64 flex-shrink-0">
+                                    <div className="w-full md:w-64 lg:w-80 flex-shrink-0">
                                         <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-white border border-sand shadow-inner relative">
                                             <img
                                                 src={resource.image || "/assets/images/starter-seedling.webp"}
@@ -185,28 +185,52 @@ const FreeResourcesSection = () => {
                         </div>
                     </div>
 
-                    {/* Right Column: Persona (Span 4) */}
-                    <div className="lg:col-span-4 hidden lg:flex flex-col items-center justify-end h-full pt-12">
-                        <div className="sticky top-24 w-full text-center">
-                            {/* Decorative elements behind persona */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-magenta/5 rounded-full blur-3xl animate-pulse" />
+                    {/* Right Column: Persona & Community (Span 4) */}
+                    <div className="lg:col-span-4 flex flex-col items-center h-full mt-12 lg:mt-0 lg:pt-12">
+                        <div className="lg:sticky lg:top-24 w-full text-center space-y-8">
+                            {/* Persona Group */}
+                            <div className="relative">
+                                {/* Decorative elements behind persona */}
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-magenta/5 rounded-full blur-3xl animate-pulse" />
 
-                            <img
-                                src="/assets/personas/persona-teacher-reading.webp"
-                                alt="Teacher"
-                                className="w-full max-w-[320px] mx-auto drop-shadow-2xl relative z-10 transform hover:scale-105 transition-transform duration-500"
-                            />
+                                <img
+                                    src="/assets/personas/persona-teacher-reading.webp"
+                                    alt="Teacher"
+                                    className="w-full max-w-[280px] lg:max-w-[320px] mx-auto drop-shadow-2xl relative z-10 transform hover:scale-105 transition-transform duration-500"
+                                />
 
-                            <div className="mt-6 bg-paper border border-sand p-4 rounded-xl shadow-card max-w-[280px] mx-auto relative z-20">
-                                <div className="text-4xl text-magenta mb-2">❝</div>
-                                <p className="text-graphite/80 italic text-sm mb-3">
-                                    {language === 'he'
-                                        ? 'התלמידים שלי מחכים כל שבוע לפעילות החדשה. החומרים האלו פשוט עובדים!'
-                                        : 'My students look forward to the new activity every week. These materials just work!'}
-                                </p>
-                                <div className="text-xs font-bold text-graphite/60 uppercase tracking-wider">
-                                    {language === 'he' ? '– שרה, מורה למדעים' : '– Sarah, Science Teacher'}
+                                <div className="mt-6 bg-paper border border-sand p-4 rounded-xl shadow-card max-w-[280px] mx-auto relative z-20">
+                                    <div className="text-4xl text-magenta mb-2">❝</div>
+                                    <p className="text-graphite/80 italic text-sm mb-3">
+                                        {language === 'he'
+                                            ? 'התלמידים שלי מחכים כל שבוע לפעילות החדשה. החומרים האלו פשוט עובדים!'
+                                            : 'My students look forward to the new activity every week. These materials just work!'}
+                                    </p>
+                                    <div className="text-xs font-bold text-graphite/60 uppercase tracking-wider">
+                                        {language === 'he' ? '– שרה, מורה למדעים' : '– Sarah, Science Teacher'}
+                                    </div>
                                 </div>
+                            </div>
+
+                            {/* New Community Card for spacing */}
+                            <div className="bg-sand/20 rounded-2xl p-6 border border-sand/50 max-w-[320px] mx-auto text-start">
+                                <div className="flex items-center gap-3 mb-3">
+                                    <div className="bg-green/10 p-2 rounded-lg text-green">
+                                        <Icon name="heart" size="sm" />
+                                    </div>
+                                    <h4 className="font-display text-lg text-graphite">
+                                        {language === 'he' ? 'הצטרפו לקהילה' : 'Join the Community'}
+                                    </h4>
+                                </div>
+                                <p className="text-graphite/70 text-sm mb-4">
+                                    {language === 'he'
+                                        ? 'אלפי מורים והורים כבר משתפים רעיונות בקבוצה שלנו.'
+                                        : 'Thousands of teachers and parents are already sharing ideas in our group.'}
+                                </p>
+                                <Button variant="outline" size="small" className="w-full justify-between bg-paper hover:bg-white text-xs">
+                                    {language === 'he' ? 'הצטרפות לקבוצה' : 'Join Group'}
+                                    <Icon name="arrow-right" size="xs" />
+                                </Button>
                             </div>
                         </div>
                     </div>
