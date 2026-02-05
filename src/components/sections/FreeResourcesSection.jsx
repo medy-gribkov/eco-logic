@@ -180,19 +180,27 @@ const FreeResourcesSection = () => {
                                 {/* Left Arrow */}
                                 <button
                                     onClick={prevSlide}
-                                    className="absolute top-1/2 -left-4 md:-left-6 -translate-y-1/2 z-10 w-12 h-12 bg-paper/90 backdrop-blur text-graphite rounded-full shadow-lg border border-sand hover:bg-white hover:border-magenta hover:text-magenta transition-all flex items-center justify-center transform hover:scale-110"
+                                    className="absolute top-1/2 -left-4 md:-left-6 -translate-y-1/2 z-10 w-12 h-12 bg-paper/90 backdrop-blur rounded-full shadow-lg border border-sand hover:bg-white hover:border-magenta transition-all flex items-center justify-center group/arrow"
                                     aria-label="Previous slide"
                                 >
-                                    <Icon name="arrow-right" size="sm" className={language === 'he' ? "" : "rotate-180"} />
+                                    <img
+                                        src="/assets/icons/carousel-arrow.webp"
+                                        alt=""
+                                        className={`w-6 h-6 object-contain opacity-80 group-hover/arrow:opacity-100 ${language === 'he' ? "" : "rotate-180"}`}
+                                    />
                                 </button>
 
                                 {/* Right Arrow */}
                                 <button
                                     onClick={nextSlide}
-                                    className="absolute top-1/2 -right-4 md:-right-6 -translate-y-1/2 z-10 w-12 h-12 bg-paper/90 backdrop-blur text-graphite rounded-full shadow-lg border border-sand hover:bg-white hover:border-magenta hover:text-magenta transition-all flex items-center justify-center transform hover:scale-110"
+                                    className="absolute top-1/2 -right-4 md:-right-6 -translate-y-1/2 z-10 w-12 h-12 bg-paper/90 backdrop-blur rounded-full shadow-lg border border-sand hover:bg-white hover:border-magenta transition-all flex items-center justify-center group/arrow"
                                     aria-label="Next slide"
                                 >
-                                    <Icon name="arrow-right" size="sm" className={language === 'he' ? "rotate-180" : ""} />
+                                    <img
+                                        src="/assets/icons/carousel-arrow.webp"
+                                        alt=""
+                                        className={`w-6 h-6 object-contain opacity-80 group-hover/arrow:opacity-100 ${language === 'he' ? "rotate-180" : ""}`}
+                                    />
                                 </button>
 
                                 <div className="overflow-hidden min-h-[280px] px-1 md:px-0">

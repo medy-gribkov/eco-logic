@@ -6,250 +6,223 @@ import Container from '../layout/Container';
 import Button from '../ui/Button';
 import Card from '../ui/Card';
 import Icon from '../ui/Icon';
-import Modal from '../ui/Modal';
-import SocialPost from '../ui/SocialPost';
 import { useLanguage } from '../../i18n';
 import { questions } from '../../data/questions';
 
 const QuizPreview = () => {
     const navigate = useNavigate();
-    const { language, isRTL } = useLanguage();
+    const { language } = useLanguage();
     const [selectedAnswer, setSelectedAnswer] = useState(null);
-    const [showResult, setShowResult] = useState(false);
-    const [selectedPostType, setSelectedPostType] = useState(null);
+    const [viewState, setViewState] = useState('thinking'); // 'thinking', 'correct', 'incorrect'
 
     // Use first question as preview
     const question = questions[0];
-    const isCorrect = selectedAnswer === question.correctId;
 
     const handleAnswer = (optionId) => {
-        if (showResult) return;
+        if (viewState !== 'thinking') return;
+
         setSelectedAnswer(optionId);
-        setTimeout(() => setShowResult(true), 300);
+        const isCorrect = optionId === question.correctId;
+
+        // Small delay for "processing" feel
+        setTimeout(() => {
+            setViewState(isCorrect ? 'correct' : 'incorrect');
+        }, 400);
     };
 
     const resetPreview = () => {
         setSelectedAnswer(null);
-        setShowResult(false);
+        setViewState('thinking');
+    };
+
+    const handleShare = (platform) => {
+        const text = `${question.fact[language]} - EcoLogic`;
+        const url = window.location.origin;
+
+        if (platform === 'whatsapp') {
+            window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
+        } else if (platform === 'copy') {
+            navigator.clipboard.writeText(text + ' ' + url);
+            alert(language === 'he' ? 'הקישור הועתק!' : 'Link copied!');
+        }
+    };
+
+    // Dynamic Persona Image based on state
+    const getPersonaImage = () => {
+        switch (viewState) {
+            case 'correct': return '/assets/personas/quiz-success.png';
+            case 'incorrect': return '/assets/personas/quiz-pointing.png';
+            default: return '/assets/personas/quiz-thinking.png';
+        }
     };
 
     return (
-        <>
-            <Section id="quiz-preview" spacing="large" className="relative overflow-hidden">
-                {/* Background illustration */}
-                <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: 'url(/assets/backgrounds/bg-quiz.webp)' }}
-                />
-                <div className="absolute inset-0 bg-paper/40 backdrop-blur-[1px]" />
-                <Container size="small" className="relative z-10">
-                    {/* Header - Reframed as Interactive Lesson */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-center mb-12"
-                    >
+        <Section id="quiz-preview" spacing="large" className="relative overflow-hidden">
+            {/* Background */}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-quiz.webp)' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-paper/80 to-paper/40 backdrop-blur-[2px]" />
 
+            <Container size="small" className="relative z-10">
+                {/* Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-8"
+                >
+                    <h2 className="font-display text-4xl text-graphite mb-2">
+                        {language === 'he' ? 'בחנו את עצמכם' : 'Test Your Knowledge'}
+                    </h2>
+                    <p className="text-lg text-graphite/60 max-w-xl mx-auto">
+                        {language === 'he'
+                            ? 'שאלה אחת קצרה שתגרום לכם לחשוב מחדש על בזבוז מים.'
+                            : 'One quick question that will make you rethink water waste.'}
+                    </p>
+                </motion.div>
 
-                        <h2 className="font-display text-4xl md:text-5xl mb-4 text-graphite">
-                            {language === 'he' ? 'נסו שיעור אינטראקטיבי' : 'Try an Interactive Lesson'}
-                        </h2>
-                        <p className="text-xl text-graphite/70 max-w-2xl mx-auto">
-                            {language === 'he'
-                                ? 'כך אנחנו הופכים למידה למעניינת. נסו שאלה אחת ותגלו.'
-                                : 'This is how we make learning engaging. Try one question and discover.'}
-                        </p>
-                    </motion.div>
+                {/* Main Interactive Card */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <Card className="max-w-4xl mx-auto overflow-visible shadow-elevated rounded-3xl border border-white/50 bg-white/60 backdrop-blur-md relative">
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-center">
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <Card className="max-w-3xl mx-auto overflow-hidden shadow-elevated rounded-[2rem] border-0 bg-white/80 backdrop-blur-sm">
-                            <div className="p-8 md:p-10 relative">
-                                {/* Decorative circle */}
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green/10 to-transparent rounded-bl-[4rem] -z-0" />
-
-                                {/* Question */}
-                                <div className="text-center mb-8 relative z-10">
-                                    {question.iconSrc && (
-                                        <div className="flex justify-center mb-6">
-                                            <div className="w-16 h-16 bg-white shadow-sm rounded-2xl flex items-center justify-center transform -rotate-3">
-                                                <img
-                                                    src={question.iconSrc}
-                                                    alt=""
-                                                    className="w-10 h-10 object-contain"
-                                                />
-                                            </div>
-                                        </div>
-                                    )}
-                                    <h3 className="font-display text-2xl md:text-3xl text-graphite leading-tight">
-                                        {question.question[language]}
-                                    </h3>
-                                </div>
-
-                                {/* Options - 2x2 Grid for compact modern feel */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                                    {question.options.map((option) => {
-                                        const isSelected = selectedAnswer === option.id;
-                                        const isCorrectOption = option.id === question.correctId;
-
-                                        let optionStyle = 'border-sand hover:border-green/30 hover:bg-white bg-paper/50 shadow-sm';
-                                        if (showResult) {
-                                            if (isCorrectOption) {
-                                                optionStyle = 'border-green bg-green/10 ring-1 ring-green';
-                                            } else if (isSelected && !isCorrectOption) {
-                                                optionStyle = 'border-magenta bg-magenta/10 opacity-70';
-                                            } else {
-                                                optionStyle = 'opacity-40 border-transparent';
-                                            }
-                                        } else if (isSelected) {
-                                            optionStyle = 'border-graphite bg-graphite/5';
-                                        }
-
-                                        return (
-                                            <motion.button
-                                                key={option.id}
-                                                onClick={() => handleAnswer(option.id)}
-                                                disabled={showResult}
-                                                whileHover={!showResult ? { scale: 1.02, y: -2 } : {}}
-                                                whileTap={!showResult ? { scale: 0.98 } : {}}
-                                                className={`
-                                                w-full p-4 rounded-xl border transition-all duration-300
-                                                flex items-center justify-between text-start h-full
-                                                ${optionStyle}
-                                                ${showResult ? 'cursor-default' : 'cursor-pointer'}
-                                            `}
-                                            >
-                                                <span className={`font-body text-base ${showResult && isCorrectOption ? 'font-bold' : ''} text-graphite`}>
-                                                    {option.label[language]}
-                                                </span>
-                                                {showResult && isCorrectOption && (
-                                                    <div className="w-6 h-6 bg-green text-white rounded-full flex items-center justify-center shadow-sm">
-                                                        <Icon name="checkmark" size="xs" className="brightness-0 invert" />
-                                                    </div>
-                                                )}
-                                                {showResult && isSelected && !isCorrectOption && (
-                                                    <span className="text-magenta font-bold">✕</span>
-                                                )}
-                                            </motion.button>
-                                        );
-                                    })}
-                                </div>
-
-                                {/* Result/CTA Area - Integrated */}
+                            {/* Left Column: Persona (Dynamic) */}
+                            <div className="md:col-span-4 relative h-64 md:h-full min-h-[300px] md:min-h-[400px] flex items-end justify-center order-2 md:order-1 px-4">
                                 <AnimatePresence mode="wait">
-                                    {showResult ? (
-                                        <motion.div
-                                            key="result"
-                                            initial={{ opacity: 0, height: 0 }}
-                                            animate={{ opacity: 1, height: 'auto' }}
-                                            exit={{ opacity: 0, height: 0 }}
-                                            className="overflow-hidden"
-                                        >
-                                            <div className="bg-sand/30 rounded-2xl p-6 border border-sand/50 flex flex-col md:flex-row gap-6 items-center md:items-start text-center md:text-start">
-                                                <img
-                                                    src="/assets/personas/persona-celebration.webp"
-                                                    alt="Teacher"
-                                                    className="w-24 h-24 object-contain -my-4 md:mb-0 drop-shadow-md"
-                                                />
-                                                <div className="flex-grow">
-                                                    <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-                                                        <span className={`font-display text-xl ${isCorrect ? 'text-green' : 'text-magenta'}`}>
-                                                            {isCorrect
-                                                                ? (language === 'he' ? 'בול! שיחקתם אותה' : 'Nailed it! Spot on.')
-                                                                : (language === 'he' ? 'קרוב, הנה התשובה' : 'Close! Here\'s why.')}
-                                                        </span>
-                                                    </div>
-                                                    <p className="text-sm text-graphite/80 leading-relaxed mb-4">
-                                                        {question.fact[language]}
-                                                    </p>
-
-                                                    {/* Action Buttons */}
-                                                    <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                                                        <Button
-                                                            size="small"
-                                                            onClick={() => navigate('/quiz', {
-                                                                state: { startQuestion: 1, score: isCorrect ? 1 : 0 }
-                                                            })}
-                                                            className="bg-graphite text-paper hover:bg-graphite/90 text-sm px-6"
-                                                        >
-                                                            {language === 'he' ? 'המשך לחידון' : 'Continue Quiz'}
-                                                        </Button>
-                                                        {!isCorrect && (
-                                                            <button
-                                                                onClick={resetPreview}
-                                                                className="px-4 py-2 rounded-lg text-xs font-bold text-graphite/50 hover:text-graphite uppercase tracking-wider transition-colors"
-                                                            >
-                                                                {language === 'he' ? 'נסו שוב' : 'Try Again'}
-                                                            </button>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </motion.div>
-                                    ) : (
-                                        <div className="text-center py-4">
-                                            <p className="text-xs font-mono text-graphite/40 uppercase tracking-widest">
-                                                {language === 'he' ? 'בחרו את התשובה הנכונה' : 'Select the correct answer'}
-                                            </p>
-                                        </div>
-                                    )}
+                                    <motion.img
+                                        key={viewState}
+                                        src={getPersonaImage()}
+                                        alt="Persona"
+                                        initial={{ opacity: 0, x: -20, scale: 0.9 }}
+                                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                                        exit={{ opacity: 0, x: 20, scale: 0.9 }}
+                                        transition={{ duration: 0.4 }}
+                                        className="w-full max-w-[280px] object-contain drop-shadow-2xl relative z-20 -mb-8 md:-mb-12 origin-bottom"
+                                    />
                                 </AnimatePresence>
+
+                                {/* Background Circle for Persona */}
+                                <div className={`
+                                    absolute bottom-0 w-64 h-64 rounded-full blur-3xl opacity-30 z-10 transition-colors duration-500
+                                    ${viewState === 'correct' ? 'bg-green' : viewState === 'incorrect' ? 'bg-magenta' : 'bg-sand'}
+                                `} />
                             </div>
-                        </Card>
-                    </motion.div>
 
-                    {/* Teaching methodology note */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="mt-8 text-center flex items-center justify-center gap-2"
-                    >
-                        <Icon name="lightbulb" size="sm" />
-                        <p className="text-sm text-graphite/50">
-                            {language === 'he'
-                                ? 'השיטה שלנו: שאלה - גילוי - הסבר - זכירה'
-                                : 'Our method: Question - Discovery - Explanation - Retention'}
-                        </p>
-                    </motion.div>
-                </Container>
-            </Section>
+                            {/* Right Column: Quiz Content */}
+                            <div className="md:col-span-8 p-6 md:p-8 md:ps-0 order-1 md:order-2">
+                                <div className="bg-white/50 rounded-2xl p-6 border border-white shadow-sm">
+                                    {/* Icon & Question */}
+                                    <div className="flex items-start gap-4 mb-6">
+                                        <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center flex-shrink-0 text-graphite">
+                                            <Icon name="lightbulb" size="md" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-display text-2xl text-graphite leading-tight mb-2">
+                                                {question.question[language]}
+                                            </h3>
+                                        </div>
+                                    </div>
 
-            {/* Social Post Modal */}
-            <Modal
-                isOpen={!!selectedPostType}
-                onClose={() => setSelectedPostType(null)}
-                title={language === 'he' ? 'שתפו את התוכן' : 'Share this content'}
-                size="large"
-            >
-                {selectedPostType && (
-                    <div className="flex justify-center">
-                        <SocialPost
-                            type={selectedPostType}
-                            data={{
-                                savedAmount: '15,400 L',
-                                equivalent: language === 'he' ? '6 חודשים של מקלחות' : '6 months of showers',
-                                fact: question.fact[language]
-                            }}
-                            onShare={(type) => {
-                                const text = `${question.fact[language]} - EcoLogic`;
-                                if (navigator.share) {
-                                    navigator.share({ text, url: window.location.origin });
-                                } else {
-                                    navigator.clipboard.writeText(text);
-                                    alert(language === 'he' ? 'הועתק!' : 'Copied!');
-                                }
-                            }}
-                        />
-                    </div>
-                )}
-            </Modal>
-        </>
+                                    <div className="space-y-3">
+                                        {question.options.map((option) => {
+                                            const isSelected = selectedAnswer === option.id;
+                                            const isCorrectOption = option.id === question.correctId;
+
+                                            // Determine visual state
+                                            let stateClasses = "hover:bg-sand/30 border-sand"; // Default
+                                            if (viewState !== 'thinking') {
+                                                if (isCorrectOption) stateClasses = "bg-green/10 border-green text-green font-bold ring-1 ring-green";
+                                                else if (isSelected) stateClasses = "bg-magenta/10 border-magenta text-magenta opacity-70";
+                                                else stateClasses = "opacity-40 border-transparent grayscale";
+                                            } else if (isSelected) {
+                                                stateClasses = "bg-graphite/5 border-graphite";
+                                            }
+
+                                            return (
+                                                <button
+                                                    key={option.id}
+                                                    onClick={() => handleAnswer(option.id)}
+                                                    disabled={viewState !== 'thinking'}
+                                                    className={`
+                                                        w-full text-start p-4 rounded-xl border-2 transition-all duration-200 flex justify-between items-center group
+                                                        ${stateClasses}
+                                                    `}
+                                                >
+                                                    <span className="text-base">{option.label[language]}</span>
+                                                    {viewState === 'correct' && isCorrectOption && (
+                                                        <Icon name="checkmark" size="sm" className="text-green" />
+                                                    )}
+                                                    {viewState === 'thinking' && (
+                                                        <div className="w-4 h-4 rounded-full border-2 border-sand group-hover:border-graphite/50 transition-colors" />
+                                                    )}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+
+                                    {/* Feedback / Result Section */}
+                                    <AnimatePresence>
+                                        {viewState !== 'thinking' && (
+                                            <motion.div
+                                                initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                                                animate={{ opacity: 1, height: 'auto', marginTop: 24 }}
+                                                className="overflow-hidden border-t border-sand/30 pt-4"
+                                            >
+                                                <h4 className={`font-display text-xl mb-2 ${viewState === 'correct' ? 'text-green' : 'text-magenta'}`}>
+                                                    {viewState === 'correct'
+                                                        ? (language === 'he' ? 'צדקתם! 🌱' : 'Correct! 🌱')
+                                                        : (language === 'he' ? 'לא בדיוק... 🤔' : 'Not quite... 🤔')}
+                                                </h4>
+                                                <p className="text-graphite/80 leading-relaxed mb-6">
+                                                    {question.fact[language]}
+                                                </p>
+
+                                                {/* Smart Actions based on result */}
+                                                <div className="flex flex-wrap gap-3">
+                                                    {viewState === 'correct' ? (
+                                                        <>
+                                                            <Button
+                                                                variant="primary"
+                                                                onClick={() => handleShare('whatsapp')}
+                                                                className="bg-[#25D366] hover:bg-[#128C7E] text-white border-none"
+                                                            >
+                                                                <Icon name="share" size="xs" className="me-2 brightness-0 invert" inline />
+                                                                {language === 'he' ? 'שתפו בוואטסאפ' : 'Share on WhatsApp'}
+                                                            </Button>
+                                                            <Button
+                                                                variant="outline"
+                                                                onClick={() => handleShare('copy')}
+                                                            >
+                                                                {language === 'he' ? 'העתקת קישור' : 'Copy Link'}
+                                                            </Button>
+                                                        </>
+                                                    ) : (
+                                                        <Button
+                                                            variant="primary"
+                                                            onClick={resetPreview}
+                                                            className="bg-magenta hover:bg-magenta/90 text-white border-none"
+                                                        >
+                                                            <Icon name="refresh" size="xs" className="me-2 brightness-0 invert" inline />
+                                                            {language === 'he' ? 'נסו שוב' : 'Try Again'}
+                                                        </Button>
+                                                    )}
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
+                </motion.div>
+            </Container>
+        </Section>
     );
 };
 
