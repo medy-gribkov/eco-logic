@@ -11,7 +11,7 @@ import {
     TrustedBrandsSection,
     MerchSection,
     VolunteerSection,
-    PressKitSection,
+
 } from '../components/sections';
 
 const Home = () => {
@@ -56,8 +56,7 @@ const Home = () => {
                 {/* 11. Merch - Subtle eco-merchandise (recycled) */}
                 <MerchSection />
 
-                {/* 12. Press Kit - Media resources */}
-                <PressKitSection />
+
             </div>
         </div>
     );

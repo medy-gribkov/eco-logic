@@ -17,6 +17,18 @@ const FreeResourcesSection = () => {
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [currentIndex, setCurrentIndex] = React.useState(0);
 
+    const filteredResources = freeResources.filter(r => r.id !== 'seedling-starter');
+    const totalSlides = Math.ceil(filteredResources.length / 2);
+    const currentSlide = Math.floor(currentIndex / 2);
+
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev + 2) % filteredResources.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentIndex((prev) => (prev - 2 + filteredResources.length) % filteredResources.length);
+    };
+
     const handleOpenModal = (resource) => {
         setSelectedResource(resource);
         setIsModalOpen(true);
@@ -134,24 +146,7 @@ const FreeResourcesSection = () => {
                             </motion.div>
                         ))}
 
-                        import {AnimatePresence} from 'framer-motion';
 
-// ... (in component)
-    const filteredResources = freeResources.filter(r => r.id !== 'seedling-starter');
-                        const totalSlides = Math.ceil(filteredResources.length / 2);
-                        const currentSlide = Math.floor(currentIndex / 2);
-
-    const nextSlide = () => {
-                            setCurrentIndex((prev) => (prev + 2) % filteredResources.length);
-    };
-
-    const prevSlide = () => {
-                            setCurrentIndex((prev) => (prev - 2 + filteredResources.length) % filteredResources.length);
-    };
-
-                        return (
-                        // ...
-                        {/* Secondary Resources Carousel */}
                         <div className="relative">
                             {/* Carousel Controls */}
                             <div className="flex items-center justify-between mb-4">
