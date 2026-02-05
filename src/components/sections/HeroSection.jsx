@@ -59,8 +59,8 @@ const HeroSection = () => {
                 </video>
             </div>
 
-            {/* Soft gradient overlay for text readability */}
-            <div className="absolute inset-0 z-[1] bg-gradient-to-b from-paper/70 via-paper/50 to-paper/70" />
+            {/* Soft gradient overlay for text readability - reduced opacity */}
+            <div className="absolute inset-0 z-[1] bg-gradient-to-b from-paper/60 via-paper/20 to-paper/60" />
 
             {/* Decorative floating elements */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden z-[2]">
@@ -88,7 +88,7 @@ const HeroSection = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="font-display text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight text-graphite"
+                        className="font-display text-4xl md:text-5xl lg:text-6xl mb-12 sm:mb-16 leading-tight text-graphite"
                     >
                         {language === 'he'
                             ? 'לשמור על העתיד דרך חינוך'
