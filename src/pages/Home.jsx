@@ -10,6 +10,8 @@ import {
     CollaborateSection,
     TrustedBrandsSection,
     MerchSection,
+    VolunteerSection,
+    PressKitSection,
 } from '../components/sections';
 
 const Home = () => {
@@ -48,11 +50,17 @@ const Home = () => {
                 {/* 8. Collaborate - Partner with us */}
                 <CollaborateSection />
 
-                {/* 9. Trusted By - Schools and organizations */}
+                {/* 9. Volunteer - Join our mission */}
+                <VolunteerSection />
+
+                {/* 10. Trusted By - Schools and organizations */}
                 <TrustedBrandsSection />
 
-                {/* 10. Merch - Subtle eco-merchandise (recycled) */}
+                {/* 11. Merch - Subtle eco-merchandise (recycled) */}
                 <MerchSection />
+
+                {/* 12. Press Kit - Media resources */}
+                <PressKitSection />
             </div>
         </div>
     );

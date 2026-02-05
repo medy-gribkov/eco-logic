@@ -111,7 +111,7 @@ const Contact = () => {
                                         className="text-center py-8"
                                     >
                                         <img
-                                            src="/assets/personas/persona-celebration.png"
+                                            src="/assets/personas/persona-celebration.webp"
                                             alt="Success"
                                             className="w-32 h-32 object-contain mx-auto mb-4"
                                         />

@@ -36,7 +36,7 @@ const About = () => {
                 >
                     <div className="w-20 h-20 bg-green rounded-full flex items-center justify-center mx-auto mb-6">
                         <img
-                            src="/assets/icons/nature.png"
+                            src="/assets/icons/leaf.webp"
                             alt="EcoLogic"
                             className="w-12 h-12"
                             onError={(e) => {
