@@ -15,6 +15,7 @@ const FreeResourcesSection = () => {
     const { language } = useLanguage();
     const [selectedResource, setSelectedResource] = React.useState(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
+    const [currentIndex, setCurrentIndex] = React.useState(0);
 
     const handleOpenModal = (resource) => {
         setSelectedResource(resource);
@@ -133,55 +134,84 @@ const FreeResourcesSection = () => {
                             </motion.div>
                         ))}
 
-                        {/* Secondary Resources Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {freeResources.filter(r => r.id !== 'seedling-starter').map((resource, index) => (
-                                <motion.div
-                                    key={resource.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className="h-full"
-                                >
-                                    <div className="h-full flex flex-col bg-paper/80 backdrop-blur-sm rounded-2xl p-6 border border-sand hover:border-magenta/30 hover:shadow-card hover:bg-paper transition-all duration-300 group">
-                                        <div className="flex items-start justify-between mb-4">
-                                            <div className="p-3 rounded-xl bg-sand/30 text-graphite/80 group-hover:bg-magenta/10 group-hover:text-magenta transition-colors">
-                                                <Icon
-                                                    name={
-                                                        resource.type === 'guide' ? 'lightbulb' :
-                                                            resource.type === 'water' ? 'water' :
-                                                                resource.type === 'activities' ? 'book' :
-                                                                    resource.type === 'seedling' ? 'seedling' :
-                                                                        resource.type === 'infographics' ? 'ideas' : 'ideas'
-                                                    }
-                                                    size="lg"
-                                                />
-                                            </div>
-                                            <div className="text-xs font-mono text-graphite/60 bg-sand/40 px-2 py-1 rounded">
-                                                {resource.format}
-                                            </div>
-                                        </div>
+                        {/* Secondary Resources Carousel */}
+                        <div className="relative">
+                            {/* Carousel Controls */}
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="font-display text-xl text-graphite">
+                                    {language === 'he' ? 'עוד משאבים' : 'More Resources'}
+                                </h3>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => setCurrentIndex(prev => Math.max(0, prev - 2))}
+                                        disabled={currentIndex === 0}
+                                        className="p-2 rounded-full border border-sand hover:bg-white hover:border-magenta/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-graphite"
+                                    >
+                                        <Icon name="arrow-right" size="xs" className={language === 'he' ? "" : "rotate-180"} />
+                                    </button>
+                                    <button
+                                        onClick={() => setCurrentIndex(prev => Math.min(freeResources.filter(r => r.id !== 'seedling-starter').length - 2, prev + 2))}
+                                        disabled={currentIndex >= freeResources.filter(r => r.id !== 'seedling-starter').length - 2}
+                                        className="p-2 rounded-full border border-sand hover:bg-white hover:border-magenta/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-graphite"
+                                    >
+                                        <Icon name="arrow-right" size="xs" className={language === 'he' ? "rotate-180" : ""} />
+                                    </button>
+                                </div>
+                            </div>
 
-                                        <h3 className="font-display text-xl mb-2 text-graphite group-hover:text-magenta transition-colors">
-                                            {resource.title[language]}
-                                        </h3>
-                                        <p className="text-graphite/80 text-sm mb-6 flex-grow font-medium leading-relaxed">
-                                            {resource.description[language]}
-                                        </p>
-
-                                        <Button
-                                            variant="outline"
-                                            onClick={() => handleOpenModal(resource)}
-                                            size="small"
-                                            className="w-full justify-between group-hover:border-magenta group-hover:text-magenta bg-white/50 hover:bg-white"
+                            {/* Carousel Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 min-h-[280px]">
+                                {freeResources
+                                    .filter(r => r.id !== 'seedling-starter')
+                                    .slice(currentIndex, currentIndex + 2)
+                                    .map((resource, index) => (
+                                        <motion.div
+                                            key={resource.id}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -20 }}
+                                            transition={{ duration: 0.3, delay: index * 0.1 }}
+                                            className="h-full"
                                         >
-                                            <span>{language === 'he' ? 'הורדה' : 'Download'}</span>
-                                            <Icon name="download" size="xs" />
-                                        </Button>
-                                    </div>
-                                </motion.div>
-                            ))}
+                                            <div className="h-full flex flex-col bg-paper/80 backdrop-blur-sm rounded-2xl p-6 border border-sand hover:border-magenta/30 hover:shadow-card hover:bg-paper transition-all duration-300 group">
+                                                <div className="flex items-start justify-between mb-4">
+                                                    <div className="p-3 rounded-xl bg-sand/30 text-graphite/80 group-hover:bg-magenta/10 group-hover:text-magenta transition-colors">
+                                                        <Icon
+                                                            name={
+                                                                resource.type === 'guide' ? 'lightbulb' :
+                                                                    resource.type === 'water' ? 'water' :
+                                                                        resource.type === 'activities' ? 'book' :
+                                                                            resource.type === 'seedling' ? 'seedling' :
+                                                                                resource.type === 'infographics' ? 'ideas' : 'ideas'
+                                                            }
+                                                            size="lg"
+                                                        />
+                                                    </div>
+                                                    <div className="text-xs font-mono text-graphite/60 bg-sand/40 px-2 py-1 rounded">
+                                                        {resource.format}
+                                                    </div>
+                                                </div>
+
+                                                <h3 className="font-display text-xl mb-2 text-graphite group-hover:text-magenta transition-colors">
+                                                    {resource.title[language]}
+                                                </h3>
+                                                <p className="text-graphite/80 text-sm mb-6 flex-grow font-medium leading-relaxed">
+                                                    {resource.description[language]}
+                                                </p>
+
+                                                <Button
+                                                    variant="outline"
+                                                    onClick={() => handleOpenModal(resource)}
+                                                    size="small"
+                                                    className="w-full justify-between group-hover:border-magenta group-hover:text-magenta bg-white/50 hover:bg-white"
+                                                >
+                                                    <span>{language === 'he' ? 'הורדה' : 'Download'}</span>
+                                                    <Icon name="download" size="xs" />
+                                                </Button>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                            </div>
                         </div>
                     </div>
 
