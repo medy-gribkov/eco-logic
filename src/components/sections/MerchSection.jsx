@@ -281,11 +281,14 @@ const MerchSection = () => {
                     viewport={{ once: true }}
                     className="mt-8 text-center"
                 >
-                    <p className="text-sm text-graphite/40">
-                        {language === 'he'
-                            ? '💡 מוצרים נבחרים כלולים בחינם בחבילת "עץ" שלנו'
-                            : '💡 Selected products included free in our "Tree" package'}
-                    </p>
+                    <div className="flex items-center justify-center gap-2 text-sm text-graphite/40">
+                        <img src="/assets/logo/logo-icon.svg" alt="EcoLogic" className="w-4 h-4 opacity-50 grayscale" />
+                        <span>
+                            {language === 'he'
+                                ? 'מוצרים נבחרים כלולים בחינם בחבילת "עץ" שלנו'
+                                : "Selected products included free in our 'Tree' package"}
+                        </span>
+                    </div>
                 </motion.div>
             </Container >
         </Section >

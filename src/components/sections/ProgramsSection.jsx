@@ -158,12 +158,7 @@ const ProgramsSection = () => {
                         viewport={{ once: true }}
                         className="space-y-6"
                     >
-                        <div className="inline-flex items-center gap-2 bg-magenta/10 text-magenta px-4 py-2 rounded-full">
-                            <Icon name="seedling" size="xs" inline />
-                            <span className="font-body text-sm uppercase tracking-wider">
-                                {language === 'he' ? 'התכניות שלנו' : 'Our Programs'}
-                            </span>
-                        </div>
+
 
                         <h2 className="font-display text-5xl md:text-6xl text-graphite leading-none">
                             {language === 'he' ? 'גדלו איתנו' : 'Grow With Us'}

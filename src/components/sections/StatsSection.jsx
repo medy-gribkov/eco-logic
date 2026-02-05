@@ -29,12 +29,7 @@ const StatsSection = ({ variant = 'global' }) => {
                     viewport={{ once: true }}
                     className="text-center mb-10"
                 >
-                    <div className="inline-flex items-center gap-2 bg-blue/10 text-blue px-4 py-2 rounded-full mb-4">
-                        <img src="/assets/icons/globe.webp" alt="" className="w-4 h-4" />
-                        <span className="font-body text-sm uppercase tracking-wider">
-                            {t('stats.impact', 'Our Impact')}
-                        </span>
-                    </div>
+
 
                     <h2 className="font-display text-4xl md:text-5xl mb-2 text-graphite">
                         {t('stats.title')}

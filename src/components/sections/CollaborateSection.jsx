@@ -104,12 +104,7 @@ const CollaborateSection = () => {
                     transition={{ duration: 0.5 }}
                     className="text-center mb-12"
                 >
-                    <div className="inline-flex items-center gap-2 bg-green/10 text-green px-4 py-2 rounded-full mb-6">
-                        <Icon name="globe" size="xs" inline />
-                        <span className="font-body text-sm uppercase tracking-wider">
-                            {language === 'he' ? 'ביחד אנחנו חזקים' : 'Together We Are Stronger'}
-                        </span>
-                    </div>
+
 
                     <h2 className="font-display text-4xl md:text-5xl mb-4 text-graphite">
                         {language === 'he' ? 'בואו לעשות את זה ביחד' : "Let's Do This Together"}
