@@ -225,6 +225,54 @@ export const freeResources = [
         pages: 8,
         downloadUrl: '/assets/downloads/seedling-starter.pdf',
         image: '/assets/images/starter-seedling.webp'
+    },
+    {
+        id: 'infographic-water',
+        title: {
+            he: 'מחזור המים',
+            en: 'The Water Cycle'
+        },
+        description: {
+            he: 'אינפוגרפיקה מאוירת להסבר בכיתה',
+            en: 'Illustrated infographic for classroom explanation'
+        },
+        type: 'infographics',
+        format: 'JPG',
+        pages: 1,
+        downloadUrl: '/assets/downloads/infographics/infographic-water.jpg',
+        image: '/assets/downloads/infographics/infographic-water.jpg'
+    },
+    {
+        id: 'infographic-recycling',
+        title: {
+            he: 'מדריך מחזור',
+            en: 'Recycling Guide'
+        },
+        description: {
+            he: 'מה הולך לאיזה פח? מדריך ויזואלי',
+            en: 'What goes where? A visual guide'
+        },
+        type: 'infographics',
+        format: 'JPG',
+        pages: 1,
+        downloadUrl: '/assets/downloads/infographics/infographic-recycling.jpg',
+        image: '/assets/downloads/infographics/infographic-recycling.jpg'
+    },
+    {
+        id: 'infographic-energy',
+        title: {
+            he: 'חיסכון באנרגיה',
+            en: 'Energy Saving'
+        },
+        description: {
+            he: 'טיפים פשוטים לחיסכון בחשמל',
+            en: 'Simple tips for saving electricity'
+        },
+        type: 'infographics',
+        format: 'JPG',
+        pages: 1,
+        downloadUrl: '/assets/downloads/infographics/infographic-energy.jpg',
+        image: '/assets/downloads/infographics/infographic-energy.jpg'
     }
 ];
 

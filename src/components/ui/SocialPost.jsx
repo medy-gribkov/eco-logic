@@ -1,6 +1,7 @@
+```javascript
 import React from 'react';
 import { motion } from 'framer-motion';
-import Icon from './Icon';
+import { Instagram, Facebook, Twitter, MessageCircle, Share2, Heart, Bookmark } from 'lucide-react';
 import { useLanguage } from '../../i18n';
 
 const SocialPost = ({ type, data, onShare }) => {
@@ -10,31 +11,32 @@ const SocialPost = ({ type, data, onShare }) => {
     const platforms = {
         instagram: {
             name: 'Instagram',
-            icon: 'instagram', // You might need a real icon here
+            Icon: Instagram,
             color: 'bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500',
             textColor: 'text-white'
         },
         facebook: {
             name: 'Facebook',
-            icon: 'facebook',
+            Icon: Facebook,
             color: 'bg-[#1877F2]',
             textColor: 'text-white'
         },
         twitter: {
             name: 'Twitter', // X
-            icon: 'twitter',
+            Icon: Twitter,
             color: 'bg-black',
             textColor: 'text-white'
         },
         whatsapp: {
             name: 'WhatsApp',
-            icon: 'message-circle',
+            Icon: MessageCircle,
             color: 'bg-[#25D366]',
             textColor: 'text-white'
         }
     };
 
     const platform = platforms[type] || platforms.instagram;
+    const PlatformIcon = platform.Icon;
 
     return (
         <div className="w-full max-w-sm mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-sand/50">
@@ -83,11 +85,11 @@ const SocialPost = ({ type, data, onShare }) => {
             <div className="p-3">
                 <div className="flex items-center justify-between mb-3">
                     <div className="flex gap-4">
-                        <Icon name="heart" size="sm" className="text-magenta" />
-                        <Icon name="message-circle" size="sm" className="text-graphite/60" />
-                        <Icon name="share" size="sm" className="text-graphite/60" />
+                        <Heart className="w-6 h-6 text-magenta fill-magenta" />
+                        <MessageCircle className="w-6 h-6 text-graphite/60" />
+                        <Share2 className="w-6 h-6 text-graphite/60" />
                     </div>
-                    <Icon name="bookmark" size="sm" className="text-graphite/60" />
+                    <Bookmark className="w-6 h-6 text-graphite/60" />
                 </div>
 
                 <div className="text-xs font-bold text-graphite mb-1">
@@ -106,10 +108,10 @@ const SocialPost = ({ type, data, onShare }) => {
             <div className="bg-sand/20 p-3 border-t border-sand/50">
                 <button
                     onClick={() => onShare(type)}
-                    className={`w-full py-2 ${platform.color} ${platform.textColor} rounded-lg text-sm font-bold shadow-md hover:opacity-90 transition-opacity flex items-center justify-center gap-2`}
+                    className={`w - full py - 2 ${ platform.color } ${ platform.textColor } rounded - lg text - sm font - bold shadow - md hover: opacity - 90 transition - opacity flex items - center justify - center gap - 2`}
                 >
-                    {language === 'he' ? `שתפו ב-${platform.name}` : `Share on ${platform.name}`}
-                    <Icon name="share" size="xs" className="brightness-0 invert" />
+                    {language === 'he' ? `שתפו ב - ${ platform.name } ` : `Share on ${ platform.name } `}
+                    <PlatformIcon className="w-4 h-4" />
                 </button>
             </div>
         </div>

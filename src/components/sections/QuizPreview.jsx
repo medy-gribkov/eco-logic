@@ -196,48 +196,64 @@ const QuizPreview = () => {
                                                 </p>
 
                                                 {/* Smart Actions based on result */}
-                                                <div className="flex flex-wrap gap-3">
+                                                {/* Smart Actions based on result */}
+                                                <div className="flex flex-col gap-4">
                                                     {viewState === 'correct' ? (
                                                         <>
-                                                            <div className="w-full mb-2">
+                                                            <div>
                                                                 <p className="text-xs text-graphite/50 mb-2 uppercase tracking-wide font-bold">
                                                                     {language === 'he' ? 'שתפו את התוצאה' : 'Share Result'}
                                                                 </p>
+                                                                <div className="flex flex-wrap gap-2">
+                                                                    <Button
+                                                                        size="small"
+                                                                        onClick={() => handleShare('whatsapp')}
+                                                                        className="bg-[#25D366] hover:bg-[#128C7E] text-white border-none flex-grow justify-center"
+                                                                    >
+                                                                        <Icon name="message-circle" size="xs" className="me-2 brightness-0 invert" inline />
+                                                                        WhatsApp
+                                                                    </Button>
+                                                                    <Button
+                                                                        size="small"
+                                                                        onClick={() => handleShare('instagram')}
+                                                                        className="bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 text-white border-none flex-grow justify-center"
+                                                                    >
+                                                                        <Icon name="instagram" size="xs" className="me-2 brightness-0 invert" inline />
+                                                                        Instagram
+                                                                    </Button>
+                                                                    <Button
+                                                                        size="small"
+                                                                        onClick={() => handleShare('facebook')}
+                                                                        className="bg-[#1877F2] text-white border-none flex-grow justify-center"
+                                                                    >
+                                                                        <Icon name="facebook" size="xs" className="me-2 brightness-0 invert" inline />
+                                                                        Facebook
+                                                                    </Button>
+                                                                </div>
                                                             </div>
-                                                            <Button
-                                                                size="small"
-                                                                onClick={() => handleShare('whatsapp')}
-                                                                className="bg-[#25D366] hover:bg-[#128C7E] text-white border-none"
-                                                            >
-                                                                <Icon name="message-circle" size="xs" className="me-2 brightness-0 invert" inline />
-                                                                WhatsApp
-                                                            </Button>
-                                                            <Button
-                                                                size="small"
-                                                                onClick={() => handleShare('instagram')}
-                                                                className="bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 text-white border-none"
-                                                            >
-                                                                <Icon name="instagram" size="xs" className="me-2 brightness-0 invert" inline />
-                                                                Instagram
-                                                            </Button>
-                                                            <Button
-                                                                size="small"
-                                                                onClick={() => handleShare('facebook')}
-                                                                className="bg-[#1877F2] text-white border-none"
-                                                            >
-                                                                <Icon name="facebook" size="xs" className="me-2 brightness-0 invert" inline />
-                                                                Facebook
-                                                            </Button>
+
+                                                            <div className="pt-2 border-t border-sand/30 flex justify-end">
+                                                                <Button
+                                                                    variant="outline"
+                                                                    onClick={() => navigate('/quiz')}
+                                                                    className="w-full md:w-auto"
+                                                                >
+                                                                    {language === 'he' ? 'המשך לחידון המלא' : 'Continue to Full Quiz'}
+                                                                    <Icon name="arrow-right" size="xs" className={language === 'he' ? 'rotate-180 me-2' : 'ms-2'} inline />
+                                                                </Button>
+                                                            </div>
                                                         </>
                                                     ) : (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={resetPreview}
-                                                            className="bg-magenta hover:bg-magenta/90 text-white border-none"
-                                                        >
-                                                            <Icon name="refresh" size="xs" className="me-2 brightness-0 invert" inline />
-                                                            {language === 'he' ? 'נסו שוב' : 'Try Again'}
-                                                        </Button>
+                                                        <div className="flex justify-start">
+                                                            <Button
+                                                                variant="primary"
+                                                                onClick={resetPreview}
+                                                                className="bg-magenta hover:bg-magenta/90 text-white border-none"
+                                                            >
+                                                                <Icon name="refresh" size="xs" className="me-2 brightness-0 invert" inline />
+                                                                {language === 'he' ? 'נסו שוב' : 'Try Again'}
+                                                            </Button>
+                                                        </div>
                                                     )}
                                                 </div>
 
