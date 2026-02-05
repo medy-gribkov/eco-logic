@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLogic - Hackathon Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --magenta: #FF2D7A;
+            --green: #1D7C5A;
+            --graphite: #111111;
+            --paper: #F3F1EA;
+            --sand: #E8DFD0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', 'Inter', sans-serif;
+            background: var(--paper);
+            color: var(--graphite);
+            overflow-x: hidden;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            page-break-after: always;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            font-size: 14px;
+            color: var(--graphite);
+            opacity: 0.4;
+        }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--green);
+        }
+
+        p {
+            font-size: 24px;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        .highlight {
+            color: var(--magenta);
+        }
+
+        .green {
+            color: var(--green);
+        }
+
+        /* Slide variants */
+        .slide-title {
+            background: linear-gradient(135deg, var(--paper) 0%, var(--sand) 100%);
+            text-align: center;
+            align-items: center;
+        }
+
+        .slide-title h1 {
+            font-size: 96px;
+        }
+
+        .slide-section {
+            background: var(--green);
+            color: var(--paper);
+        }
+
+        .slide-section h2 {
+            font-size: 64px;
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin-bottom: 16px;
+        }
+
+        .card p {
+            font-size: 18px;
+        }
+
+        /* Stats */
+        .stat {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .stat-number {
+            font-size: 72px;
+            font-weight: 900;
+            color: var(--magenta);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 20px;
+            margin-top: 12px;
+            opacity: 0.7;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 40px;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+
+        .timeline-marker {
+            width: 60px;
+            height: 60px;
+            background: var(--magenta);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 8px;
+        }
+
+        .timeline-content p {
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        /* Code block */
+        .code-block {
+            background: var(--graphite);
+            color: var(--paper);
+            padding: 24px 32px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        /* Image placeholder */
+        .image-frame {
+            background: var(--sand);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .image-frame img {
+            max-width: 100%;
+            border-radius: 12px;
+        }
+
+        /* List */
+        ul {
+            list-style: none;
+            margin-top: 24px;
+        }
+
+        ul li {
+            font-size: 22px;
+            padding: 12px 0;
+            padding-right: 40px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 18px;
+            width: 20px;
+            height: 20px;
+            background: var(--green);
+            border-radius: 50%;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            font-size: 18px;
+        }
+
+        th, td {
+            padding: 16px 20px;
+            text-align: right;
+            border-bottom: 1px solid var(--sand);
+        }
+
+        th {
+            background: var(--sand);
+            font-weight: 700;
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 14px;
+            opacity: 0.5;
+        }
+
+        @media print {
+            .slide {
+                height: 100vh;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <div class="slide slide-title">
+        <h1><span class="green">Eco</span><span class="highlight">Logic</span></h1>
+        <p style="font-size: 32px; margin-bottom: 40px;">פלטפורמה חינוכית לסביבה בת קיימא</p>
+        <p style="font-size: 20px; opacity: 0.6;">הקתון תילתן 2026</p>
+        <span class="slide-number">1</span>
+    </div>
+
+    <!-- Slide 2: The Problem -->
+    <div class="slide">
+        <span class="logo">EcoLogic</span>
+        <h2>הבעיה</h2>
+        <p style="font-size: 28px; margin-bottom: 40px;">
+            רוב האנשים לא מודעים להשפעה הסביבתית של הבחירות היומיומיות שלהם.
+        </p>
+        <div class="grid-3">
+            <div class="stat">
+                <div class="stat-number">92%</div>
+                <div class="stat-label">לא יודעים כמה מים נדרשים לייצור ג'ינס</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">78%</div>
+                <div class="stat-label">לא מבינים את טביעת הרגל הפחמנית של המזון</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">85%</div>
+                <div class="stat-label">רוצים ללמוד אבל לא יודעים איפה להתחיל</div>
+            </div>
+        </div>
+        <span class="slide-number">2</span>
+    </div>
+
+    <!-- Slide 3: The Solution -->
+    <div class="slide slide-section">
+        <h2>הפתרון שלנו</h2>
+        <p style="font-size: 28px;">
+            חידון אינטראקטיבי שהופך נתונים סביבתיים יבשים לחוויה ויזואלית ומעניינת
+        </p>
+        <span class="slide-number" style="color: var(--paper);">3</span>
+    </div>
+
+    <!-- Slide 4: Key Features -->
+    <div class="slide">
+        <span class="logo">EcoLogic</span>
+        <h2>תכונות מרכזיות</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>חידון אינטראקטיבי</h3>
+                <p>10 שאלות על טביעת מים, פחמן, ומשאבים. כל תשובה מלמדת עובדה מפתיעה.</p>
+            </div>
+            <div class="card">
+                <h3>שיתוף חברתי</h3>
+                <p>תבניות מוכנות לאינסטגרם, פייסבוק וטוויטר לשיתוף הידע.</p>
+            </div>
+            <div class="card">
+                <h3>משאבים להורדה</h3>
+                <p>מדריכים בפורמט PDF להמשך למידה ופעולה.</p>
+            </div>
+            <div class="card">
+                <h3>דו-לשוני</h3>
+                <p>תמיכה מלאה בעברית ואנגלית כולל RTL.</p>
+            </div>
+        </div>
+        <span class="slide-number">4</span>
+    </div>
+
+    <!-- Slide 5: Design Philosophy -->
+    <div class="slide">
+        <span class="logo">EcoLogic</span>
+        <h2>פילוסופיית העיצוב</h2>
+        <p style="margin-bottom: 40px;">
+            עיצוב אורגני וחם שמרגיש אנושי, לא תאגידי.
+        </p>
+        <div class="grid-3">
+            <div>
+                <h3>סגנון אקוורל</h3>
+                <p>כל האיורים והאייקונים בסגנון צבעי מים ידני.</p>
+            </div>
+            <div>
+                <h3>דמויות עקביות</h3>
+                <p>מורה וילדים שמלווים את המשתמש לאורך האתר.</p>
+            </div>
+            <div>
+                <h3>צבעים טבעיים</h3>
+                <p>פלטת צבעים חמה עם מגנטה כצבע הדגשה.</p>
+            </div>
+        </div>
+        <span class="slide-number">5</span>
+    </div>
+
+    <!-- Slide 6: Color Palette -->
+    <div class="slide">
+        <span class="logo">EcoLogic</span>
+        <h2>פלטת הצבעים</h2>
+        <table>
+            <tr>
+                <th>שם</th>
+                <th>קוד</th>
+                <th>שימוש</th>
+            </tr>
+            <tr>
+                <td style="color: var(--magenta); font-weight: 700;">Magenta</td>
+                <td>#FF2D7A</td>
+                <td>כפתורי פעולה, הדגשות, תגיות</td>
+            </tr>
+            <tr>
+                <td style="color: var(--green); font-weight: 700;">Green</td>
+                <td>#1D7C5A</td>
+                <td>הצלחה, נושאים סביבתיים</td>
+            </tr>
+            <tr>
+                <td>Graphite</td>
+                <td>#111111</td>
+                <td>טקסט ראשי</td>
+            </tr>
+            <tr>
+                <td>Paper</td>
+                <td>#F3F1EA</td>
+                <td>רקע דפים</td>
+            </tr>
+            <tr>
+                <td>Sand</td>
+                <td>#E8DFD0</td>
+                <td>כרטיסים, הפרדות</td>
+            </tr>
+        </table>
+        <span class="slide-number">6</span>
+    </div>
+
+    <!-- Slide 7: Development Process -->
+    <div class="slide slide-section">
+        <h2>תהליך הפיתוח</h2>
+        <p style="font-size: 28px;">
+            מאפס לפרודקשן ב-AI
+        </p>
+        <span class="slide-number" style="color: var(--paper);">7</span>
+    </div>
+
+    <!-- Slide 8: Timeline -->
+    <div class="slide">
+        <span class="logo">EcoLogic</span>
+        <h2>שלבי הפיתוח</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker">1</div>
+                <div class="timeline-content">
+                    <h3>הגדרת מערכת עיצוב</h3>
+                    <p>צבעים, טיפוגרפיה, מרחקים, דפוסי קומפוננטות</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker">2</div>
+                <div class="timeline-content">
+                    <h3>יצירת נכסים ויזואליים</h3>
+                    <p>15 אייקונים, 8 רקעים, 4 דמויות - כולם באותו סגנון</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker">3</div>
+                <div class="timeline-content">
+                    <h3>בניית קומפוננטות</h3>
+                    <p>Button, Card, Icon, Modal, Section - ספריית UI מלאה</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker">4</div>
+                <div class="timeline-content">
+                    <h3>פיתוח פיצ'רים</h3>
+                    <p>מערכת חידון, שיתוף חברתי, הורדות, דו-לשוניות</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker">5</div>
+                <div class="timeline-content">
+                    <h3>השקה</h3>
+                    <p>Deploy ל-Vercel עם CI/CD אוטומטי</p>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">8</span>
+    </div>
+
+    <!-- Slide 9: Tech Stack -->
+    <div class="slide">
+        <span class="logo">EcoLogic</span>
+        <h2>טכנולוגיות</h2>
+        <div class="grid-4">
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--magenta);">React 19</h3>
+                <p>UI Framework</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--magenta);">Vite</h3>
+                <p>Build Tool</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--magenta);">Tailwind 4</h3>
+                <p>Styling</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--magenta);">Vercel</h3>
+                <p>Hosting</p>
+            </div>
+        </div>
+        <div class="code-block" dir="ltr" style="margin-top: 40px;">
+npm install react react-router-dom framer-motion tailwindcss
+        </div>
+        <span class="slide-number">9</span>
+    </div>
+
+    <!-- Slide 10: AI Workflow -->
+    <div class="slide">
+        <span class="logo">EcoLogic</span>
+        <h2>עבודה עם AI</h2>
+        <p style="margin-bottom: 30px;">
+            כל הפרויקט נבנה בשיתוף פעולה עם AI, כולל:
+        </p>
+        <ul>
+            <li>יצירת כל הקוד - קומפוננטות, דפים, לוגיקה</li>
+            <li>יצירת כל האיורים והאייקונים בסגנון אחיד</li>
+            <li>כתיבת תוכן בעברית ואנגלית</li>
+            <li>פתרון באגים ואופטימיזציה</li>
+            <li>תיעוד ומדריכים</li>
+        </ul>
+        <span class="slide-number">10</span>
+    </div>
+
+    <!-- Slide 11: Reusable Skills -->
+    <div class="slide">
+        <span class="logo">EcoLogic</span>
+        <h2>Skills לשימוש חוזר</h2>
+        <p style="margin-bottom: 30px;">
+            יצרנו מדריכים שמאפשרים לשחזר את הפרויקט או ליצור פרויקטים דומים:
+        </p>
+        <div class="grid-2">
+            <div class="card">
+                <h3>project-setup.md</h3>
+                <p>התקנת React + Vite + Tailwind מאפס</p>
+            </div>
+            <div class="card">
+                <h3>design-system.md</h3>
+                <p>הגדרת צבעים, פונטים, מרחקים</p>
+            </div>
+            <div class="card">
+                <h3>asset-generation.md</h3>
+                <p>יצירת תמונות AI עקביות</p>
+            </div>
+            <div class="card">
+                <h3>component-library.md</h3>
+                <p>בניית ספריית קומפוננטות</p>
+            </div>
+        </div>
+        <span class="slide-number">11</span>
+    </div>
+
+    <!-- Slide 12: Statistics -->
+    <div class="slide">
+        <span class="logo">EcoLogic</span>
+        <h2>במספרים</h2>
+        <div class="grid-4">
+            <div class="stat">
+                <div class="stat-number">13</div>
+                <div class="stat-label">דפים</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">46+</div>
+                <div class="stat-label">קומפוננטות</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">15</div>
+                <div class="stat-label">אייקונים מותאמים</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">2</div>
+                <div class="stat-label">שפות</div>
+            </div>
+        </div>
+        <div class="grid-4" style="margin-top: 20px;">
+            <div class="stat">
+                <div class="stat-number">8</div>
+                <div class="stat-label">רקעים</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">4</div>
+                <div class="stat-label">דמויות</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">10</div>
+                <div class="stat-label">שאלות חידון</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">3</div>
+                <div class="stat-label">שותפים</div>
+            </div>
+        </div>
+        <span class="slide-number">12</span>
+    </div>
+
+    <!-- Slide 13: Live Demo -->
+    <div class="slide slide-section">
+        <h2>הדגמה חיה</h2>
+        <p style="font-size: 32px;">
+            eco-logic-rouge.vercel.app
+        </p>
+        <span class="slide-number" style="color: var(--paper);">13</span>
+    </div>
+
+    <!-- Slide 14: Thank You -->
+    <div class="slide slide-title">
+        <h1>תודה!</h1>
+        <p style="font-size: 28px; margin-bottom: 20px;">
+            <span class="green">eco-logic-rouge.vercel.app</span>
+        </p>
+        <p style="font-size: 20px; opacity: 0.6;">
+            Tiltan College Hackathon 2026
+        </p>
+        <span class="slide-number">14</span>
+    </div>
+
+</body>
+</html>

@@ -29,13 +29,13 @@ const iconMap = {
 };
 
 const sizeMap = {
-    xs: 'w-4 h-4',
-    sm: 'w-6 h-6',
-    md: 'w-8 h-8',
-    lg: 'w-12 h-12',
-    xl: 'w-16 h-16',
-    '2xl': 'w-20 h-20',
-    '3xl': 'w-24 h-24',
+    xs: 'w-5 h-5', // bumped from 4
+    sm: 'w-7 h-7', // bumped from 6
+    md: 'w-10 h-10', // bumped from 8 (standard)
+    lg: 'w-14 h-14', // bumped from 12
+    xl: 'w-20 h-20', // bumped from 16
+    '2xl': 'w-24 h-24',
+    '3xl': 'w-32 h-32',
 };
 
 const Icon = ({

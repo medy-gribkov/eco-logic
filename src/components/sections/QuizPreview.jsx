@@ -73,184 +73,138 @@ const QuizPreview = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <Card className="p-8 md:p-12 border-2 border-sand">
-                            {/* Question */}
-                            <div className="text-center mb-10">
-                                {question.iconSrc && (
-                                    <div className="flex justify-center mb-6">
-                                        <div className="w-20 h-20 bg-sand/50 rounded-2xl flex items-center justify-center">
-                                            <img
-                                                src={question.iconSrc}
-                                                alt=""
-                                                className="w-12 h-12 object-contain"
-                                            />
+                        <Card className="max-w-3xl mx-auto overflow-hidden shadow-elevated rounded-[2rem] border-0 bg-white/80 backdrop-blur-sm">
+                            <div className="p-8 md:p-10 relative">
+                                {/* Decorative circle */}
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green/10 to-transparent rounded-bl-[4rem] -z-0" />
+
+                                {/* Question */}
+                                <div className="text-center mb-8 relative z-10">
+                                    {question.iconSrc && (
+                                        <div className="flex justify-center mb-6">
+                                            <div className="w-16 h-16 bg-white shadow-sm rounded-2xl flex items-center justify-center transform -rotate-3">
+                                                <img
+                                                    src={question.iconSrc}
+                                                    alt=""
+                                                    className="w-10 h-10 object-contain"
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
-                                <h3 className="font-display text-2xl md:text-3xl text-graphite">
-                                    {question.question[language]}
-                                </h3>
-                            </div>
+                                    )}
+                                    <h3 className="font-display text-2xl md:text-3xl text-graphite leading-tight">
+                                        {question.question[language]}
+                                    </h3>
+                                </div>
 
-                            {/* Options */}
-                            <div className="space-y-4 mb-10">
-                                {question.options.map((option) => {
-                                    const isSelected = selectedAnswer === option.id;
-                                    const isCorrectOption = option.id === question.correctId;
+                                {/* Options - 2x2 Grid for compact modern feel */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                                    {question.options.map((option) => {
+                                        const isSelected = selectedAnswer === option.id;
+                                        const isCorrectOption = option.id === question.correctId;
 
-                                    let optionStyle = 'border-sand hover:border-green/50 bg-paper';
-                                    if (showResult) {
-                                        if (isCorrectOption) {
-                                            optionStyle = 'border-green bg-green/10';
-                                        } else if (isSelected && !isCorrectOption) {
-                                            optionStyle = 'border-magenta bg-magenta/10';
+                                        let optionStyle = 'border-sand hover:border-green/30 hover:bg-white bg-paper/50 shadow-sm';
+                                        if (showResult) {
+                                            if (isCorrectOption) {
+                                                optionStyle = 'border-green bg-green/10 ring-1 ring-green';
+                                            } else if (isSelected && !isCorrectOption) {
+                                                optionStyle = 'border-magenta bg-magenta/10 opacity-70';
+                                            } else {
+                                                optionStyle = 'opacity-40 border-transparent';
+                                            }
+                                        } else if (isSelected) {
+                                            optionStyle = 'border-graphite bg-graphite/5';
                                         }
-                                    } else if (isSelected) {
-                                        optionStyle = 'border-sage bg-sage/10';
-                                    }
 
-                                    return (
-                                        <motion.button
-                                            key={option.id}
-                                            onClick={() => handleAnswer(option.id)}
-                                            disabled={showResult}
-                                            whileHover={!showResult ? { scale: 1.01 } : {}}
-                                            whileTap={!showResult ? { scale: 0.99 } : {}}
-                                            className={`
-                                            w-full p-5 rounded-xl border-2 transition-all
-                                            flex items-center justify-between
-                                            ${optionStyle}
-                                            ${showResult ? 'cursor-default' : 'cursor-pointer'}
-                                        `}
-                                        >
-                                            <span className="font-body text-lg text-graphite">{option.label[language]}</span>
-                                            {showResult && isCorrectOption && (
-                                                <Icon name="checkmark" size="md" />
-                                            )}
-                                            {showResult && isSelected && !isCorrectOption && (
-                                                <span className="w-6 h-6 rounded-full bg-magenta flex items-center justify-center text-paper text-sm">
-                                                    X
+                                        return (
+                                            <motion.button
+                                                key={option.id}
+                                                onClick={() => handleAnswer(option.id)}
+                                                disabled={showResult}
+                                                whileHover={!showResult ? { scale: 1.02, y: -2 } : {}}
+                                                whileTap={!showResult ? { scale: 0.98 } : {}}
+                                                className={`
+                                                w-full p-4 rounded-xl border transition-all duration-300
+                                                flex items-center justify-between text-start h-full
+                                                ${optionStyle}
+                                                ${showResult ? 'cursor-default' : 'cursor-pointer'}
+                                            `}
+                                            >
+                                                <span className={`font-body text-base ${showResult && isCorrectOption ? 'font-bold' : ''} text-graphite`}>
+                                                    {option.label[language]}
                                                 </span>
-                                            )}
-                                        </motion.button>
-                                    );
-                                })}
-                            </div>
+                                                {showResult && isCorrectOption && (
+                                                    <div className="w-6 h-6 bg-green text-white rounded-full flex items-center justify-center shadow-sm">
+                                                        <Icon name="checkmark" size="xs" className="brightness-0 invert" />
+                                                    </div>
+                                                )}
+                                                {showResult && isSelected && !isCorrectOption && (
+                                                    <span className="text-magenta font-bold">✕</span>
+                                                )}
+                                            </motion.button>
+                                        );
+                                    })}
+                                </div>
 
-                            {/* Result/CTA */}
-                            <AnimatePresence mode="wait">
-                                {showResult ? (
-                                    <motion.div
-                                        key="result"
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0 }}
-                                        className="text-center"
-                                    >
-                                        {/* Educational insight with persona */}
-                                        <div className={`
-                                        rounded-xl p-6 mb-6
-                                        ${isCorrect ? 'bg-green/10 border border-green/20' : 'bg-sand border border-sand'}
-                                    `}>
-                                            <div className="flex items-center gap-4 mb-4">
+                                {/* Result/CTA Area - Integrated */}
+                                <AnimatePresence mode="wait">
+                                    {showResult ? (
+                                        <motion.div
+                                            key="result"
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: 'auto' }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            className="overflow-hidden"
+                                        >
+                                            <div className="bg-sand/30 rounded-2xl p-6 border border-sand/50 flex flex-col md:flex-row gap-6 items-center md:items-start text-center md:text-start">
                                                 <img
                                                     src="/assets/personas/persona-celebration.webp"
                                                     alt="Teacher"
-                                                    className="w-20 h-20 object-contain flex-shrink-0"
+                                                    className="w-24 h-24 object-contain -my-4 md:mb-0 drop-shadow-md"
                                                 />
-                                                <div className="text-start">
-                                                    <span className={`font-display text-lg ${isCorrect ? 'text-green' : 'text-magenta'}`}>
-                                                        {isCorrect
-                                                            ? (language === 'he' ? 'מצוין! זה נכון' : 'Excellent! That\'s correct')
-                                                            : (language === 'he' ? 'לא בדיוק, אבל עכשיו תדעו' : 'Not quite, but now you know')}
-                                                    </span>
-                                                    <p className="text-graphite/70 leading-relaxed mt-2">
+                                                <div className="flex-grow">
+                                                    <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
+                                                        <span className={`font-display text-xl ${isCorrect ? 'text-green' : 'text-magenta'}`}>
+                                                            {isCorrect
+                                                                ? (language === 'he' ? 'בול! שיחקתם אותה' : 'Nailed it! Spot on.')
+                                                                : (language === 'he' ? 'קרוב, הנה התשובה' : 'Close! Here\'s why.')}
+                                                        </span>
+                                                    </div>
+                                                    <p className="text-sm text-graphite/80 leading-relaxed mb-4">
                                                         {question.fact[language]}
                                                     </p>
+
+                                                    {/* Action Buttons */}
+                                                    <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                                                        <Button
+                                                            size="small"
+                                                            onClick={() => navigate('/quiz', {
+                                                                state: { startQuestion: 1, score: isCorrect ? 1 : 0 }
+                                                            })}
+                                                            className="bg-graphite text-paper hover:bg-graphite/90 text-sm px-6"
+                                                        >
+                                                            {language === 'he' ? 'המשך לחידון' : 'Continue Quiz'}
+                                                        </Button>
+                                                        {!isCorrect && (
+                                                            <button
+                                                                onClick={resetPreview}
+                                                                className="px-4 py-2 rounded-lg text-xs font-bold text-graphite/50 hover:text-graphite uppercase tracking-wider transition-colors"
+                                                            >
+                                                                {language === 'he' ? 'נסו שוב' : 'Try Again'}
+                                                            </button>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        {/* Social sharing section - Mini previews */}
-                                        <div className="bg-paper/80 rounded-xl p-4 mb-6 border border-sand">
-                                            <p className="text-sm text-graphite/60 mb-3">
-                                                {language === 'he' ? 'שתפו את הידע:' : 'Share the knowledge:'}
+                                        </motion.div>
+                                    ) : (
+                                        <div className="text-center py-4">
+                                            <p className="text-xs font-mono text-graphite/40 uppercase tracking-widest">
+                                                {language === 'he' ? 'בחרו את התשובה הנכונה' : 'Select the correct answer'}
                                             </p>
-                                            <div className="flex gap-3 justify-center">
-                                                {/* Mini Story Preview */}
-                                                <button
-                                                    onClick={() => setSelectedPostType('story')}
-                                                    className="w-16 h-24 bg-graphite rounded-lg overflow-hidden hover:ring-2 hover:ring-magenta transition-all cursor-pointer group"
-                                                >
-                                                    <div className="w-full h-full flex flex-col items-center justify-center text-paper p-1">
-                                                        <span className="text-[6px] font-bold">I SAVED</span>
-                                                        <span className="text-[8px] text-magenta font-bold">15,400L</span>
-                                                        <span className="text-[4px] mt-1 opacity-50 group-hover:opacity-100">Click to view</span>
-                                                    </div>
-                                                </button>
-                                                {/* Mini Feed Preview */}
-                                                <button
-                                                    onClick={() => setSelectedPostType('feed')}
-                                                    className="w-20 h-20 bg-paper border-2 border-graphite rounded-lg overflow-hidden hover:ring-2 hover:ring-magenta transition-all cursor-pointer group"
-                                                >
-                                                    <div className="w-full h-full flex flex-col items-center justify-center p-1">
-                                                        <span className="text-[6px] font-bold">DID YOU</span>
-                                                        <span className="text-[6px] font-bold">KNOW?</span>
-                                                        <span className="text-[4px] mt-1 opacity-50 group-hover:opacity-100">Click to view</span>
-                                                    </div>
-                                                </button>
-                                                {/* Mini Twitter Preview */}
-                                                <button
-                                                    onClick={() => setSelectedPostType('twitter')}
-                                                    className="w-24 h-14 bg-blue rounded-lg overflow-hidden hover:ring-2 hover:ring-magenta transition-all cursor-pointer group"
-                                                >
-                                                    <div className="w-full h-full flex flex-col items-center justify-center text-paper p-1">
-                                                        <span className="text-[5px] font-bold">STOP DOOMSCROLLING</span>
-                                                        <span className="text-[4px] mt-1 opacity-50 group-hover:opacity-100">Click to view</span>
-                                                    </div>
-                                                </button>
-                                            </div>
                                         </div>
-
-                                        <p className="text-sm text-graphite/50 mb-6">
-                                            {language === 'he'
-                                                ? 'המשיכו לחידון המלא ובחנו את הידע שלכם!'
-                                                : 'Continue to the full quiz and test your knowledge!'}
-                                        </p>
-
-                                        <div className="flex gap-4 justify-center flex-wrap">
-                                            {!isCorrect && (
-                                                <Button variant="outline" onClick={resetPreview} className="border-graphite/30">
-                                                    {language === 'he' ? 'נסו שוב' : 'Try Again'}
-                                                </Button>
-                                            )}
-                                            <Button
-                                                onClick={() => navigate('/quiz', {
-                                                    state: {
-                                                        startQuestion: 1,
-                                                        score: isCorrect ? 1 : 0
-                                                    }
-                                                })}
-                                                className="flex items-center gap-2 bg-green hover:bg-green/90"
-                                            >
-                                                {language === 'he' ? 'המשך לשאלה 2' : 'Continue to Q2'}
-                                                <span className={isRTL ? 'rotate-180' : ''}>→</span>
-                                            </Button>
-                                        </div>
-                                    </motion.div>
-                                ) : (
-                                    <motion.div
-                                        key="hint"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        className="text-center"
-                                    >
-                                        <p className="text-graphite/50">
-                                            {language === 'he' ? 'בחרו תשובה כדי לראות את התוצאה' : 'Select an answer to see the result'}
-                                        </p>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
+                                    )}
+                                </AnimatePresence>
+                            </div>
                         </Card>
                     </motion.div>
 
