@@ -59,7 +59,7 @@ const HeroSection = () => {
                 />
             </div>
 
-            <Container className="relative z-10 pt-32 md:pt-40 pb-12">
+            <Container className="relative z-10 pt-20 md:pt-28 pb-12">
                 <div className="max-w-4xl mx-auto text-center py-6 md:py-8">
                     {/* Main Title */}
                     <motion.h1
