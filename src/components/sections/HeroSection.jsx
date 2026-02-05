@@ -81,14 +81,14 @@ const HeroSection = () => {
                 />
             </div>
 
-            <Container className="relative z-10 pt-12 md:pt-16 pb-12">
+            <Container className="relative z-10 pt-8 md:pt-12 pb-12">
                 <div className="max-w-4xl mx-auto text-center py-0">
                     {/* Main Title */}
                     <motion.h1
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="font-display text-4xl md:text-5xl lg:text-6xl mb-24 md:mb-32 leading-tight text-graphite"
+                        className="font-display text-4xl md:text-5xl lg:text-6xl mb-32 md:mb-48 leading-tight text-graphite"
                     >
                         {language === 'he'
                             ? 'לשמור על העתיד דרך חינוך'
