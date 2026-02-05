@@ -16,10 +16,19 @@ const FreeResourcesSection = () => {
     const [selectedResource, setSelectedResource] = React.useState(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [currentIndex, setCurrentIndex] = React.useState(0);
+    const [isPaused, setIsPaused] = React.useState(false);
 
     const filteredResources = freeResources.filter(r => r.id !== 'seedling-starter');
     const totalSlides = Math.ceil(filteredResources.length / 2);
     const currentSlide = Math.floor(currentIndex / 2);
+
+    React.useEffect(() => {
+        if (isPaused) return;
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 2) % filteredResources.length);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [filteredResources.length, isPaused]);
 
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev + 2) % filteredResources.length);
