@@ -156,7 +156,11 @@ const FreeResourcesSection = () => {
                         ))}
 
 
-                        <div className="relative">
+                        <div
+                            className="relative"
+                            onMouseEnter={() => setIsPaused(true)}
+                            onMouseLeave={() => setIsPaused(false)}
+                        >
                             {/* Carousel Controls */}
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="font-display text-xl text-graphite">
