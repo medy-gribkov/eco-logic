@@ -157,104 +157,107 @@ const FreeResourcesSection = () => {
 
 
                         <div
-                            className="relative"
+                            className="relative group/carousel"
                             onMouseEnter={() => setIsPaused(true)}
                             onMouseLeave={() => setIsPaused(false)}
                         >
-                            {/* Carousel Controls */}
+                            {/* Carousel Header */}
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="font-display text-xl text-graphite">
                                     {language === 'he' ? 'עוד משאבים' : 'More Resources'}
                                 </h3>
-                                <div className="flex gap-2">
-                                    <button
-                                        onClick={prevSlide}
-                                        className="p-2 rounded-full border border-sand hover:bg-white hover:border-magenta/50 transition-all text-graphite"
-                                        aria-label="Previous slide"
-                                    >
-                                        <Icon name="arrow-right" size="xs" className={language === 'he' ? "" : "rotate-180"} />
-                                    </button>
-                                    <button
-                                        onClick={nextSlide}
-                                        className="p-2 rounded-full border border-sand hover:bg-white hover:border-magenta/50 transition-all text-graphite"
-                                        aria-label="Next slide"
-                                    >
-                                        <Icon name="arrow-right" size="xs" className={language === 'he' ? "rotate-180" : ""} />
-                                    </button>
+                                {/* Indicators (Dots) moved to header for cleanliness */}
+                                <div className="flex gap-1.5">
+                                    {Array.from({ length: totalSlides }).map((_, idx) => (
+                                        <button
+                                            key={idx}
+                                            onClick={() => setCurrentIndex(idx * 2)}
+                                            className={`w-2 h-2 rounded-full transition-all ${currentSlide === idx ? 'bg-magenta w-4' : 'bg-graphite/20 hover:bg-graphite/40'
+                                                }`}
+                                            aria-label={`Go to slide ${idx + 1}`}
+                                        />
+                                    ))}
                                 </div>
                             </div>
 
-                            {/* Carousel Grid */}
-                            <div className="overflow-hidden min-h-[280px]">
-                                <AnimatePresence mode="wait">
-                                    <motion.div
-                                        key={currentIndex}
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -20 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                                    >
-                                        {filteredResources
-                                            .slice(currentIndex, currentIndex + 2)
-                                            .map((resource) => (
-                                                <div
-                                                    key={resource.id}
-                                                    className="h-full"
-                                                >
-                                                    <div className="h-full flex flex-col bg-paper/80 backdrop-blur-sm rounded-2xl p-6 border border-sand hover:border-magenta/30 hover:shadow-card hover:bg-paper transition-all duration-300 group">
-                                                        <div className="flex items-start justify-between mb-4">
-                                                            <div className="p-3 rounded-xl bg-sand/30 text-graphite/80 group-hover:bg-magenta/10 group-hover:text-magenta transition-colors">
-                                                                <Icon
-                                                                    name={
-                                                                        resource.type === 'guide' ? 'lightbulb' :
-                                                                            resource.type === 'water' ? 'water' :
-                                                                                resource.type === 'activities' ? 'book' :
-                                                                                    resource.type === 'seedling' ? 'seedling' :
-                                                                                        resource.type === 'infographics' ? 'ideas' : 'ideas'
-                                                                    }
-                                                                    size="lg"
-                                                                />
+                            {/* Carousel Grid with Side Arrows */}
+                            <div className="relative">
+                                {/* Left Arrow */}
+                                <button
+                                    onClick={prevSlide}
+                                    className="absolute top-1/2 -left-4 md:-left-6 -translate-y-1/2 z-10 w-10 h-10 bg-paper/80 backdrop-blur text-graphite rounded-full shadow-lg border border-sand hover:bg-white hover:border-magenta hover:text-magenta transition-all flex items-center justify-center opacity-0 group-hover/carousel:opacity-100"
+                                    aria-label="Previous slide"
+                                >
+                                    <Icon name="arrow-right" size="sm" className={language === 'he' ? "" : "rotate-180"} />
+                                </button>
+
+                                {/* Right Arrow */}
+                                <button
+                                    onClick={nextSlide}
+                                    className="absolute top-1/2 -right-4 md:-right-6 -translate-y-1/2 z-10 w-10 h-10 bg-paper/80 backdrop-blur text-graphite rounded-full shadow-lg border border-sand hover:bg-white hover:border-magenta hover:text-magenta transition-all flex items-center justify-center opacity-0 group-hover/carousel:opacity-100"
+                                    aria-label="Next slide"
+                                >
+                                    <Icon name="arrow-right" size="sm" className={language === 'he' ? "rotate-180" : ""} />
+                                </button>
+
+                                <div className="overflow-hidden min-h-[280px] px-1 md:px-0">
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={currentIndex}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -20 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                                        >
+                                            {filteredResources
+                                                .slice(currentIndex, currentIndex + 2)
+                                                .map((resource) => (
+                                                    <div
+                                                        key={resource.id}
+                                                        className="h-full"
+                                                    >
+                                                        <div className="h-full flex flex-col bg-paper/80 backdrop-blur-sm rounded-2xl p-6 border border-sand hover:border-magenta/30 hover:shadow-card hover:bg-paper transition-all duration-300 group">
+                                                            <div className="flex items-start justify-between mb-4">
+                                                                <div className="p-3 rounded-xl bg-sand/30 text-graphite/80 group-hover:bg-magenta/10 group-hover:text-magenta transition-colors">
+                                                                    <Icon
+                                                                        name={
+                                                                            resource.type === 'guide' ? 'lightbulb' :
+                                                                                resource.type === 'water' ? 'water' :
+                                                                                    resource.type === 'activities' ? 'book' :
+                                                                                        resource.type === 'seedling' ? 'seedling' :
+                                                                                            resource.type === 'infographics' ? 'ideas' : 'ideas'
+                                                                        }
+                                                                        size="lg"
+                                                                    />
+                                                                </div>
+                                                                <div className="text-xs font-mono text-graphite/60 bg-sand/40 px-2 py-1 rounded">
+                                                                    {resource.format}
+                                                                </div>
                                                             </div>
-                                                            <div className="text-xs font-mono text-graphite/60 bg-sand/40 px-2 py-1 rounded">
-                                                                {resource.format}
-                                                            </div>
+
+                                                            <h3 className="font-display text-xl mb-2 text-graphite group-hover:text-magenta transition-colors">
+                                                                {resource.title[language]}
+                                                            </h3>
+                                                            <p className="text-graphite/80 text-sm mb-6 flex-grow font-medium leading-relaxed">
+                                                                {resource.description[language]}
+                                                            </p>
+
+                                                            <Button
+                                                                variant="outline"
+                                                                onClick={() => handleOpenModal(resource)}
+                                                                size="small"
+                                                                className="w-full justify-between group-hover:border-magenta group-hover:text-magenta bg-white/50 hover:bg-white"
+                                                            >
+                                                                <span>{language === 'he' ? 'הורדה' : 'Download'}</span>
+                                                                <Icon name="download" size="xs" />
+                                                            </Button>
                                                         </div>
-
-                                                        <h3 className="font-display text-xl mb-2 text-graphite group-hover:text-magenta transition-colors">
-                                                            {resource.title[language]}
-                                                        </h3>
-                                                        <p className="text-graphite/80 text-sm mb-6 flex-grow font-medium leading-relaxed">
-                                                            {resource.description[language]}
-                                                        </p>
-
-                                                        <Button
-                                                            variant="outline"
-                                                            onClick={() => handleOpenModal(resource)}
-                                                            size="small"
-                                                            className="w-full justify-between group-hover:border-magenta group-hover:text-magenta bg-white/50 hover:bg-white"
-                                                        >
-                                                            <span>{language === 'he' ? 'הורדה' : 'Download'}</span>
-                                                            <Icon name="download" size="xs" />
-                                                        </Button>
                                                     </div>
-                                                </div>
-                                            ))}
-                                    </motion.div>
-                                </AnimatePresence>
-                            </div>
-
-                            {/* Dots Indicator */}
-                            <div className="flex justify-center gap-2 mt-4">
-                                {Array.from({ length: totalSlides }).map((_, idx) => (
-                                    <button
-                                        key={idx}
-                                        onClick={() => setCurrentIndex(idx * 2)}
-                                        className={`w-2 h-2 rounded-full transition-all ${currentSlide === idx ? 'bg-magenta w-4' : 'bg-graphite/20 hover:bg-graphite/40'
-                                            }`}
-                                        aria-label={`Go to slide ${idx + 1}`}
-                                    />
-                                ))}
+                                                ))}
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </div>
                             </div>
                         </div>
                     </div>
