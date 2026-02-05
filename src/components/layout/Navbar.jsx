@@ -158,13 +158,7 @@ const Navbar = () => {
             `}>
                 <div className="flex justify-between items-center px-4 md:px-6 py-2 md:py-3">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2 z-10 relative">
-                        <img
-                            src="/assets/logo/logo.svg"
-                            alt="EcoLogic"
-                            className="h-12 md:h-16 w-auto"
-                        />
-                    </Link>
+                    className="h-9 md:h-10 w-auto"
 
                     {/* Decorative Vine - Continuous Drape Pattern */}
                     <div

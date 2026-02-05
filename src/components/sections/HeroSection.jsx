@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight as Arrow } from 'lucide-react';
+import { ArrowRight as Arrow, Volume2, VolumeX, Pause, Play } from 'lucide-react';
 import Button from '../ui/Button';
 import Container from '../layout/Container';
 import Icon from '../ui/Icon';
@@ -10,6 +10,9 @@ import { useLanguage } from '../../i18n';
 const HeroSection = () => {
     const navigate = useNavigate();
     const { language, isRTL } = useLanguage();
+    const videoRef = useRef(null);
+    const [isMuted, setIsMuted] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(true);
 
     const scrollToSection = (sectionId) => {
         const element = document.getElementById(sectionId);
@@ -18,14 +21,33 @@ const HeroSection = () => {
         }
     };
 
+    const toggleMute = () => {
+        if (videoRef.current) {
+            videoRef.current.muted = !isMuted;
+            setIsMuted(!isMuted);
+        }
+    };
+
+    const togglePlay = () => {
+        if (videoRef.current) {
+            if (isPlaying) {
+                videoRef.current.pause();
+            } else {
+                videoRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
+
     return (
         <section id="hero" className="relative min-h-screen flex items-start overflow-hidden">
             {/* Video Background */}
             <div className="absolute inset-0 z-0 bg-sand/20">
                 <video
+                    ref={videoRef}
                     autoPlay
                     loop
-                    muted
+                    muted={isMuted}
                     playsInline
                     preload="metadata"
                     poster="/assets/backgrounds/bg-hero.webp"
@@ -69,8 +91,8 @@ const HeroSection = () => {
                         className="font-display text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight text-graphite"
                     >
                         {language === 'he'
-                            ? 'ללמוד מהטבע, לשמור על העתיד דרך חינוך'
-                            : 'Learning from nature, preserving the future through education'}
+                            ? 'לשמור על העתיד דרך חינוך'
+                            : 'Preserving the future through education'}
                     </motion.h1>
 
                     {/* Subtitle */}
@@ -135,24 +157,42 @@ const HeroSection = () => {
                 </div>
             </Container>
 
+            {/* Video Controls - Bottom Corners */}
+            <div className="absolute bottom-8 left-8 z-30">
+                <button
+                    onClick={togglePlay}
+                    className="p-3 bg-paper/20 hover:bg-paper/40 backdrop-blur-md rounded-full text-graphite transition-all border border-graphite/10"
+                    aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                >
+                    {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+                </button>
+            </div>
+
+            <div className="absolute bottom-8 right-8 z-30">
+                <button
+                    onClick={toggleMute}
+                    className="p-3 bg-paper/20 hover:bg-paper/40 backdrop-blur-md rounded-full text-graphite transition-all border border-graphite/10"
+                    aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+                >
+                    {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                </button>
+            </div>
+
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
             >
-                <motion.div
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-6 h-10 border-2 border-graphite/30 rounded-full flex justify-center cursor-pointer"
-                    onClick={() => scrollToSection('about')}
+                <div
+                    className="w-6 h-10 border-2 border-graphite/30 rounded-full flex justify-center"
                 >
                     <motion.div
                         animate={{ y: [0, 12, 0] }}
                         transition={{ duration: 2, repeat: Infinity }}
                         className="w-1.5 h-3 bg-magenta/60 rounded-full mt-2"
                     />
-                </motion.div>
+                </div>
             </motion.div>
         </section>
     );
