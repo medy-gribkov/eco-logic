@@ -62,7 +62,7 @@ const FeaturesSection = () => {
             {/* Background illustration */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: 'url(/assets/backgrounds/bg-features.png)' }}
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-features.webp)' }}
             />
 
 

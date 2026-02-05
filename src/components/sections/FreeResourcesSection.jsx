@@ -36,7 +36,7 @@ const FreeResourcesSection = () => {
             {/* Background illustration */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: 'url(/assets/backgrounds/bg-resources.png)' }}
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-resources.webp)' }}
             />
 
 
@@ -67,70 +67,150 @@ const FreeResourcesSection = () => {
                     </p>
                 </motion.div>
 
-                {/* Resources Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10 pb-12">
-                    {freeResources.map((resource, index) => {
-                        return (
+                {/* Main Content Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10 pb-12 items-start">
+
+                    {/* Left Column: Resources (Span 8) */}
+                    <div className="lg:col-span-8 flex flex-col gap-6">
+
+                        {/* Featured Resource Card (Seedling Starter) */}
+                        {freeResources.filter(r => r.id === 'seedling-starter').map((resource) => (
                             <motion.div
                                 key={resource.id}
-                                initial={{ opacity: 0, y: 30 }}
+                                initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.2 }}
-                                transition={{ delay: index * 0.08, duration: 0.4 }}
-                                className={`h-full relative ${index === 0 ? 'lg:pb-24' : ''}`} // Add space at bottom of first column for image
+                                viewport={{ once: true }}
+                                className="bg-paper rounded-3xl p-6 md:p-8 border-2 border-green/20 shadow-elevated relative overflow-hidden group"
                             >
-                                <div className={`h-full flex flex-col group bg-paper rounded-2xl p-6 border border-sand hover:border-magenta/30 hover:shadow-lg transition-all duration-300 relative overflow-hidden ${index === 0 ? 'lg:h-auto lg:min-h-0' : ''}`}> {/* Allow first card to be shorter */}
+                                {/* Background Gradient */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-green/5 to-sand/20 opacity-50" />
 
-                                    <div className="relative z-10 flex flex-col flex-grow">
-                                        {/* Icon Container */}
-                                        <div className="mb-6 h-12 flex items-center">
-                                            <Icon
-                                                name={resource.type === 'guide' ? 'lightbulb' : (resource.type === 'water' ? 'nature' : (resource.type === 'activities' ? 'book' : 'ideas'))}
-                                                size="xl"
-                                            />
+                                <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
+                                    {/* Text Content */}
+                                    <div className="flex-1 text-center md:text-start">
+                                        <div className="inline-flex items-center gap-2 bg-green/10 text-green px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+                                            <Icon name="star" size="xs" inline />
+                                            {language === 'he' ? 'מומלץ למתחילים' : 'Best for Beginners'}
                                         </div>
+                                        <h3 className="font-display text-2xl md:text-3xl mb-3 text-graphite">
+                                            {resource.title[language]}
+                                        </h3>
+                                        <p className="text-graphite/70 mb-6 text-lg leading-relaxed">
+                                            {resource.description[language]}
+                                        </p>
 
-                                        {/* Content */}
-                                        <div className="flex-grow">
-                                            <h3 className="font-display text-xl mb-3 text-graphite min-h-[3.5rem] flex items-end pb-1">
-                                                {resource.title[language]}
-                                            </h3>
-                                            <p className="text-graphite/60 text-sm mb-6 leading-relaxed">
-                                                {resource.description[language]}
-                                            </p>
-                                        </div>
-
-                                        {/* Meta & Action */}
-                                        <div className="mt-auto pt-4 border-t border-sand/50 flex flex-col gap-4">
-                                            <div className="flex items-center gap-2 text-xs text-graphite/50 bg-sand/30 px-3 py-1.5 rounded-lg w-fit">
-                                                <span>{resource.format}</span>
-                                                <span className="w-1 h-1 rounded-full bg-graphite/30"></span>
+                                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mb-6 text-sm text-graphite/60">
+                                            <div className="flex items-center gap-1.5 bg-white/50 px-3 py-1.5 rounded-lg border border-sand">
+                                                <Icon name="book" size="xs" />
                                                 <span>{resource.pages} {language === 'he' ? 'עמ\'' : 'pgs'}</span>
                                             </div>
+                                            <div className="flex items-center gap-1.5 bg-white/50 px-3 py-1.5 rounded-lg border border-sand">
+                                                <span>PDF</span>
+                                            </div>
+                                        </div>
 
-                                            <Button
-                                                variant="outline"
-                                                onClick={() => handleOpenModal(resource)}
-                                                className="w-full flex items-center justify-center gap-2 border-magenta text-magenta hover:bg-magenta hover:text-paper"
-                                            >
-                                                <Icon name="download" size="xs" />
-                                                {language === 'he' ? 'הורדה' : 'Download Guide'}
-                                            </Button>
+                                        <Button
+                                            variant="primary"
+                                            onClick={() => handleOpenModal(resource)}
+                                            className="w-full md:w-auto bg-green hover:bg-green/90 text-white shadow-lg shadow-green/20"
+                                        >
+                                            <Icon name="download" size="sm" className="me-2" inline />
+                                            {language === 'he' ? 'הורדת המדריך' : 'Download Guide'}
+                                        </Button>
+                                    </div>
+
+                                    {/* Image */}
+                                    <div className="w-full md:w-64 flex-shrink-0">
+                                        <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-white border border-sand shadow-inner relative">
+                                            <img
+                                                src={resource.image || "/assets/images/starter-seedling.webp"}
+                                                alt={resource.title[language]}
+                                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                            />
                                         </div>
                                     </div>
                                 </div>
                             </motion.div>
-                        );
-                    })}
+                        ))}
 
-                    {/* Teacher Reading Persona (Decorative - Bottom Left) */}
-                    <div className="absolute -bottom-8 -start-8 w-56 pointer-events-none z-20 hidden lg:block">
-                        <img
-                            src="/assets/personas/persona-teacher-reading.png"
-                            alt={language === 'he' ? 'מורה מקריאה סיפור' : 'Teacher reading a story'}
-                            className="w-full h-auto drop-shadow-2xl transform -scale-x-100"
-                        />
+                        {/* Secondary Resources Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {freeResources.filter(r => r.id !== 'seedling-starter').map((resource, index) => (
+                                <motion.div
+                                    key={resource.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="h-full"
+                                >
+                                    <div className="h-full flex flex-col bg-paper/80 backdrop-blur-sm rounded-2xl p-6 border border-sand hover:border-magenta/30 hover:shadow-card hover:bg-paper transition-all duration-300 group">
+                                        <div className="flex items-start justify-between mb-4">
+                                            <div className="p-3 rounded-xl bg-sand/30 text-graphite/80 group-hover:bg-magenta/10 group-hover:text-magenta transition-colors">
+                                                <Icon
+                                                    name={
+                                                        resource.type === 'guide' ? 'lightbulb' :
+                                                            resource.type === 'water' ? 'water' :
+                                                                resource.type === 'activities' ? 'book' :
+                                                                    resource.type === 'seedling' ? 'seedling' :
+                                                                        resource.type === 'infographics' ? 'ideas' : 'ideas'
+                                                    }
+                                                    size="lg"
+                                                />
+                                            </div>
+                                            <div className="text-xs font-mono text-graphite/60 bg-sand/40 px-2 py-1 rounded">
+                                                {resource.format}
+                                            </div>
+                                        </div>
+
+                                        <h3 className="font-display text-xl mb-2 text-graphite group-hover:text-magenta transition-colors">
+                                            {resource.title[language]}
+                                        </h3>
+                                        <p className="text-graphite/80 text-sm mb-6 flex-grow font-medium leading-relaxed">
+                                            {resource.description[language]}
+                                        </p>
+
+                                        <Button
+                                            variant="outline"
+                                            onClick={() => handleOpenModal(resource)}
+                                            size="small"
+                                            className="w-full justify-between group-hover:border-magenta group-hover:text-magenta bg-white/50 hover:bg-white"
+                                        >
+                                            <span>{language === 'he' ? 'הורדה' : 'Download'}</span>
+                                            <Icon name="download" size="xs" />
+                                        </Button>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
+
+                    {/* Right Column: Persona (Span 4) */}
+                    <div className="lg:col-span-4 hidden lg:flex flex-col items-center justify-end h-full pt-12">
+                        <div className="sticky top-24 w-full text-center">
+                            {/* Decorative elements behind persona */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-magenta/5 rounded-full blur-3xl animate-pulse" />
+
+                            <img
+                                src="/assets/personas/persona-teacher-reading.webp"
+                                alt="Teacher"
+                                className="w-full max-w-[320px] mx-auto drop-shadow-2xl relative z-10 transform hover:scale-105 transition-transform duration-500"
+                            />
+
+                            <div className="mt-6 bg-paper border border-sand p-4 rounded-xl shadow-card max-w-[280px] mx-auto relative z-20">
+                                <div className="text-4xl text-magenta mb-2">❝</div>
+                                <p className="text-graphite/80 italic text-sm mb-3">
+                                    {language === 'he'
+                                        ? 'התלמידים שלי מחכים כל שבוע לפעילות החדשה. החומרים האלו פשוט עובדים!'
+                                        : 'My students look forward to the new activity every week. These materials just work!'}
+                                </p>
+                                <div className="text-xs font-bold text-graphite/60 uppercase tracking-wider">
+                                    {language === 'he' ? '– שרה, מורה למדעים' : '– Sarah, Science Teacher'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 {/* Recycled materials note */}
@@ -160,7 +240,7 @@ const FreeResourcesSection = () => {
                     <div className="space-y-6">
                         <div className="flex items-start gap-4 bg-sand/20 p-4 rounded-xl">
                             <img
-                                src="/assets/personas/persona-modal-guide.png"
+                                src="/assets/personas/persona-modal-guide.webp"
                                 alt="Guide"
                                 className="w-20 h-20 object-contain flex-shrink-0"
                             />

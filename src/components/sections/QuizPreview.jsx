@@ -39,7 +39,7 @@ const QuizPreview = () => {
                 {/* Background illustration */}
                 <div
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: 'url(/assets/backgrounds/bg-quiz.png)' }}
+                    style={{ backgroundImage: 'url(/assets/backgrounds/bg-quiz.webp)' }}
                 />
                 <div className="absolute inset-0 bg-paper/40 backdrop-blur-[1px]" />
                 <Container size="small" className="relative z-10">
@@ -154,7 +154,7 @@ const QuizPreview = () => {
                                     `}>
                                             <div className="flex items-center gap-4 mb-4">
                                                 <img
-                                                    src="/assets/personas/persona-celebration.png"
+                                                    src="/assets/personas/persona-celebration.webp"
                                                     alt="Teacher"
                                                     className="w-20 h-20 object-contain flex-shrink-0"
                                                 />

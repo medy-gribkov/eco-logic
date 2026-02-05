@@ -46,6 +46,7 @@ const ProgramsSection = () => {
             },
             features: [
                 { he: 'ערכת שתיל פיזית', en: 'Physical seedling kit' },
+                { he: 'מדריך גידול שתיל', en: 'Seedling starter guide' },
                 { he: 'תכנית 4 שיעורים', en: '4-lesson curriculum' },
                 { he: 'גישה לפלטפורמה', en: 'Platform access' }
             ],
@@ -109,7 +110,7 @@ const ProgramsSection = () => {
                 type: 'program',
                 name: program.name[language],
                 price: program.priceValue,
-                image: '/assets/icons/tree.png'
+                image: '/assets/icons/tree.webp'
             });
             openCart();
         }
@@ -120,7 +121,7 @@ const ProgramsSection = () => {
             {/* Background illustration */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: 'url(/assets/backgrounds/bg-programs.png)' }}
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-programs.webp)' }}
             />
 
 
@@ -135,7 +136,7 @@ const ProgramsSection = () => {
                                 loop
                                 muted
                                 playsInline
-                                poster="/assets/images/persona-starterkit.png"
+                                poster="/assets/images/persona-starterkit.webp"
                                 className="w-full aspect-video object-cover scale-125"
                             >
                                 <source src="/assets/videos/hero-loop.mp4" type="video/mp4" />

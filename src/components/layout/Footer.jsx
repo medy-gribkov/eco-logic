@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Send } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../i18n';
 import Icon from '../ui/Icon';
 import Modal from '../ui/Modal';
@@ -39,14 +40,14 @@ const Footer = () => {
             {/* Background illustration */}
             <div
                 className="absolute inset-0 bg-cover bg-bottom bg-no-repeat pointer-events-none"
-                style={{ backgroundImage: 'url(/assets/backgrounds/bg-footer.png)' }}
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-footer.webp)' }}
             />
 
             {/* Main Footer Content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-                    {/* Brand Column */}
-                    <div className="md:col-span-4">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-10 md:py-16">
+                <div className="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-10">
+                    {/* Brand Column - Full width on mobile */}
+                    <div className="col-span-2 md:col-span-4">
                         <img
                             src="/assets/logo/logo.svg"
                             alt="EcoLogic"
@@ -75,8 +76,8 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Navigate Column */}
-                    <div className="md:col-span-3">
+                    {/* Navigate Column - Half width on mobile */}
+                    <div className="col-span-1 md:col-span-3">
                         <h4 className="font-display text-xl uppercase tracking-wider mb-6 text-graphite border-b border-graphite/10 pb-2 inline-block">
                             {isRTL ? 'ניווט' : 'Navigate'}
                         </h4>
@@ -94,8 +95,8 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Connect Column */}
-                    <div className="md:col-span-2">
+                    {/* Connect Column - Half width on mobile */}
+                    <div className="col-span-1 md:col-span-2">
                         <h4 className="font-display text-xl uppercase tracking-wider mb-6 text-graphite border-b border-graphite/10 pb-2 inline-block">
                             {isRTL ? 'עקבו' : 'Connect'}
                         </h4>
@@ -115,8 +116,8 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Newsletter Column */}
-                    <div className="md:col-span-3">
+                    {/* Newsletter Column - Full width on mobile */}
+                    <div className="col-span-2 md:col-span-3">
                         <h4 className="font-display text-xl uppercase tracking-wider mb-6 text-graphite border-b border-graphite/10 pb-2 inline-block">
                             {language === 'he' ? 'הישארו מעודכנים' : 'Stay Updated'}
                         </h4>
@@ -156,6 +157,22 @@ const Footer = () => {
                         <p className="text-graphite/50 text-sm">
                             © 2024 EcoLogic. {language === 'he' ? 'כל הזכויות שמורות' : 'All rights reserved'}
                         </p>
+
+                        {/* Legal Links */}
+                        <div className="flex items-center gap-4 text-sm">
+                            <Link to="/terms" className="text-graphite/50 hover:text-magenta transition-colors">
+                                {language === 'he' ? 'תנאי שימוש' : 'Terms'}
+                            </Link>
+                            <span className="text-graphite/30">|</span>
+                            <Link to="/privacy" className="text-graphite/50 hover:text-magenta transition-colors">
+                                {language === 'he' ? 'פרטיות' : 'Privacy'}
+                            </Link>
+                            <span className="text-graphite/30">|</span>
+                            <Link to="/accessibility" className="text-graphite/50 hover:text-magenta transition-colors">
+                                {language === 'he' ? 'נגישות' : 'Accessibility'}
+                            </Link>
+                        </div>
+
                         <div className="flex items-center gap-2 text-graphite/40 text-sm">
                             <Icon name="recycle-heart" size="xs" />
                             <span>{language === 'he' ? 'עשוי מאהבה לכדור הארץ' : 'Made with love for Earth'}</span>
@@ -173,7 +190,7 @@ const Footer = () => {
             >
                 <div className="text-center py-6">
                     <img
-                        src="/assets/personas/persona-celebration.png"
+                        src="/assets/personas/persona-celebration.webp"
                         alt="Celebration"
                         className="w-28 h-28 object-contain mx-auto mb-4"
                     />

@@ -90,7 +90,7 @@ const CollaborateSection = () => {
             {/* Background illustration */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: 'url(/assets/backgrounds/bg-collaborate.png)' }}
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-collaborate.webp)' }}
             />
 
 
@@ -141,7 +141,7 @@ const CollaborateSection = () => {
                         {/* Welcoming Teacher Image */}
                         <div className="absolute -top-24 start-1/2 -translate-x-1/2 w-48 md:w-56 pointer-events-none">
                             <img
-                                src="/assets/personas/persona-teacher-welcome.png"
+                                src="/assets/personas/persona-teacher-welcome.webp"
                                 alt={language === 'he' ? 'מורה מזמינה' : 'Teacher welcoming'}
                                 className="w-full h-auto drop-shadow-lg"
                             />
@@ -251,7 +251,7 @@ const CollaborateSection = () => {
                 ) : (
                     <div className="text-center py-8">
                         <img
-                            src="/assets/personas/persona-celebration.png"
+                            src="/assets/personas/persona-celebration.webp"
                             alt="Celebration"
                             className="w-32 h-32 object-contain mx-auto mb-4"
                         />

@@ -170,7 +170,7 @@ const MerchSection = () => {
             {/* Background illustration */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-40"
-                style={{ backgroundImage: 'url(/assets/backgrounds/bg-about.png)' }}
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-about.webp)' }}
             />
 
 
@@ -206,7 +206,7 @@ const MerchSection = () => {
                         onClick={() => scroll('left')}
                         disabled={!canScrollLeft}
                         className={`
-                            absolute top-1/2 -translate-y-1/2 z-10
+                            absolute top-1/2 -translate-y-1/2 z-20
                             ${isRTL ? 'right-0 md:-right-2' : 'left-0 md:-left-2'}
                             w-10 h-10 bg-paper rounded-full shadow-md
                             flex items-center justify-center
@@ -222,7 +222,7 @@ const MerchSection = () => {
                         onClick={() => scroll('right')}
                         disabled={!canScrollRight}
                         className={`
-                            absolute top-1/2 -translate-y-1/2 z-10
+                            absolute top-1/2 -translate-y-1/2 z-20
                             ${isRTL ? 'left-0 md:-left-2' : 'right-0 md:-right-2'}
                             w-10 h-10 bg-paper rounded-full shadow-md
                             flex items-center justify-center
@@ -249,7 +249,7 @@ const MerchSection = () => {
                             />
                         ))}
                     </div>
-                    <div className="flex justify-center gap-2 mt-6">
+                    <div className="flex justify-center gap-2 mt-6 relative z-20">
                         {allProducts.map((_, index) => (
                             <button
                                 key={index}

@@ -17,7 +17,7 @@ const StatsSection = ({ variant = 'global' }) => {
             {/* Background illustration */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: 'url(/assets/backgrounds/bg-features.png)' }}
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-features.webp)' }}
             />
             {/* Soft overlay to ensure readability */}
             <div className="absolute inset-0 bg-paper/60 backdrop-blur-[2px]" />
@@ -30,7 +30,7 @@ const StatsSection = ({ variant = 'global' }) => {
                     className="text-center mb-10"
                 >
                     <div className="inline-flex items-center gap-2 bg-blue/10 text-blue px-4 py-2 rounded-full mb-4">
-                        <img src="/assets/icons/globe.png" alt="" className="w-4 h-4" />
+                        <img src="/assets/icons/globe.webp" alt="" className="w-4 h-4" />
                         <span className="font-body text-sm uppercase tracking-wider">
                             {t('stats.impact', 'Our Impact')}
                         </span>

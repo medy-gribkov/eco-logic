@@ -23,7 +23,7 @@ const AboutSection = () => {
             {/* Background illustration */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: 'url(/assets/backgrounds/bg-about.png)' }}
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-about.webp)' }}
             />
 
 
@@ -42,7 +42,7 @@ const AboutSection = () => {
                             {/* Main image container */}
                             <div className="relative bg-paper rounded-3xl p-3 shadow-elevated">
                                 <img
-                                    src="/assets/images/persona-planting.png"
+                                    src="/assets/images/persona-planting.webp"
                                     alt={language === 'he' ? 'ילדים לומדים על הטבע' : 'Children learning about nature'}
                                     className="w-full h-auto rounded-2xl"
                                 />
@@ -56,7 +56,7 @@ const AboutSection = () => {
                                     className="absolute -bottom-12 -start-12 w-2/3 max-w-[200px]"
                                 >
                                     <img
-                                        src="/assets/personas/persona-teacher-pointing.png"
+                                        src="/assets/personas/persona-teacher-pointing.webp"
                                         alt={language === 'he' ? 'מורה מסבירה' : 'Teacher explaining'}
                                         className="w-full h-auto drop-shadow-xl z-20"
                                     />

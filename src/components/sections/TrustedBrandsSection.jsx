@@ -9,17 +9,17 @@ const TrustedBrandsSection = () => {
         {
             id: 'nature-parks',
             name: { he: 'רשות הטבע והגנים', en: 'Nature & Parks Authority' },
-            logo: '/assets/logos/nature-parks-authority.png',
+            logo: '/assets/logos/nature-parks-authority.webp',
         },
         {
             id: 'kkl-jnf',
             name: { he: 'קרן קיימת לישראל', en: 'KKL-JNF' },
-            logo: '/assets/logos/kkl-jnf.png',
+            logo: '/assets/logos/kkl-jnf.webp',
         },
         {
             id: 'env-ministry',
             name: { he: 'המשרד להגנת הסביבה', en: 'Ministry of Environment' },
-            logo: '/assets/logos/env-ministry.png',
+            logo: '/assets/logos/env-ministry.webp',
         },
     ];
 
@@ -28,13 +28,13 @@ const TrustedBrandsSection = () => {
             {/* Background image - subtle, behind everything */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-25 z-0"
-                style={{ backgroundImage: 'url(/assets/backgrounds/bg-collaborate.png)' }}
+                style={{ backgroundImage: 'url(/assets/backgrounds/bg-collaborate.webp)' }}
             />
 
             {/* Large persona - above bg, full opacity */}
             <div className="absolute -left-10 top-1/2 -translate-y-1/2 pointer-events-none z-10">
                 <img
-                    src="/assets/personas/persona-modal-guide.png"
+                    src="/assets/personas/persona-modal-guide.webp"
                     alt=""
                     className="w-64 md:w-80 h-auto object-contain"
                 />

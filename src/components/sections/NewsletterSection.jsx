@@ -65,7 +65,10 @@ const NewsletterSection = () => {
                                     {t('newsletter.success')}
                                 </>
                             ) : status === 'loading' ? (
-                                <span className="animate-pulse">{t('newsletter.sending')}</span>
+                                <span className="flex items-center gap-2">
+                                    <img src="/assets/personas/persona-thinking.webp" alt="" className="w-6 h-6 animate-pulse" />
+                                    {t('newsletter.sending')}
+                                </span>
                             ) : (
                                 <>
                                     <Send className="w-4 h-4" />

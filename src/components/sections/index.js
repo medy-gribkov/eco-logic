@@ -16,3 +16,7 @@ export { default as TrustedBrandsSection } from './TrustedBrandsSection';
 export { default as FreeResourcesSection } from './FreeResourcesSection';
 export { default as ProgramsSection } from './ProgramsSection';
 export { default as CollaborateSection } from './CollaborateSection';
+
+// Community and media sections
+export { default as VolunteerSection } from './VolunteerSection';
+export { default as PressKitSection } from './PressKitSection';

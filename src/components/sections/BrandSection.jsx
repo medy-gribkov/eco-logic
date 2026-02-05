@@ -10,15 +10,20 @@ const BrandSection = () => {
 
     const socialPosts = [
         {
-            image: '/assets/images/social-post-1.jpg',
+            image: '/assets/icons/globe.webp', // Temporary: using high-quality icon as abstract post
             caption: isRTL ? 'השפעה בלתי נראית' : 'Invisible Impact',
             likes: '2.4K',
         },
         {
-            image: '/assets/images/social-post-2.jpg',
+            image: '/assets/icons/seedling.webp',
             caption: isRTL ? 'צעד אחד היום' : 'One Step Today',
             likes: '1.8K',
         },
+        {
+            image: '/assets/icons/recycle-heart.webp',
+            caption: isRTL ? 'אהבה לטבע' : 'Love for Nature',
+            likes: '850',
+        }
     ];
 
     return (
@@ -59,7 +64,7 @@ const BrandSection = () => {
                         <div className="relative rounded-2xl overflow-hidden shadow-elevated bg-paper">
                             <div className="aspect-[16/10] overflow-hidden">
                                 <img
-                                    src="/assets/images/billboard.jpg"
+                                    src="/assets/images/billboard.webp"
                                     alt="EcoLogic Billboard Campaign"
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
@@ -88,7 +93,7 @@ const BrandSection = () => {
                             <div className="relative h-full rounded-2xl overflow-hidden shadow-card bg-paper">
                                 <div className="aspect-[4/3] md:aspect-auto md:h-full overflow-hidden">
                                     <img
-                                        src="/assets/images/merch.png"
+                                        src="/assets/images/merch.webp"
                                         alt="EcoLogic Merchandise"
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
@@ -150,7 +155,7 @@ const BrandSection = () => {
                         </a>
                     </div>
 
-                    <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+                    <div className="flex gap-6 overflow-x-auto pb-8 -mx-4 px-4 scrollbar-hide">
                         {socialPosts.map((post, index) => (
                             <motion.div
                                 key={index}
@@ -159,22 +164,29 @@ const BrandSection = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
                                 whileHover={{ y: -4 }}
-                                className="flex-shrink-0 w-64 bg-paper rounded-xl shadow-card overflow-hidden cursor-pointer border border-gray/20"
+                                className="flex-shrink-0 w-72 bg-paper rounded-2xl shadow-elevated overflow-hidden cursor-pointer border border-gray/20 group relative"
                             >
-                                <div className="aspect-square overflow-hidden">
+                                <div className="aspect-square overflow-hidden relative">
+                                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10" />
                                     <img
                                         src={post.image}
                                         alt={post.caption}
-                                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     />
+                                    <div className="absolute top-3 right-3 z-20 bg-paper/90 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <Instagram className="w-4 h-4 text-magenta" />
+                                    </div>
                                 </div>
-                                <div className="p-4">
-                                    <p className="text-sm text-graphite/70 font-medium mb-2">
+                                <div className="p-5">
+                                    <p className="text-base text-graphite font-display mb-3 line-clamp-2">
                                         {post.caption}
                                     </p>
-                                    <div className="flex items-center gap-1 text-xs text-graphite/50">
-                                        <span>{post.likes}</span>
-                                        <span>{isRTL ? 'לייקים' : 'likes'}</span>
+                                    <div className="flex items-center justify-between text-xs text-graphite/60 border-t border-sand pt-3">
+                                        <div className="flex items-center gap-1.5">
+                                            <div className="w-4 h-4 rounded-full bg-magenta/10 flex items-center justify-center text-magenta">♥</div>
+                                            <span>{post.likes}</span>
+                                        </div>
+                                        <span>2h ago</span>
                                     </div>
                                 </div>
                             </motion.div>
@@ -187,10 +199,12 @@ const BrandSection = () => {
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
-                            className="flex-shrink-0 w-64 aspect-square bg-gradient-to-br from-green/10 to-blue/10 rounded-xl flex flex-col items-center justify-center gap-3 border-2 border-dashed border-gray/30 hover:border-green/50 transition-colors cursor-pointer"
+                            className="flex-shrink-0 w-72 aspect-[4/5] bg-gradient-to-br from-green/5 to-blue/5 rounded-2xl flex flex-col items-center justify-center gap-4 border-2 border-dashed border-gray/30 hover:border-green/50 hover:bg-green/5 transition-all cursor-pointer group"
                         >
-                            <Instagram className="w-8 h-8 text-green/60" />
-                            <span className="text-sm text-graphite/60">{isRTL ? 'ראו עוד' : 'See More'}</span>
+                            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                                <Instagram className="w-8 h-8 text-green" />
+                            </div>
+                            <span className="font-display text-lg text-graphite/60 group-hover:text-green transition-colors">{isRTL ? 'לכל הפוסטים' : 'View All Posts'}</span>
                         </motion.a>
                     </div>
                 </motion.div>

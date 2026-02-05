@@ -8,21 +8,24 @@ import React from 'react';
 
 const iconMap = {
     // Core brand icons
-    checkmark: '/assets/icons/checkmark.png',
-    globe: '/assets/icons/globe.png',
-    ideas: '/assets/icons/ideas.png',
-    leaf: '/assets/icons/leaf.png',
-    lightbulb: '/assets/icons/lightbulb.png',
-    'recycle-heart': '/assets/icons/recycle-heart.png',
-    recycle: '/assets/icons/recycle.png',
-    tree: '/assets/icons/tree.png',
+    checkmark: '/assets/icons/checkmark.webp',
+    globe: '/assets/icons/globe.webp',
+    ideas: '/assets/icons/ideas.webp',
+    leaf: '/assets/icons/leaf.webp',
+    lightbulb: '/assets/icons/lightbulb.webp',
+    'recycle-heart': '/assets/icons/recycle-heart.webp',
+    recycle: '/assets/icons/recycle.webp',
+    tree: '/assets/icons/tree.webp',
     // Additional icons
-    book: '/assets/icons/book.png',
-    seedling: '/assets/icons/seedling.png',
-    download: '/assets/icons/download.png',
-    heart: '/assets/icons/heart.png',
-    sprout: '/assets/icons/sprout.png',
-    forest: '/assets/icons/forest.png',
+    book: '/assets/icons/book.webp',
+    seedling: '/assets/icons/seedling.webp',
+    download: '/assets/icons/download.webp',
+    heart: '/assets/icons/heart.webp',
+    sprout: '/assets/icons/sprout.webp',
+    forest: '/assets/icons/forest.webp',
+    // Alias for nature-related content
+    nature: '/assets/icons/leaf.webp',
+    water: '/assets/icons/globe.webp',
 };
 
 const sizeMap = {
