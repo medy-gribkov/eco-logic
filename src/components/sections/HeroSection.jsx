@@ -19,7 +19,7 @@ const HeroSection = () => {
     };
 
     return (
-        <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
+        <section id="hero" className="relative min-h-screen flex items-start overflow-hidden">
             {/* Video Background */}
             <div className="absolute inset-0 z-0 bg-sand/20">
                 <video
@@ -59,19 +59,18 @@ const HeroSection = () => {
                 />
             </div>
 
-            <Container className="relative z-10 pt-20 md:pt-24">
+            <Container className="relative z-10 pt-32 md:pt-40 pb-12">
                 <div className="max-w-4xl mx-auto text-center py-6 md:py-8">
                     {/* Main Title */}
                     <motion.h1
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight text-graphite"
+                        className="font-display text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight text-graphite"
                     >
-                        {language === 'he' ? 'חינוך' : 'Education'}
-                        <span className="block text-green">
-                            {language === 'he' ? 'שומר על העתיד' : 'preserves the future'}
-                        </span>
+                        {language === 'he'
+                            ? 'ללמוד מהטבע, לשמור על העתיד דרך חינוך'
+                            : 'Learning from nature, preserving the future through education'}
                     </motion.h1>
 
                     {/* Subtitle */}
