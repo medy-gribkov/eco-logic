@@ -71,27 +71,49 @@ const Contact = () => {
 
     return (
         <div className="py-12">
-            {/* Header */}
-            <Section spacing="default" animate={false}>
-                <Container>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center mb-12"
-                    >
-                        <Badge color="magenta" className="mb-4">
-                            <Mail className="w-4 h-4 inline mr-1" />
-                            {t('contact.title')}
-                        </Badge>
-                        <h1 className="font-display text-5xl md:text-6xl mb-4">
-                            {t('contact.title')}
-                        </h1>
-                        <p className="text-xl text-graphite/70 max-w-2xl mx-auto">
-                            {t('contact.subtitle')}
-                        </p>
-                    </motion.div>
+            {/* Hero Section */}
+            <section className="relative min-h-[50vh] flex items-center overflow-hidden mb-8">
+                <div className="absolute inset-0 bg-gradient-to-r from-paper/90 via-paper/70 to-sage/20" />
+                <Container className="relative z-10 pt-24 pb-8">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="text-start"
+                        >
+                            <div className="inline-flex items-center gap-2 bg-magenta/10 text-magenta px-4 py-2 rounded-full mb-6">
+                                <Mail className="w-4 h-4" />
+                                <span className="font-body text-sm uppercase tracking-wider">
+                                    {t('contact.title')}
+                                </span>
+                            </div>
+                            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 text-graphite leading-tight">
+                                {language === 'he' ? 'דברו' : 'Talk'}
+                                <span className="block text-magenta">
+                                    {language === 'he' ? 'איתנו' : 'To Us'}
+                                </span>
+                            </h1>
+                            <p className="text-xl text-graphite/70 mb-0 max-w-lg leading-relaxed">
+                                {t('contact.subtitle')}
+                            </p>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="hidden lg:flex justify-center"
+                        >
+                            <img
+                                src="/assets/personas/persona-modal-guide.webp"
+                                alt="Contact"
+                                className="max-h-[400px] w-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                            />
+                        </motion.div>
+                    </div>
                 </Container>
-            </Section>
+            </section>
 
             {/* Contact Form & Info */}
             <Section spacing="large">

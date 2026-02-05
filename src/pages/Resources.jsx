@@ -184,27 +184,58 @@ const Resources = () => {
 
     return (
         <div className="py-12">
-            {/* Header */}
-            <Section spacing="default" animate={false}>
-                <Container>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center mb-12"
-                    >
-                        <Badge color="blue" className="mb-4">
-                            <BookOpen className="w-4 h-4 inline mr-1" />
-                            {t('resources.title')}
-                        </Badge>
-                        <h1 className="font-display text-5xl md:text-6xl mb-4">
-                            {t('resources.title')}
-                        </h1>
-                        <p className="text-xl text-graphite/70 max-w-2xl mx-auto">
-                            {t('resources.subtitle')}
-                        </p>
-                    </motion.div>
+            {/* Hero Section */}
+            <section className="relative min-h-[60vh] flex items-center overflow-hidden mb-12">
+                {/* Background */}
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: 'url(/assets/backgrounds/bg-programs.webp)' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-paper/95 via-paper/85 to-paper/60" />
+
+                <Container className="relative z-10 pt-32 pb-12">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        <motion.div
+                            initial="hidden"
+                            animate="visible"
+                            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                            transition={{ duration: 0.6 }}
+                            className="text-start"
+                        >
+                            <div className="inline-flex items-center gap-2 bg-blue/10 text-blue px-4 py-2 rounded-full mb-6">
+                                <BookOpen className="w-4 h-4" />
+                                <span className="font-body text-sm uppercase tracking-wider">
+                                    {t('resources.title')}
+                                </span>
+                            </div>
+
+                            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 text-graphite leading-tight">
+                                {language === 'he' ? 'ספריית' : 'Library of'}
+                                <span className="block text-blue">
+                                    {language === 'he' ? 'הידע הירוק' : 'Green Knowledge'}
+                                </span>
+                            </h1>
+
+                            <p className="text-xl text-graphite/70 mb-8 max-w-lg leading-relaxed">
+                                {t('resources.subtitle')}
+                            </p>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="hidden lg:flex justify-center"
+                        >
+                            <img
+                                src="/assets/personas/persona-teacher-pointing.webp"
+                                alt="Resources"
+                                className="max-h-[500px] w-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                            />
+                        </motion.div>
+                    </div>
                 </Container>
-            </Section>
+            </section>
 
             {/* Tabbed Content */}
             <Section spacing="large">
