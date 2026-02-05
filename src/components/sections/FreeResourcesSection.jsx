@@ -185,7 +185,7 @@ const FreeResourcesSection = () => {
                                 {/* Left Arrow */}
                                 <button
                                     onClick={prevSlide}
-                                    className="absolute top-1/2 -left-4 md:-left-6 -translate-y-1/2 z-10 w-10 h-10 bg-paper/80 backdrop-blur text-graphite rounded-full shadow-lg border border-sand hover:bg-white hover:border-magenta hover:text-magenta transition-all flex items-center justify-center opacity-0 group-hover/carousel:opacity-100"
+                                    className="absolute top-1/2 -left-4 md:-left-6 -translate-y-1/2 z-10 w-12 h-12 bg-paper/90 backdrop-blur text-graphite rounded-full shadow-lg border border-sand hover:bg-white hover:border-magenta hover:text-magenta transition-all flex items-center justify-center transform hover:scale-110"
                                     aria-label="Previous slide"
                                 >
                                     <Icon name="arrow-right" size="sm" className={language === 'he' ? "" : "rotate-180"} />
@@ -194,7 +194,7 @@ const FreeResourcesSection = () => {
                                 {/* Right Arrow */}
                                 <button
                                     onClick={nextSlide}
-                                    className="absolute top-1/2 -right-4 md:-right-6 -translate-y-1/2 z-10 w-10 h-10 bg-paper/80 backdrop-blur text-graphite rounded-full shadow-lg border border-sand hover:bg-white hover:border-magenta hover:text-magenta transition-all flex items-center justify-center opacity-0 group-hover/carousel:opacity-100"
+                                    className="absolute top-1/2 -right-4 md:-right-6 -translate-y-1/2 z-10 w-12 h-12 bg-paper/90 backdrop-blur text-graphite rounded-full shadow-lg border border-sand hover:bg-white hover:border-magenta hover:text-magenta transition-all flex items-center justify-center transform hover:scale-110"
                                     aria-label="Next slide"
                                 >
                                     <Icon name="arrow-right" size="sm" className={language === 'he' ? "rotate-180" : ""} />
@@ -290,24 +290,34 @@ const FreeResourcesSection = () => {
                             </div>
 
                             {/* New Community Card for spacing */}
-                            <div className="bg-sand/20 rounded-2xl p-6 border border-sand/50 max-w-[320px] mx-auto text-start">
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div className="bg-green/10 p-2 rounded-lg text-green">
-                                        <Icon name="heart" size="sm" />
+                            <div className="bg-green/5 rounded-3xl p-8 border border-green/20 w-full max-w-[340px] mx-auto text-center relative overflow-hidden group">
+                                <div className="absolute inset-0 bg-green/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                                <div className="relative z-10 flex flex-col items-center">
+                                    <div className="bg-green/10 p-4 rounded-2xl text-green mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                                        <Icon name="users" size="md" />
                                     </div>
-                                    <h4 className="font-display text-lg text-graphite">
-                                        {language === 'he' ? 'הצטרפו לקהילה' : 'Join the Community'}
+                                    <h4 className="font-display text-2xl text-graphite mb-2">
+                                        {language === 'he' ? 'הצטרפו לקהילה שלנו' : 'Join Our Community'}
                                     </h4>
+                                    <p className="text-graphite/70 text-base mb-6 leading-relaxed">
+                                        {language === 'he'
+                                            ? 'אלפי מורים והורים כבר משתפים רעיונות, טיפים וחומרי לימוד בקבוצת הוואטסאפ שלנו.'
+                                            : 'Thousands of teachers and parents are already sharing ideas, tips, and materials in our WhatsApp group.'}
+                                    </p>
+                                    <Button
+                                        variant="primary"
+                                        size="default"
+                                        className="w-full justify-center bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-lg shadow-green/20"
+                                        onClick={() => window.open('https://chat.whatsapp.com/placeholder', '_blank')}
+                                    >
+                                        <Icon name="message-circle" size="sm" className="me-2" />
+                                        {language === 'he' ? 'הצטרפות לקבוצה' : 'Join WhatsApp Group'}
+                                    </Button>
+                                    <p className="text-xs text-graphite/40 mt-4">
+                                        {language === 'he' ? '* קבוצה שקטה, עדכונים בלבד' : '* Quiet group, updates only'}
+                                    </p>
                                 </div>
-                                <p className="text-graphite/70 text-sm mb-4">
-                                    {language === 'he'
-                                        ? 'אלפי מורים והורים כבר משתפים רעיונות בקבוצה שלנו.'
-                                        : 'Thousands of teachers and parents are already sharing ideas in our group.'}
-                                </p>
-                                <Button variant="outline" size="small" className="w-full justify-between bg-paper hover:bg-white text-xs">
-                                    {language === 'he' ? 'הצטרפות לקבוצה' : 'Join Group'}
-                                    <Icon name="arrow-right" size="xs" />
-                                </Button>
                             </div>
                         </div>
                     </div>
