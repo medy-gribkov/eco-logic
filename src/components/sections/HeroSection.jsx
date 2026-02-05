@@ -59,8 +59,8 @@ const HeroSection = () => {
                 />
             </div>
 
-            <Container className="relative z-10 pt-12">
-                <div className="max-w-4xl mx-auto text-center py-8 md:py-10">
+            <Container className="relative z-10 pt-20 md:pt-24">
+                <div className="max-w-4xl mx-auto text-center py-6 md:py-8">
                     {/* Main Title */}
                     <motion.h1
                         initial={{ opacity: 0, y: 30 }}
@@ -68,9 +68,9 @@ const HeroSection = () => {
                         transition={{ duration: 0.6, delay: 0.1 }}
                         className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight text-graphite"
                     >
-                        {language === 'he' ? 'ללמוד מהטבע,' : 'Learning from nature,'}
+                        {language === 'he' ? 'חינוך' : 'Education'}
                         <span className="block text-green">
-                            {language === 'he' ? 'לשמור על העתיד' : 'preserving the future'}
+                            {language === 'he' ? 'שומר על העתיד' : 'preserves the future'}
                         </span>
                     </motion.h1>
 
@@ -79,7 +79,7 @@ const HeroSection = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-lg md:text-xl text-graphite/70 max-w-2xl mx-auto mb-10 leading-relaxed"
+                        className="text-lg md:text-xl text-graphite/80 max-w-2xl mx-auto mb-10 leading-relaxed font-medium"
                     >
                         {language === 'he'
                             ? 'משאבים חינוכיים חינמיים, סדנאות וחומרי לימוד לכל מי שרוצה ללמד ולהפיץ מודעות סביבתית'
@@ -94,19 +94,20 @@ const HeroSection = () => {
                         className="flex flex-col sm:flex-row gap-4 justify-center"
                     >
                         <Button
-                            onClick={() => scrollToSection('free-resources')}
-                            className="px-8 py-4 text-lg flex items-center justify-center gap-2 bg-magenta hover:bg-magenta/90"
+                            variant="primary"
+                            onClick={() => scrollToSection('programs')}
+                            className="px-8 py-4 text-lg flex items-center justify-center gap-2 bg-green hover:bg-green/90 shadow-lg hover:shadow-xl transition-all"
                         >
-                            <Icon name="download" size="xs" className="invert mix-blend-screen" inline />
-                            {language === 'he' ? 'הורד משאבים חינם' : 'Get Free Resources'}
+                            {language === 'he' ? 'גלו את התכניות' : 'Explore Programs'}
+                            <Arrow className="w-5 h-5 ms-2" />
                         </Button>
                         <Button
                             variant="outline"
-                            onClick={() => scrollToSection('programs')}
-                            className="px-8 py-4 text-lg border-graphite/30 text-graphite hover:bg-graphite hover:text-paper flex items-center justify-center gap-2"
+                            onClick={() => scrollToSection('free-resources')}
+                            className="px-8 py-4 text-lg border-2 border-graphite text-graphite hover:bg-graphite hover:text-paper flex items-center justify-center gap-2 font-bold"
                         >
-                            {language === 'he' ? 'גלה את התכניות שלנו' : 'Explore Our Programs'}
-                            <Arrow className="w-5 h-5 ms-2" />
+                            <Icon name="download" size="xs" inline />
+                            {language === 'he' ? 'משאבים חינם' : 'Free Resources'}
                         </Button>
                     </motion.div>
 

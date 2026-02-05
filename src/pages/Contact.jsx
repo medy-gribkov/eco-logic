@@ -74,7 +74,7 @@ const Contact = () => {
             {/* Hero Section */}
             <section className="relative min-h-[50vh] flex items-center overflow-hidden mb-8">
                 <div className="absolute inset-0 bg-gradient-to-r from-paper/90 via-paper/70 to-sage/20" />
-                <Container className="relative z-10 pt-24 pb-8">
+                <Container className="relative z-10 pt-20 md:pt-24 pb-8">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -82,12 +82,6 @@ const Contact = () => {
                             transition={{ duration: 0.6 }}
                             className="text-start"
                         >
-                            <div className="inline-flex items-center gap-2 bg-magenta/10 text-magenta px-4 py-2 rounded-full mb-6">
-                                <Mail className="w-4 h-4" />
-                                <span className="font-body text-sm uppercase tracking-wider">
-                                    {t('contact.title')}
-                                </span>
-                            </div>
                             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 text-graphite leading-tight">
                                 {language === 'he' ? 'דברו' : 'Talk'}
                                 <span className="block text-magenta">

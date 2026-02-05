@@ -162,7 +162,7 @@ const Navbar = () => {
                         <img
                             src="/assets/logo/logo.svg"
                             alt="EcoLogic"
-                            className="h-8 w-auto"
+                            className="h-10 md:h-12 w-auto"
                         />
                     </Link>
 

@@ -112,7 +112,7 @@ const VolunteerPage = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-paper/95 via-paper/80 to-paper/60" />
 
-                <Container className="relative z-10 pt-32 pb-16">
+                <Container className="relative z-10 pt-20 md:pt-24 pb-16">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         {/* Text Content */}
                         <motion.div
@@ -121,13 +121,6 @@ const VolunteerPage = () => {
                             variants={fadeInUp}
                             transition={{ duration: 0.6 }}
                         >
-                            <div className="inline-flex items-center gap-2 bg-green/10 text-green px-4 py-2 rounded-full mb-6">
-                                <Icon name="heart" size="xs" inline />
-                                <span className="font-body text-sm uppercase tracking-wider">
-                                    {language === 'he' ? 'הצטרפו למשפחה' : 'Join Our Family'}
-                                </span>
-                            </div>
-
                             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 text-graphite leading-tight">
                                 {language === 'he' ? 'עשו את' : 'Make a'}
                                 <span className="block text-green">

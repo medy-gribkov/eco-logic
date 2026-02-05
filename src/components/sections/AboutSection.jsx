@@ -81,20 +81,12 @@ const AboutSection = () => {
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="space-y-8"
                     >
-                        {/* Section badge */}
-                        <div className="inline-flex items-center gap-2 bg-green/10 text-green px-4 py-2 rounded-full">
-                            <Icon name="seedling" size="xs" inline />
-                            <span className="font-body text-sm uppercase tracking-wider">
-                                {language === 'he' ? 'קצת עלינו' : 'About Us'}
-                            </span>
-                        </div>
-
-                        {/* Title */}
-                        <h2 className="font-display text-5xl md:text-6xl text-graphite leading-none">
+                        {/* Title - Moved up since badge is gone */}
+                        <h2 className="font-display text-5xl md:text-6xl text-graphite leading-none -mt-4">
                             {language === 'he' ? 'מי אנחנו' : 'About EcoLogic'}
                         </h2>
 
-                        {/* Mission block - cleaner, no double containers */}
+                        {/* Mission block */}
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
                                 <Icon name="recycle-heart" size="lg" className="flex-shrink-0 mt-1" />
@@ -118,8 +110,22 @@ const AboutSection = () => {
                                     </h3>
                                     <p className="text-graphite/70 leading-relaxed">
                                         {language === 'he'
-                                            ? '"השפעה בלתי נראית" בוחנת איך הבחירות היומיות שלנו - מה אנחנו אוכלים, איך אנחנו נוסעים, מה אנחנו קונים - משפיעות על הסביבה בדרכים שלא תמיד רואים.'
-                                            : '"Invisible Impact" explores how our daily choices - what we eat, how we travel, what we buy - affect the environment in ways we don\'t always see.'}
+                                            ? '"השפעה בלתי נראית" בוחנת איך הבחירות היומיות שלנו - מה אנחנו אוכלים, איך אנחנו נוסעים, מה אנחנו קונים - משפיעות על הסביבה.'
+                                            : '"Invisible Impact" explores how our daily choices - what we eat, how we travel, what we buy - affect the environment.'}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start gap-4">
+                                <Icon name="ideas" size="lg" className="flex-shrink-0 mt-1" />
+                                <div>
+                                    <h3 className="font-display text-xl text-graphite mb-2">
+                                        {language === 'he' ? 'איך אנחנו עושים את זה' : 'How We Do It'}
+                                    </h3>
+                                    <p className="text-graphite/70 leading-relaxed">
+                                        {language === 'he'
+                                            ? 'באמצעות שילוב של טכנולוגיה, עיצוב ונתונים, אנחנו יוצרים כלים חינוכיים נגישים ומרתקים שמניעים לפעולה חיובית.'
+                                            : 'By combining technology, design, and data, we create accessible and engaging educational tools that drive positive action.'}
                                     </p>
                                 </div>
                             </div>

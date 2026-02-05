@@ -32,10 +32,7 @@ const Home = () => {
                 {/* 2. About - Who we are, mission */}
                 <AboutSection />
 
-                {/* 3. Features - Our Approach: Education → Awareness → Action */}
-                <FeaturesSection />
-
-                {/* 4. Free Resources - Download free materials */}
+                {/* 3. Free Resources - Download free materials */}
                 <FreeResourcesSection />
 
                 {/* 5. Programs - Tiered offerings (Seed, Sprout, Tree, Forest) */}

@@ -193,7 +193,7 @@ const Resources = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-paper/95 via-paper/85 to-paper/60" />
 
-                <Container className="relative z-10 pt-32 pb-12">
+                <Container className="relative z-10 pt-20 md:pt-24 pb-12">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <motion.div
                             initial="hidden"
@@ -202,13 +202,6 @@ const Resources = () => {
                             transition={{ duration: 0.6 }}
                             className="text-start"
                         >
-                            <div className="inline-flex items-center gap-2 bg-blue/10 text-blue px-4 py-2 rounded-full mb-6">
-                                <BookOpen className="w-4 h-4" />
-                                <span className="font-body text-sm uppercase tracking-wider">
-                                    {t('resources.title')}
-                                </span>
-                            </div>
-
                             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 text-graphite leading-tight">
                                 {language === 'he' ? 'ספריית' : 'Library of'}
                                 <span className="block text-blue">

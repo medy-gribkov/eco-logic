@@ -282,6 +282,7 @@ const FreeResourcesSection = () => {
                                         className="w-full flex items-center justify-center gap-2 py-3"
                                         variant="primary"
                                     >
+                                        <Icon name="download" size="xs" className="me-2" inline />
                                         Download
                                     </DownloadButton>
                                 )}
@@ -310,6 +311,7 @@ const FreeResourcesSection = () => {
                                         className="w-full flex items-center justify-center gap-2 py-3"
                                         variant="primary"
                                     >
+                                        <Icon name="download" size="xs" className="me-2" inline />
                                         הורדה
                                     </DownloadButton>
                                 )}

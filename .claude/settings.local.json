@@ -9,7 +9,15 @@
       "Bash(git add:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat\\(assets\\): migrate to WebP format and add new visual assets\n\n- Convert icons from PNG to WebP for better compression\n- Convert personas from PNG to WebP\n- Add background images for all sections \\(hero, programs, features, etc.\\)\n- Add product images \\(seedling kits, curriculum cards, merchandise\\)\n- Add partner logos \\(env ministry, KKL-JNF, nature parks authority\\)\n- Add social media post templates\n- Add decorative vine elements\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git commit:*)",
-      "Bash(gh repo create:*)"
+      "Bash(gh repo create:*)",
+      "Bash(du -sh:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "Bash(grep:*)",
+      "Bash(xargs:*)",
+      "Bash(dir:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }
