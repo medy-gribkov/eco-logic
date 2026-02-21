@@ -41,8 +41,6 @@ vercel --prod
 
 ```
 eco-logic/
-    .agent/
-        workflows/           # Reusable skill files
     public/
         assets/
             backgrounds/     # Section background images
@@ -93,22 +91,6 @@ import Icon from '../components/ui/Icon';
 
 <Icon name="leaf" size="md" />
 ```
-
----
-
-## Skills / Workflows
-
-Reusable workflow files are available in `.agent/workflows/`:
-
-| File | Description |
-|------|-------------|
-| `project-setup.md` | Initialize React + Vite + Tailwind |
-| `design-system.md` | Create colors, typography, spacing |
-| `asset-generation.md` | Generate consistent AI images |
-| `component-library.md` | Build reusable UI components |
-| `deployment.md` | Deploy to Vercel |
-
-These skills can be used to recreate this project or build similar ones with different styles.
 
 ---
 
